@@ -1,22 +1,46 @@
 html {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: "Georgia";
+}
+
+a {
+  text-decoration: none;
+  color: unset;
 }
 
 h1 {
   font-size: 32px;
   line-height: 35.2px;
   font-weight: 400;
-  letter-spacing: 6%;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 130%;
+  color: $color-light-xl;
   margin: 0;
 }
 
 .wrapper {
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
+.button {
+  display: inline-block;
+  color: $color-dark-3xl;
+  font-size: 17px;
+  line-height: 130%;
+  background-color: $color-primary;
+  border-radius: 100px;
+  padding: 15px 45px;
+  letter-spacing: 1px;
+}

@@ -1,3 +1,146 @@
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/arial/arial-regular.ttf") format("truetype"), url("../fonts/arial/ArialMT.woff2") format("woff2"), url("../fonts/arial/ArialMT.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial Narrow";
+  src: url("../fonts/arial/arial-narrow.ttf") format("truetype"), url("../fonts/arial/ArialNarrow.woff2") format("woff2"), url("../fonts/arial/ArialNarrow.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/arial/arial-italic.ttf") format("truetype"), url("../fonts/arial/Arial-ItalicMT.woff2") format("woff2"), url("../fonts/arial/Arial-ItalicMT.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/arial/arial-bold.ttf") format("truetype"), url("../fonts/arial/Arial-BoldMT.woff2") format("woff2"), url("../fonts/arial/Arial-BoldMT.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial Narrow";
+  src: url("../fonts/arial/arial-narrow-bold-italic.ttf") format("truetype"), url("../fonts/arial/ArialNarrow-BoldItalic.woff2") format("woff2"), url("../fonts/arial/ArialNarrow-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/arial/arial-black.ttf") format("truetype"), url("../fonts/arial/Arial-Black.woff2") format("woff2"), url("../fonts/arial/Arial-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial Narrow";
+  src: url("../fonts/arial/arial-narrow-italic.ttf") format("truetype"), url("../fonts/arial/ArialNarrow-Italic.woff2") format("woff2"), url("../fonts/arial/ArialNarrow-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial";
+  src: url("../fonts/arial/arial-bold-italic.ttf") format("truetype"), url("../fonts/arial/Arial-BoldItalicMT.woff2") format("woff2"), url("../fonts/arial/Arial-BoldItalicMT.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Arial Narrow";
+  src: url("../fonts/arial/arial-narrow-bold.ttf") format("truetype"), url("../fonts/arial/ArialNarrow-Bold.woff2") format("woff2"), url("../fonts/arial/ArialNarrow-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Georgia";
+  src: url("../fonts/georgia/georgia-regular.ttf") format("truetype"), url("../fonts/georgia/Georgia.woff2") format("woff2"), url("../fonts/georgia/Georgia.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Georgia";
+  src: url("../fonts/georgia/georgia-bold-italic.ttf") format("truetype"), url("../fonts/georgia/Georgia-BoldItalic.woff2") format("woff2"), url("../fonts/georgia/Georgia-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Georgia";
+  src: url("../fonts/georgia/georgia-bold.ttf") format("truetype"), url("../fonts/georgia/Georgia-Bold.woff2") format("woff2"), url("../fonts/georgia/Georgia-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Georgia";
+  src: url("../fonts/georgia/georgia-italic.ttf") format("truetype"), url("../fonts/georgia/Georgia-Italic.woff2") format("woff2"), url("../fonts/georgia/Georgia-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Georgia";
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 35.2px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 130%;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  color: #292929;
+  font-size: 17px;
+  line-height: 130%;
+  background-color: #F1CDB3;
+  border-radius: 100px;
+  padding: 15px 45px;
+  letter-spacing: 1px;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+}
+
 .header_wrapper {
   display: flex;
   justify-content: space-between;
@@ -7,11 +150,13 @@
 }
 
 .logo_subtitle {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Arial";
+  color: #FFFFFF;
   font-size: 13px;
   line-height: 100%;
-  letter-spacing: 10%;
+  letter-spacing: 1.3px;
   font-weight: 400;
+  padding: 10px 0 0 4px;
 }
 
 .nav_block {
@@ -22,34 +167,46 @@
 }
 
 .nav_item {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Arial";
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #F1CDB3;
+  color: #CDCDCD;
   text-decoration: none;
 }
 
-html {
-  scroll-behavior: smooth;
+.item_active {
+  color: #FAFAFA;
+  border-bottom: 3px solid #F1CDB3;
 }
 
-body {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+.not-only {
+  background: url(../assets/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) #211f20;
 }
 
-h1 {
-  font-size: 32px;
-  line-height: 35.2px;
+.not-only_header {
+  margin: 163px 0 42px 0;
+}
+
+.not-only_wrapper {
+  display: flex;
+  padding-top: 180px;
+  gap: 42px;
+}
+
+.not-only_text {
+  font-family: "Arial";
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: 6%;
-  margin: 0;
+  font-size: 15px;
+  line-height: 160%;
+  color: #CDCDCD;
+  margin-bottom: 42px;
 }
 
-.wrapper {
-  width: 1200px;
-  margin: 0 auto;
+.not-only_image {
+  display: block;
+  max-width: 698px;
 }
 
 /*# sourceMappingURL=style.css.map */

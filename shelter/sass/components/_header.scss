@@ -1,17 +1,25 @@
+.header {
+  position: absolute;
+  width: 100%;
+}
+
 .header_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: $color-primary;
   padding-top: 30px;
+  
 }
 
 .logo_subtitle {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Arial";
+  color: $color-light-xl;
   font-size: 13px;
   line-height: 100%; 
-  letter-spacing: 10%;
+  letter-spacing: 1.3px;
   font-weight: 400;
+  padding: 10px 0 0 4px;
 }
 
 .nav_block {
@@ -22,10 +30,15 @@
 }
 
 .nav_item {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Arial";
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: $color-primary;
+  color: $color-dark-s;
   text-decoration: none;
+}
+
+.item_active {
+  color: $color-light-s;
+  border-bottom: 3px solid $color-primary;
 }
