@@ -197,6 +197,12 @@ p {
   color: #CDCDCD;
   text-decoration: none;
 }
+.nav_item:hover {
+  color: #FAFAFA;
+}
+.nav_item:active {
+  border-bottom: 3px solid #F1CDB3;
+}
 
 .item_active {
   color: #FAFAFA;
