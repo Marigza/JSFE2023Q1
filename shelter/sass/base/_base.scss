@@ -9,8 +9,10 @@ body {
 }
 
 a {
+  display: inline-block;
   text-decoration: none;
   color: unset;
+  padding: 15px 45px;
 }
 
 h1 {
@@ -55,6 +57,10 @@ p {
   line-height: 130%;
   background-color: $color-primary;
   border-radius: 100px;
-  padding: 15px 45px;
   letter-spacing: 1px;
+  transition: all linear 0.3s;
+  &:hover {
+    background-color: $color-primary-light;
+    
+  }
 }
