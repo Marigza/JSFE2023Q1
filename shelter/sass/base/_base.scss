@@ -19,6 +19,13 @@ header a {
   padding: 0;
 }
 
+footer a {
+  padding: 0;
+  &:hover {
+    color: $color-light-s;
+  }
+}
+
 h1 {
   font-size: 32px;
   line-height: 35.2px;
