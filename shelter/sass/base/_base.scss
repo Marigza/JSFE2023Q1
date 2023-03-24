@@ -68,3 +68,23 @@ p {
     
   }
 }
+
+.button-card {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 115%;
+  color: $color-dark-l;
+  background-color: $color-primary;
+  border-radius: 9px;
+  letter-spacing: 1px;
+  transition: all linear 0.3s;
+  > a {
+    padding: 10px 15px;
+    > span {
+      vertical-align: middle;
+    }
+  }
+  &:hover {
+    background-color: $color-primary-light;
+  }
+}
