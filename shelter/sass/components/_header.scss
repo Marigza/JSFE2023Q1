@@ -3,13 +3,19 @@
   width: 100%;
 }
 
+.header_our-pets {
+  margin-bottom: 30px;
+}
+
 .header_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: $color-primary;
   padding-top: 30px;
-  
+  &.pets {
+    color: $color-dark-l;
+  }
 }
 
 .logo_subtitle {
@@ -20,6 +26,9 @@
   letter-spacing: 1.3px;
   font-weight: 400;
   padding: 10px 0 0 4px;
+  &.pets {
+    color: $color-dark-3xl;
+  }
 }
 
 .nav_block {
@@ -36,15 +45,25 @@
   line-height: 24px;
   color: $color-dark-s;
   text-decoration: none;
+  &.pets {
+    color: $color-dark-l;
+    &:hover {
+      color: $color-dark-3xl;
+    }
+  }
   &:hover {
     color: $color-light-s;
   }
   &:active {
     border-bottom: 3px solid $color-primary;
   }
+  
 }
 
 .item_active {
   color: $color-light-s;
   border-bottom: 3px solid $color-primary;
+  &.pets {
+    color: $color-dark-3xl;
+  }
 }
