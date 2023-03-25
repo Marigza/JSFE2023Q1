@@ -94,6 +94,10 @@ html {
   box-sizing: border-box;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Georgia";
@@ -336,16 +340,33 @@ p {
 }
 
 .slider_button {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 100px;
   border: 2px solid #F1CDB3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 .slider_button:hover {
   background-color: #FDDCC4;
   border: 2px solid #FDDCC4;
   transition: all linear 0.3s;
+}
+
+.button_disabled {
+  border: 2px solid #CDCDCD;
+  color: #CDCDCD;
+  cursor: default;
+}
+.button_disabled:hover {
+  background-color: transparent;
+  border: 2px solid #CDCDCD;
+}
+
+.button_center {
+  background-color: #F1CDB3;
 }
 
 .slider_button__left {
@@ -365,6 +386,11 @@ p {
   display: flex;
   justify-content: space-between;
 }
+.slider-track.pets {
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 40px;
+}
 
 .slider_item {
   display: flex;
@@ -380,6 +406,7 @@ p {
 }
 .slider_item:hover {
   background-color: #FFFFFF;
+  box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
   transition: all linear 0.3s;
 }
 .slider_item:hover > :last-child {
@@ -412,6 +439,15 @@ p {
 }
 
 .our-friends_button {
+  margin: 60px 0 100px 0;
+}
+
+.slider-pagination {
+  display: flex;
+  gap: 20px;
+  font-size: 20px;
+  line-height: 115%;
+  color: #292929;
   margin: 60px 0 100px 0;
 }
 
