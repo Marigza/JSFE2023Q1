@@ -152,7 +152,8 @@ p {
 }
 
 .wrapper {
-  max-width: 1200px;
+  width: 1280px;
+  padding: 0 40px;
   margin: 0 auto;
 }
 
@@ -243,6 +244,9 @@ p {
 }
 .nav_item.pets:hover {
   color: #292929;
+}
+.nav_item.pets:active {
+  color: #545454;
 }
 .nav_item:hover {
   color: #FAFAFA;
