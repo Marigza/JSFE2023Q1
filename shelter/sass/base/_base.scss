@@ -1,0 +1,102 @@
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Georgia";
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: unset;
+  padding: 15px 45px;
+}
+
+header a {
+  padding: 0;
+}
+
+footer a {
+  padding: 0;
+  &:hover {
+    color: $color-light-s;
+  }
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 35.2px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 130%;
+  color: $color-light-xl;
+  margin: 0;
+}
+
+h3 {
+  color: $color-dark-l;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.wrapper {
+  width: 1280px;
+  padding: 0 40px;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  color: $color-dark-3xl;
+  font-size: 17px;
+  line-height: 130%;
+  background-color: $color-primary;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  transition: all linear 0.3s;
+  &:hover {
+    background-color: $color-primary-light;
+    
+  }
+}
+
+.button-card {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 115%;
+  color: $color-dark-l;
+  background-color: $color-primary;
+  border-radius: 9px;
+  letter-spacing: 1px;
+  transition: all linear 0.3s;
+  > a {
+    padding: 10px 15px;
+    > span {
+      vertical-align: middle;
+    }
+  }
+  &:hover {
+    background-color: $color-primary-light;
+  }
+}

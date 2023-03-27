@@ -1,0 +1,29 @@
+.not-only {
+  background: url(../assets/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) #211f20;
+}
+
+.not-only_header {
+margin: 163px 0 42px 0;
+}
+
+.not-only_wrapper {
+  display: flex;
+  padding-top: 180px;
+  gap: 42px;
+}
+
+.not-only_text {
+  font-family: "Arial";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: $color-dark-s;
+  margin-bottom: 42px;
+}
+
+.not-only_image {
+  display: block;
+  max-width: 698px;
+}
+

@@ -1,0 +1,69 @@
+.footer {
+  background: url(../assets/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%) #211f20;
+}
+
+.footer_wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+.footer_header {
+  color: $color-light-xl;
+}
+
+.footer_contacts {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  gap: 40px;
+  .footer_header {
+    width: 278px;
+  }
+}
+
+.footer_visits {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  padding-right: 10px;
+  gap: 32px;
+  .footer_header {
+    width: 270px;
+  }
+}
+
+.footer_image {
+  display: block;
+  width: 300px;
+}
+
+.footer_item {
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 1px;
+  color: $color-primary;
+  >* {
+    vertical-align: middle;
+  }
+}
+
+.footer_icon {
+  display: inline-block;
+  width: 40px;
+  height: 32px;
+  margin-right: 14px;
+}
+
+.icon-email {
+  background: url(../assets/icons/icon-email.svg) center no-repeat;
+}
+
+.icon-phone {
+  background: url(../assets/icons/icon-phone.svg) center no-repeat;
+}
+
+.icon-adress {
+  width: 22px;
+  background: url(../assets/icons/icon-marker.svg) center no-repeat;
+}

@@ -1,0 +1,27 @@
+.wrapper_about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  padding: 80px 0 100px 0;
+}
+
+.about_content {
+  max-width: 430px;
+}
+
+
+.about_image {
+  display: block;
+  max-width: 300px;
+}
+
+.about_text {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  color: $color-dark-xl;
+  padding-top: 25px;
+}
