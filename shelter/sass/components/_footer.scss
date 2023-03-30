@@ -12,6 +12,9 @@
     gap: 60px;
     padding-top: 30px;
   }
+  @include media-mobile-small {
+    gap: 40px;
+  }
 }
 
 .footer_header {
@@ -29,6 +32,10 @@
   @include media-tablet {
     padding-top: 0;
   }
+  @include media-mobile-small {
+    width: 100%;
+    align-items: center;
+  }
 }
 
 .footer_visits {
@@ -43,11 +50,22 @@
   @include media-tablet {
     padding-top: 0;
   }
+  @include media-mobile-XS {
+    gap: 38px;
+    padding-right: 0;
+    width: 100%;
+    .footer_header {
+        margin: 0 auto;
+    }
+  }
 }
 
 .footer_image {
   display: block;
   width: 300px;
+  @include media-mobile-small {
+    width: 260px;
+  }
 }
 
 .footer_item {

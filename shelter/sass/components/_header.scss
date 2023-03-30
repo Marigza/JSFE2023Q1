@@ -16,6 +16,10 @@
   &.pets {
     color: $color-dark-l;
   }
+  @include media-mobile {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .logo_subtitle {
@@ -69,4 +73,26 @@
   &.pets {
     color: $color-dark-3xl;
   }
+}
+
+.navigation {
+  @include media-mobile {
+    display: none;
+  }
+}
+
+.burger {
+  display: none;
+  @include media-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.burger-line {
+ display: block;
+ width: 30px;
+ height: 2px;
+ background-color: $color-primary;
 }

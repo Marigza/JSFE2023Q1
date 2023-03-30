@@ -21,14 +21,23 @@
     align-items: end;
     gap: 100px;
   }
+  @include media-mobile {
+    gap: 105px;
+  }
 }
 
 .not-only_content {
   @include media-tablet-small {
-      display: flex;
-      flex-direction: column;
-      padding: 0 124px;
-    }
+    display: flex;
+    flex-direction: column;
+    padding: 0 124px;
+  }
+  @include media-mobile {
+    padding: 0 50px;
+  }
+  @include media-mobile-small {
+    padding: 0 0;
+  }
 }
 
 .not-only_text {
@@ -39,6 +48,9 @@
   line-height: 160%;
   color: $color-dark-s;
   margin-bottom: 42px;
+  @include media-mobile-small {
+    text-align: center;
+  }
 }
 
 .not-only_button {
@@ -52,6 +64,12 @@
   max-width: 698px;
   @include media-tablet {
     max-width: 569px;
+  }
+  @include media-mobile {
+    max-width: 400px;
+  }
+  @include media-mobile-small {
+    max-width: 260px;
   }
 }
 
