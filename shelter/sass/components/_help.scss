@@ -1,6 +1,9 @@
 .help_header {
   text-align: center;
   padding: 80px 0 60px 0;
+  @include media-tablet {
+      padding: 80px 0 56px 0;
+  }
 }
 
 .help_content {
@@ -10,6 +13,10 @@
   column-gap: 120px;
   justify-content: center;
   margin: 0 87px 100px 87px;
+  @include media-tablet {
+    margin: 0 39px 100px 39px;
+    column-gap: 60px;
+  }
 }
 
 .help_item {
@@ -18,6 +25,9 @@
   align-items: center;
   gap: 30px;
   width: fit-content;
+  @include media-tablet {
+    width: 170px;
+  }
 }
 
 .help_item-icon {

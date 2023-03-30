@@ -20,6 +20,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 53px;
+  @include media-tablet-small {
+    gap: 12px;
+  }
 }
 
 .slider_button {
@@ -74,6 +77,11 @@
       row-gap: 30px;
       column-gap: 40px;
     }
+  @include media-tablet {
+    >:last-child {
+      display: none;
+    }
+  }
 }
 
 .slider_item {
