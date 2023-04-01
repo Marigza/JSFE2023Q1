@@ -95,4 +95,7 @@
  width: 30px;
  height: 2px;
  background-color: $color-primary;
+ &.pets {
+  background-color: #000000;
+ }
 }

@@ -13,7 +13,12 @@
   padding-top: 80px;
   padding-bottom: 60px;
   &.pets {
-    padding-bottom: 30px;
+    @include media-tablet {
+      padding-bottom: 30px;
+    }
+    @include media-mobile {
+      padding-bottom: 42px;
+    }
   }
   @include media-mobile {
     padding-top: 42px;
@@ -53,7 +58,6 @@
   }
   @include media-mobile-small {
     order: 2;
-    margin: 0 30px;
   }
 }
 
@@ -74,10 +78,18 @@
 .slider_button__left {
   background: url(../assets/icons/Arrow.svg) no-repeat center;
   transform: rotate(180deg);
+  @include media-mobile-small {
+      
+      margin: 0 30px;
+    }
 }
 
 .slider_button__right {
   background: url(../assets/icons/Arrow.svg) no-repeat center;
+  @include media-mobile-small {
+     
+      margin: 0 30px;
+    }
 }
 
 .slider_container {
@@ -113,6 +125,11 @@
   @include media-tablet-small {
     justify-content: center;
     >:nth-last-child(-n+2) {
+      display: none;
+    }
+  }
+  @include media-mobile-small {
+    >:nth-last-child(-n+5) {
       display: none;
     }
   }
@@ -180,5 +197,9 @@
   margin: 60px 0 100px 0;
   @include media-tablet {
     margin: 40px 0 76px 0;
+  }
+  @include media-mobile-small {
+    gap: 10px;
+    margin: 42px 0 42px 0;
   }
 }
