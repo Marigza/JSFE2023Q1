@@ -29,6 +29,8 @@
   }
   @include media-mobile-small {
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
   }
 }
 
@@ -48,6 +50,7 @@
   }
   @include media-mobile-small {
     order: 2;
+    margin: 0 30px;
   }
 }
 
@@ -77,6 +80,7 @@
 .slider_container {
   flex-grow: 1;
   @include media-mobile-small {
+    flex-basis: 100%;
     order: 1;
   }
 }

@@ -76,14 +76,14 @@
 }
 
 .navigation {
-  @include media-mobile {
+  @include media-tablet-burger {
     display: none;
   }
 }
 
 .burger {
   display: none;
-  @include media-mobile {
+  @include media-tablet-burger {
     display: flex;
     flex-direction: column;
     gap: 8px;

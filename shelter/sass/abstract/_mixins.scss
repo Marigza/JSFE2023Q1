@@ -9,6 +9,11 @@
     @content;
   }
 }
+@mixin media-tablet-burger {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
 
 @mixin media-mobile {
   @media (max-width: 730px) {
