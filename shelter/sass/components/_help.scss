@@ -1,6 +1,12 @@
 .help_header {
   text-align: center;
   padding: 80px 0 60px 0;
+  @include media-tablet {
+    padding: 80px 0 56px 0;
+  }
+  @include media-mobile {
+    padding: 42px 0 42px 0;
+  }
 }
 
 .help_content {
@@ -10,6 +16,16 @@
   column-gap: 120px;
   justify-content: center;
   margin: 0 87px 100px 87px;
+  @include media-tablet {
+    margin: 0 39px 100px 39px;
+    column-gap: 60px;
+  }
+  @include media-mobile-small {
+    justify-content: flex-start;
+    margin: 0 5px 39px 5px;
+    row-gap: 30px;
+    column-gap: 29px;
+  }
 }
 
 .help_item {
@@ -18,11 +34,23 @@
   align-items: center;
   gap: 30px;
   width: fit-content;
+  @include media-tablet {
+    width: 170px;
+  }
+  @include media-mobile {
+    width: 130px;
+    gap: 20.5px;
+  }
 }
 
-.help_item-icon {
- width: 60px;
- height: 60px;
+.help_item-icon > img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  @include media-mobile {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .help_item-text {
@@ -31,4 +59,8 @@
   text-align: center;
   letter-spacing: 1px;
   color: $color-dark-l;
+  @include media-mobile {
+    font-size: 15px;
+    line-height: 110%;
+  }
 }
