@@ -44,6 +44,14 @@ h2 {
   line-height: 130%;
   color: $color-light-xl;
   margin: 0;
+  @include media-mobile {
+    font-size: 34px;
+    text-align: center;
+  }
+  @include media-mobile-small {
+    font-size: 25px;
+    letter-spacing: 1.2px;
+  }
 }
 
 h3 {
@@ -54,6 +62,14 @@ h3 {
   line-height: 130%;
   letter-spacing: 2px;
   margin: 0;
+  @include media-mobile {
+    font-size: 30px;
+    letter-spacing: 1.5px;
+  }
+  @include media-mobile-small {
+    font-size: 25px;
+    text-align: center;
+  }
 }
 
 p {
@@ -61,9 +77,15 @@ p {
 }
 
 .wrapper {
-  width: 1280px;
+  max-width: 1280px;
   padding: 0 40px;
   margin: 0 auto;
+  @include media-tablet {
+    padding: 0 30px;
+  }
+  @include media-mobile {
+    padding: 0 10px;
+  }
 }
 
 .button {
@@ -98,5 +120,9 @@ p {
   }
   &:hover {
     background-color: $color-primary-light;
+  }
+  @include media-mobile-small {
+    font-size: 15px;
+    line-height: 110%;
   }
 }
