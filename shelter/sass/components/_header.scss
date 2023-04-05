@@ -16,7 +16,7 @@
   &.pets {
     color: $color-dark-l;
   }
-  @include media-mobile {
+  @include media-tablet-burger {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -40,6 +40,12 @@
   list-style: none;
   gap: 35px;
   padding-left: 0;
+  @include media-tablet-burger {
+    flex-direction: column;
+    gap: 40px;
+    margin: 0;
+    padding: 248px 38px 0 39px;
+  }
 }
 
 .nav_item {
@@ -49,6 +55,11 @@
   line-height: 24px;
   color: $color-dark-s;
   text-decoration: none;
+  @include media-tablet-burger {
+    font-size: 32px;
+    line-height: 160%;
+    text-align: center;
+  }
   &.pets {
     color: $color-dark-l;
     &:hover {
@@ -75,19 +86,48 @@
   }
 }
 
+// .navigation {
+//   @include media-tablet-burger {
+//     display: none;
+//   }
+// }
+
 .navigation {
   @include media-tablet-burger {
-    display: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 320px;
+    height: 100%;
+    background-color: $color-dark-3xl;
+    &.pets {
+      background-color: $color-light-xl;
+    }
   }
+
+  transition: right linear 0.5s;
+}
+
+.navigation_active {
+  @include media-tablet-burger {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 2;
+    }
+  transition: right linear 0.5s;
 }
 
 .burger {
   display: none;
   @include media-tablet-burger {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 8px;
+
   }
+  transition: all linear 0.3s;
 }
 
 .burger-line {
@@ -98,4 +138,11 @@
  &.pets {
   background-color: #000000;
  }
+}
+
+.burger_rotate{
+  transform: rotate(90deg);
+  z-index: 3;
+  //left: 10px;
+  transition: all linear 0.3s;
 }
