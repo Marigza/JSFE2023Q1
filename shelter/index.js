@@ -38,6 +38,10 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
     navigation.classList.remove('navigation_active');
     modal.classList.remove('modal-window_active');
     body.classList.remove('body_fixed');
+    const scrollY = document.body.style.top;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
     burger.classList.remove('burger_rotate');
     popup.classList.remove('popup_active');
   }
@@ -55,6 +59,8 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       let elem = petsItems[i].querySelector('.slider_item-name');
       popup.classList.add('popup_active');
       modal.classList.add('modal-window_active');
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.position = 'fixed';
       getPets(elem.textContent);
     })
   }
