@@ -76,3 +76,6 @@
     popupParasites.textContent = data[index].parasites;
   }
 }
+
+// pagination
+
