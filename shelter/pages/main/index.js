@@ -1,5 +1,6 @@
-console.log('shelter1:\n Main +60: \nПроверка верстки +7\nВёрстка соответствует макету +35\nТребования к css +6\nИнтерактивность элементов +12\n Pets +40:\nПроверка верстки +7\nВёрстка соответствует макету +15\nТребования к css +4\nИнтерактивность элементов +14');
-console.log('shelter2:\n1.Вёрстка страницы Main соответствует макету при ширине экрана 1280px, 768px, 320px: +42;\n2.Вёрстка страницы Pets соответствует макету при ширине экрана 1280px, 768px, 320px: +18;\n3.Ни на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки: +20;\n4.Верстка резиновая: +8;\n5.При ширине экрана меньше 768px на обеих страницах меню в хедере скрывается, появляется иконка бургер-меню: +4;\n6.Верстка обеих страниц валидная: +8')
+//console.log('shelter1:\n Main +60: \nПроверка верстки +7\nВёрстка соответствует макету +35\nТребования к css +6\nИнтерактивность элементов +12\n Pets +40:\nПроверка верстки +7\nВёрстка соответствует макету +15\nТребования к css +4\nИнтерактивность элементов +14');
+//console.log('shelter2:\n1.Вёрстка страницы Main соответствует макету при ширине экрана 1280px, 768px, 320px: +42;\n2.Вёрстка страницы Pets соответствует макету при ширине экрана 1280px, 768px, 320px: +18;\n3.Ни на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки: +20;\n4.Верстка резиновая: +8;\n5.При ширине экрана меньше 768px на обеих страницах меню в хедере скрывается, появляется иконка бургер-меню: +4;\n6.Верстка обеих страниц валидная: +8')
+console.log('пагинация реализована только на ширине экрана 1280рх')
 
 {
   const body = document.querySelector('.body');
@@ -54,9 +55,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
 
 // main slider
   
-  // let ComputedStyleBody = getComputedStyle(document.body);
-  // let amount = (parseInt(ComputedStyleBody.width) > 1000 ? 3 : parseInt(ComputedStyleBody.width) > 500 ? 2 : 1);
-
   function createCardTemplate() {
     const slideItem = document.createElement('div');
     slideItem.classList.add('slider_item');
@@ -94,10 +92,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
   indexLeft = [];
   indexLeft = createNewElem();
 
-  console.log(indexLeft);
-  console.log(indexCenter);
-  console.log(indexRight);
-
   // очистить стартовый набор карточек и заполнить новым
 
   let nameArr = [["Jennifer", "../../assets/modal/jennifer.png"],
@@ -115,7 +109,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       const sliderItemFoto = document.createElement('div');
       const sliderItemName = document.createElement('div');
       const sliderItemButton = document.createElement('div');
-      //sliderItemFoto.classList.add('slider_item-foto');
       sliderItemName.classList.add('slider_item-name');
       sliderItemButton.classList.add('slider_item-button');
       sliderItemButton.innerText = 'Learn more';
@@ -124,9 +117,7 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       slideItem.appendChild(sliderItemButton);
       sliderItemFoto.innerHTML = `<img src="${nameArr[indexLeft[i]][1]}" class="slider_item-foto" alt="${nameArr[indexLeft[i]][0]}">`
       sliderItemName.innerText = nameArr[indexLeft[i]][0];
-      
       ITEM_LEFT.appendChild(slideItem);
-      //slideArray.push(slideItem);
     }
     ITEM_CENTER.innerHTML = '';
     for (let i = 0; i < 3; i++) {
@@ -134,7 +125,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       const sliderItemFoto = document.createElement('div');
       const sliderItemName = document.createElement('div');
       const sliderItemButton = document.createElement('div');
-      //sliderItemFoto.classList.add('slider_item-foto');
       sliderItemName.classList.add('slider_item-name');
       sliderItemButton.classList.add('slider_item-button');
       sliderItemButton.innerText = 'Learn more';
@@ -143,7 +133,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       slideItem.appendChild(sliderItemButton);
       sliderItemFoto.innerHTML = `<img src="${nameArr[indexCenter[i]][1]}" class="slider_item-foto" alt="${nameArr[indexCenter[i]][0]}">`
       sliderItemName.innerText = nameArr[indexCenter[i]][0];
-      //slideItem.innerText = indexCenter[i];
       ITEM_CENTER.appendChild(slideItem);
       slideArray.push(slideItem);
     }
@@ -153,7 +142,6 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       const sliderItemFoto = document.createElement('div');
       const sliderItemName = document.createElement('div');
       const sliderItemButton = document.createElement('div');
-      //sliderItemFoto.classList.add('slider_item-foto');
       sliderItemName.classList.add('slider_item-name');
       sliderItemButton.classList.add('slider_item-button');
       sliderItemButton.innerText = 'Learn more';
@@ -162,18 +150,12 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
       slideItem.appendChild(sliderItemButton);
       sliderItemFoto.innerHTML = `<img src="${nameArr[indexRight[i]][1]}" class="slider_item-foto" alt="${nameArr[indexRight[i]][0]}">`
       sliderItemName.innerText = nameArr[indexRight[i]][0];
-      //slideItem.innerText = indexRight[i];
       ITEM_RIGHT.appendChild(slideItem);
-      //slideArray.push(slideItem);
     }
     return slideArray;
 
   }
   fillContentToCard();
-
-  //const slideArray = Array.from(document.querySelectorAll('.slider_item'));
-
-  console.log(slideArray);
 
   function moveToRight() {
     CAROUSEL.classList.add('transition-right');
@@ -232,7 +214,7 @@ console.log('shelter2:\n1.Вёрстка страницы Main соответс�
     }
   }
   activatePopup();
-  
+
   async function getPets(nameOfPet) {
     const pets = '../../pets.json';
     const res = await fetch(pets);
