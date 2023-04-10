@@ -3,6 +3,98 @@
 console.log('пагинация реализована только на ширине экрана 1280рх')
 
 {
+
+  let nameArr = [
+    {
+      "name": "Jennifer",
+      "img": "../../assets/modal/jennifer.png",
+      "type": "Dog",
+      "breed": "Labrador",
+      "description": "Jennifer is a sweet 2 months old Labrador that is patiently waiting to find a new forever home. This girl really enjoys being able to go outside to run and play, but won't hesitate to play up a storm in the house if she has all of her favorite toys.",
+      "age": "2 months",
+      "inoculations": ["none"],
+      "diseases": ["none"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Sophia",
+      "img": "../../assets/modal/sophia.png",
+      "type": "Dog",
+      "breed": "Shih tzu",
+      "description": "Sophia here and I'm looking for my forever home to live out the best years of my life. I am full of energy. Everyday I'm learning new things, like how to walk on a leash, go potty outside, bark and play with toys and I still need some practice.",
+      "age": "1 month",
+      "inoculations": ["parvovirus"],
+      "diseases": ["none"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Woody",
+      "img": "../../assets/modal/woody.png",
+      "type": "Dog",
+      "breed": "Golden Retriever",
+      "description": "Woody is a handsome 3 1/2 year old boy. Woody does know basic commands and is a smart pup. Since he is on the stronger side, he will learn a lot from your training. Woody will be happier when he finds a new family that can spend a lot of time with him.",
+      "age": "3 years 6 months",
+      "inoculations": ["adenovirus", "distemper"],
+      "diseases": ["right back leg mobility reduced"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Scarlett",
+      "img": "../../assets/modal/scarlett.png",
+      "type": "Dog",
+      "breed": "Jack Russell Terrier",
+      "description": "Scarlett is a happy, playful girl who will make you laugh and smile. She forms a bond quickly and will make a loyal companion and a wonderful family dog or a good companion for a single individual too since she likes to hang out and be with her human.",
+      "age": "3 months",
+      "inoculations": ["parainfluenza"],
+      "diseases": ["none"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Katrine",
+      "img": "../../assets/modal/katrine.png",
+      "type": "Cat",
+      "breed": "British Shorthair",
+      "description": "Katrine is a beautiful girl. She is as soft as the finest velvet with a thick lush fur. Will love you until the last breath she takes as long as you are the one. She is picky about her affection. She loves cuddles and to stretch into your hands for a deeper relaxations.",
+      "age": "6 months",
+      "inoculations": ["panleukopenia"],
+      "diseases": ["none"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Timmy",
+      "img": "../../assets/modal/timmy.png",
+      "type": "Cat",
+      "breed": "British Shorthair",
+      "description": "Timmy is an adorable grey british shorthair male. He loves to play and snuggle. He is neutered and up to date on age appropriate vaccinations. He can be chatty and enjoys being held. Timmy has a lot to say and wants a person to share his thoughts with.",
+      "age": "2 years 3 months",
+      "inoculations": ["calicivirus", "viral rhinotracheitis"],
+      "diseases": ["kidney stones"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Freddie",
+      "img": "../../assets/modal/freddie.png",
+      "type": "Cat",
+      "breed": "British Shorthair",
+      "description": "Freddie is a little shy at first, but very sweet when he warms up. He likes playing with shoe strings and bottle caps. He is quick to learn the rhythms of his human’s daily life. Freddie has bounced around a lot in his life, and is looking to find his forever home.",
+      "age": "2 months",
+      "inoculations": ["rabies"],
+      "diseases": ["none"],
+      "parasites": ["none"]
+    },
+    {
+      "name": "Charly",
+      "img": "../../assets/modal/charly.png",
+      "type": "Dog",
+      "breed": "Jack Russell Terrier",
+      "description": "This cute boy, Charly, is three years old and he likes adults and kids. He isn’t fond of many other dogs, so he might do best in a single dog home. Charly has lots of energy, and loves to run and play. We think a fenced yard would make him very happy.",
+      "age": "8 years",
+      "inoculations": ["bordetella bronchiseptica", "leptospirosis"],
+      "diseases": ["deafness", "blindness"],
+      "parasites": ["lice", "fleas"]
+    }
+  ];
+
   const body = document.querySelector('.body');
   const burger = document.querySelector('.burger');
   const modal = document.querySelector('.modal-window');
@@ -94,11 +186,6 @@ console.log('пагинация реализована только на шир�
 
   // очистить стартовый набор карточек и заполнить новым
 
-  let nameArr = [["Jennifer", "../../assets/modal/jennifer.png"],
-    ["Sophia", "../../assets/modal/sophia.png"], ["Woody", "../../assets/modal/woody.png"],
-    ["Scarlett", "../../assets/modal/Scarlett.png"], ["Katrine", "../../assets/modal/katrine.png"],
-    ["Timmy", "../../assets/modal/timmy.png"], ["Freddie", "../../assets/modal/freddie.png"], ["Charly", "../../assets/modal/charly.png"]]
-
   const slideArray = [];
   
   function fillContentToCard() {
@@ -115,8 +202,8 @@ console.log('пагинация реализована только на шир�
       slideItem.appendChild(sliderItemFoto);
       slideItem.appendChild(sliderItemName);
       slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexLeft[i]][1]}" class="slider_item-foto" alt="${nameArr[indexLeft[i]][0]}">`
-      sliderItemName.innerText = nameArr[indexLeft[i]][0];
+      sliderItemFoto.innerHTML = `<img src="${nameArr[indexLeft[i]].img}" class="slider_item-foto" alt="${nameArr[indexLeft[i]].name}">`
+      sliderItemName.innerText = nameArr[indexLeft[i]].name;
       ITEM_LEFT.appendChild(slideItem);
     }
     ITEM_CENTER.innerHTML = '';
@@ -131,8 +218,8 @@ console.log('пагинация реализована только на шир�
       slideItem.appendChild(sliderItemFoto);
       slideItem.appendChild(sliderItemName);
       slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexCenter[i]][1]}" class="slider_item-foto" alt="${nameArr[indexCenter[i]][0]}">`
-      sliderItemName.innerText = nameArr[indexCenter[i]][0];
+      sliderItemFoto.innerHTML = `<img src="${nameArr[indexCenter[i]].img}" class="slider_item-foto" alt="${nameArr[indexCenter[i]].name}">`
+      sliderItemName.innerText = nameArr[indexCenter[i]].name;
       ITEM_CENTER.appendChild(slideItem);
       slideArray.push(slideItem);
     }
@@ -148,8 +235,8 @@ console.log('пагинация реализована только на шир�
       slideItem.appendChild(sliderItemFoto);
       slideItem.appendChild(sliderItemName);
       slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexRight[i]][1]}" class="slider_item-foto" alt="${nameArr[indexRight[i]][0]}">`
-      sliderItemName.innerText = nameArr[indexRight[i]][0];
+      sliderItemFoto.innerHTML = `<img src="${nameArr[indexRight[i]].img}" class="slider_item-foto" alt="${nameArr[indexRight[i]].name}">`
+      sliderItemName.innerText = nameArr[indexRight[i]].name;
       ITEM_RIGHT.appendChild(slideItem);
     }
     return slideArray;
@@ -214,22 +301,18 @@ console.log('пагинация реализована только на шир�
     }
   }
   activatePopup();
-
-  async function getPets(nameOfPet) {
-    const pets = '../../pets.json';
-    const res = await fetch(pets);
-    const data = await res.json();
-    let index = data.findIndex(item => item.name === nameOfPet);
-    popupTitle.textContent = data[index].name;
-    popupImage.innerHTML = `<img src="${data[index].img}" alt="${data[index].name}">`;
-    popupType.textContent = data[index].type + ' - ' + data[index].breed;
-    popupText.textContent = data[index].description;
-    popupAge.textContent = data[index].age;
-    popupInoculations.textContent = data[index].inoculations;
-    popupDiseases.textContent = data[index].diseases;
-    popupParasites.textContent = data[index].parasites;
-  }
   
+  function getPets(nameOfPet) {
+    let index = nameArr.findIndex(item => item.name === nameOfPet);
+    popupTitle.textContent = nameArr[index].name;
+    popupImage.innerHTML = `<img src="${nameArr[index].img}" alt="${nameArr[index].name}">`;
+    popupType.textContent = nameArr[index].type + ' - ' + nameArr[index].breed;
+    popupText.textContent = nameArr[index].description;
+    popupAge.textContent = nameArr[index].age;
+    popupInoculations.textContent = nameArr[index].inoculations;
+    popupDiseases.textContent = nameArr[index].diseases;
+    popupParasites.textContent = nameArr[index].parasites;
+  }
 };
   
 
