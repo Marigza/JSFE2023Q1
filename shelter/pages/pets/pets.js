@@ -1,6 +1,5 @@
-//console.log('shelter1:\n Main +60: \nПроверка верстки +7\nВёрстка соответствует макету +35\nТребования к css +6\nИнтерактивность элементов +12\n Pets +40:\nПроверка верстки +7\nВёрстка соответствует макету +15\nТребования к css +4\nИнтерактивность элементов +14');
-//console.log('shelter2:\n1.Вёрстка страницы Main соответствует макету при ширине экрана 1280px, 768px, 320px: +42;\n2.Вёрстка страницы Pets соответствует макету при ширине экрана 1280px, 768px, 320px: +18;\n3.Ни на одном из разрешений до 320px включительно не появляется горизонтальная полоса прокрутки: +20;\n4.Верстка резиновая: +8;\n5.При ширине экрана меньше 768px на обеих страницах меню в хедере скрывается, появляется иконка бургер-меню: +4;\n6.Верстка обеих страниц валидная: +8')
-console.log('1.Реализация burger menu на обеих страницах: +26\n2.Реализация слайдера-карусели на странице Main: +36\n3.Реализация пагинации на странице Pets: +32: при изменении ширины экрана пагинация перестраивается и работает ТОЛЬКО после перезагрузки страницы -4\n4.Реализация попап на обеих страницах: +12')
+console.log('при изменении ширины экрана пагинация перестраивается и работает ТОЛЬКО после перезагрузки страницы');
+alert('при изменении ширины экрана пагинация перестраивается и работает ТОЛЬКО после перезагрузки страницы')
 
 {
 
@@ -93,7 +92,13 @@ console.log('1.Реализация burger menu на обеих страница
       "diseases": ["deafness", "blindness"],
       "parasites": ["lice", "fleas"]
     }
-  ];
+  ]
+
+  let shiffledNameArr = nameArr.slice(); 
+  shiffleArray(shiffledNameArr);
+  let nameArr6multiply = shiffledNameArr.concat(shiffledNameArr, shiffledNameArr, shiffledNameArr, shiffledNameArr, shiffledNameArr);
+  console.log(nameArr6multiply);
+
 
   const body = document.querySelector('.body');
   const burger = document.querySelector('.burger');
@@ -101,15 +106,14 @@ console.log('1.Реализация burger menu на обеих страница
   const navigation = document.querySelector('.navigation');
   const navLinks = document.querySelectorAll('.nav_item');
   const popup = document.querySelector('.popup');
-  
-  const BTN_RIGHT = document.querySelector('.slider_button__right');
-  const BTN_LEFT = document.querySelector('.slider_button__left');
-  const CAROUSEL = document.querySelector('.slider-track');
-  const ITEM_LEFT = document.querySelector('.block-left');
-  const ITEM_RIGHT = document.querySelector('.block-right');
-  const ITEM_CENTER = document.querySelector('.block-active');
 
-  
+  const BUTTON_LEFTLEFT = document.querySelector('.button_left-left');
+  const BUTTON_LEFT = document.querySelector('.button_left');
+  const BUTTON_CENTER = document.querySelector('.button_center');
+  const BUTTON_RIGHT = document.querySelector('.button_right');
+  const BUTTON_RIGHTRIGHT = document.querySelector('.button_right-right');
+  const sliderContainer = document.querySelector('.slider_container-pets'); 
+
   const popupButton = document.querySelector('.popup_button');
   const popupImage = document.querySelector('.popup_image');
   const popupTitle = document.querySelector('.popup_title');
@@ -120,7 +124,7 @@ console.log('1.Реализация burger menu на обеих страница
   const popupDiseases = document.querySelector('.popup_diseases');
   const popupParasites = document.querySelector('.popup_parasites');
 
-// Burger menu
+// burger
 
   burger.addEventListener('click', () => {
     burger.classList.toggle('burger_rotate');
@@ -142,152 +146,171 @@ console.log('1.Реализация burger menu на обеих страница
   }
 
   modal.addEventListener('click', removeModal);
-  
+
   navLinks.forEach(item => item.addEventListener('click', removeModal));
 
-// main slider
-  
+  // pagination
+
+  function shiffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
   function createCardTemplate() {
     const slideItem = document.createElement('div');
     slideItem.classList.add('slider_item');
-    return (slideItem);
+      const sliderFoto = document.createElement('div');
+      const sliderName = document.createElement('div');
+      const sliderButton = document.createElement('div');
+      sliderName.classList.add('slider_item-name');
+      sliderButton.classList.add('slider_item-button');
+      sliderButton.innerText = 'Learn more';
+      slideItem.appendChild(sliderFoto);
+      slideItem.appendChild(sliderName);
+      slideItem.appendChild(sliderButton);
+    return slideItem;
   }
 
-  function createStartElem() {
-    let indexArr = [];
-    while (indexArr.length < 3) {
-      let e = Math.floor(Math.random() * 8);
-      if (!indexArr.includes(e)) {
-        indexArr.push(e)
-      }
+  let numberOfPages = 6;
+  let numberOfItems = 8;
+
+  function createblockCardsTemplate() {
+    const sliderTrack = document.createElement('div');
+    sliderTrack.classList.add('slider-track_pets');
+    for (let i = 0; i < numberOfItems; i++) {
+      sliderTrack.appendChild(createCardTemplate());
     }
-    return indexArr;
+    return sliderTrack;
   }
 
-  function createNewElem() {
-    let indexArr = [];
-    while (indexArr.length < 3) {
-      let e = Math.floor(Math.random() * 8);
-      if (!indexCenter.includes(e) && !indexArr.includes(e)) {
-        indexArr.push(e)
-      }
-    }
-    return indexArr;
-  }
+  sliderContainer.innerHTML = '';
 
-  let indexLeft = createStartElem();
-  let indexCenter = indexLeft;
-  indexLeft = [];
-  indexLeft = createNewElem();
-  let indexRight = indexCenter;
-  indexCenter = indexLeft;
-  indexLeft = [];
-  indexLeft = createNewElem();
-
-  // очистить стартовый набор карточек и заполнить новым
-
-  const slideArray = [];
   
-  function fillContentToCard() {
 
-    ITEM_LEFT.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
-      const slideItem = createCardTemplate();
-      const sliderItemFoto = document.createElement('div');
-      const sliderItemName = document.createElement('div');
-      const sliderItemButton = document.createElement('div');
-      sliderItemName.classList.add('slider_item-name');
-      sliderItemButton.classList.add('slider_item-button');
-      sliderItemButton.innerText = 'Learn more';
-      slideItem.appendChild(sliderItemFoto);
-      slideItem.appendChild(sliderItemName);
-      slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexLeft[i]].img}" class="slider_item-foto" alt="${nameArr[indexLeft[i]].name}">`
-      sliderItemName.innerText = nameArr[indexLeft[i]].name;
-      ITEM_LEFT.appendChild(slideItem);
-    }
-    ITEM_CENTER.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
-      const slideItem = createCardTemplate();
-      const sliderItemFoto = document.createElement('div');
-      const sliderItemName = document.createElement('div');
-      const sliderItemButton = document.createElement('div');
-      sliderItemName.classList.add('slider_item-name');
-      sliderItemButton.classList.add('slider_item-button');
-      sliderItemButton.innerText = 'Learn more';
-      slideItem.appendChild(sliderItemFoto);
-      slideItem.appendChild(sliderItemName);
-      slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexCenter[i]].img}" class="slider_item-foto" alt="${nameArr[indexCenter[i]].name}">`
-      sliderItemName.innerText = nameArr[indexCenter[i]].name;
-      ITEM_CENTER.appendChild(slideItem);
-      slideArray.push(slideItem);
-    }
-    ITEM_RIGHT.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
-      const slideItem = createCardTemplate();
-      const sliderItemFoto = document.createElement('div');
-      const sliderItemName = document.createElement('div');
-      const sliderItemButton = document.createElement('div');
-      sliderItemName.classList.add('slider_item-name');
-      sliderItemButton.classList.add('slider_item-button');
-      sliderItemButton.innerText = 'Learn more';
-      slideItem.appendChild(sliderItemFoto);
-      slideItem.appendChild(sliderItemName);
-      slideItem.appendChild(sliderItemButton);
-      sliderItemFoto.innerHTML = `<img src="${nameArr[indexRight[i]].img}" class="slider_item-foto" alt="${nameArr[indexRight[i]].name}">`
-      sliderItemName.innerText = nameArr[indexRight[i]].name;
-      ITEM_RIGHT.appendChild(slideItem);
-    }
-    return slideArray;
+  //window.addEventListener('resize', changeNumber)
+  
+  function selectNumber() {
+    //console.log(innerWidth)
+      if (innerWidth < 900 && innerWidth > 510) {
+        numberOfPages = 8
+        numberOfItems = 6
+    } else if (innerWidth < 510) {
+        numberOfPages = 16
+        numberOfItems = 3
+    } 
+    return (numberOfPages, numberOfItems)
+  };
+  selectNumber();
 
-  }
-  fillContentToCard();
+  console.log('количество страниц = ', numberOfPages)
+  console.log('количество элементов на странице = ', numberOfItems)
 
-  function moveToRight() {
-    CAROUSEL.classList.add('transition-right');
-    BTN_LEFT.removeEventListener('click', moveToLeft);
-    BTN_RIGHT.removeEventListener('click', moveToRight);
-  }
-  function moveToLeft() {
-    CAROUSEL.classList.add('transition-left');
-    BTN_LEFT.removeEventListener('click', moveToLeft);
-    BTN_RIGHT.removeEventListener('click', moveToRight);
+
+  for (let i = 0; i < numberOfPages; i++) {                             // строчка для адаптива default = 6
+    sliderContainer.appendChild(createblockCardsTemplate());        
   }
 
-  BTN_RIGHT.addEventListener('click', moveToRight);
-  BTN_LEFT.addEventListener('click', moveToLeft);
+  let arrayOfLists = Array.from(sliderContainer.childNodes);
+  arrayOfLists.forEach(elem => Array.from(elem.childNodes))
+  //console.log('pages', arrayOfLists)
 
-  CAROUSEL.addEventListener('animationend', (animationEvent) => {
-    if (animationEvent.animationName === 'move-left') {
-      CAROUSEL.classList.remove('transition-left');
-      indexRight = [];
-      indexRight = indexCenter;
-      indexCenter = indexLeft;
-      indexLeft = [];
-      indexLeft = createNewElem();
-      fillContentToCard();
-      activatePopup();
-    } else {
-      CAROUSEL.classList.remove('transition-right');
-      indexLeft = [];
-      indexLeft = indexCenter;
-      indexCenter = indexRight;
-      indexRight = [];
-      indexRight = createNewElem();
-      fillContentToCard();
-      activatePopup();
-    }
+  let arrayOfItems0 = Array.from(arrayOfLists[0].childNodes)
+  //console.log('items on page', arrayOfItems0)
 
-    BTN_LEFT.addEventListener('click', moveToLeft);
-    BTN_RIGHT.addEventListener('click', moveToRight);
+  const ARRsliderTrack = Array.from(document.querySelectorAll('.slider-track_pets'));
+
+  function fillContentToBlock(array) {
+    let workingArr = nameArr6multiply.slice(0, numberOfItems);
+    nameArr6multiply = nameArr6multiply.slice(numberOfItems, nameArr6multiply.length);
+    //console.log(workingArr)                                               // строчка для адаптива
+    shiffleArray(workingArr);
+    array.forEach((elem, index) => {
+      elem.childNodes[1].innerText = workingArr[index].name;
+      elem.childNodes[0].innerHTML = `<img src="${workingArr[index].img}" class="slider_item-foto" alt="${workingArr[index].name}">`
+  })
+  };
+
+  arrayOfLists.forEach(item => {
+    fillContentToBlock(Array.from(item.childNodes));
+    //console.log(Array.from(item.childNodes))
   });
 
-  
-// popup
+  ARRsliderTrack.forEach(elem => elem.classList.add('hidden'));
+  ARRsliderTrack[0].classList.remove('hidden');
 
+  BUTTON_RIGHT.addEventListener('click', moveToRight);
+  BUTTON_RIGHTRIGHT.addEventListener('click', movetoEnd);
+
+  function moveToRight() {
+    BUTTON_LEFT.addEventListener('click', moveToLeft);
+    BUTTON_LEFTLEFT.addEventListener('click', moveToStart);
+    BUTTON_LEFT.classList.remove('button_disabled');
+    BUTTON_LEFTLEFT.classList.remove('button_disabled');
+    BUTTON_CENTER.innerText = Number(BUTTON_CENTER.innerText) + 1;
+    if (Number(BUTTON_CENTER.innerText) === numberOfPages) {                        // строчка для адаптива 
+      BUTTON_RIGHT.removeEventListener('click', moveToRight);
+      BUTTON_RIGHTRIGHT.removeEventListener('click', movetoEnd);
+      BUTTON_RIGHT.classList.add('button_disabled');
+      BUTTON_RIGHTRIGHT.classList.add('button_disabled');
+    }
+    let currentPage = Number(BUTTON_CENTER.innerText);
+    ARRsliderTrack.forEach(item => item.classList.add('hidden'));
+    ARRsliderTrack[currentPage - 1].classList.remove('hidden');
+  }
+
+  function movetoEnd() {
+    BUTTON_LEFT.addEventListener('click', moveToLeft);
+    BUTTON_LEFTLEFT.addEventListener('click', moveToStart);
+    BUTTON_LEFT.classList.remove('button_disabled');
+    BUTTON_LEFTLEFT.classList.remove('button_disabled');
+    BUTTON_CENTER.innerText = numberOfPages;                                         // строчка для адаптива 
+    BUTTON_RIGHT.removeEventListener('click', moveToRight);
+    BUTTON_RIGHTRIGHT.removeEventListener('click', movetoEnd);
+    BUTTON_RIGHT.classList.add('button_disabled');
+    BUTTON_RIGHTRIGHT.classList.add('button_disabled');
+    ARRsliderTrack.forEach(item => item.classList.add('hidden'));
+    ARRsliderTrack[ARRsliderTrack.length - 1].classList.remove('hidden');
+  }
+
+  function moveToLeft() {
+    BUTTON_RIGHT.addEventListener('click', moveToRight);
+    BUTTON_RIGHTRIGHT.addEventListener('click', movetoEnd);
+    BUTTON_RIGHT.classList.remove('button_disabled');
+    BUTTON_RIGHTRIGHT.classList.remove('button_disabled');
+    BUTTON_CENTER.innerText = Number(BUTTON_CENTER.innerText) - 1;
+    if (Number(BUTTON_CENTER.innerText) === 1) {
+      BUTTON_LEFT.removeEventListener('click', moveToLeft)
+      BUTTON_LEFTLEFT.removeEventListener('click', moveToStart)
+      BUTTON_LEFT.classList.add('button_disabled');
+      BUTTON_LEFTLEFT.classList.add('button_disabled');
+    }
+    let currentPage = Number(BUTTON_CENTER.innerText);
+    ARRsliderTrack.forEach(item => item.classList.add('hidden'));
+    ARRsliderTrack[currentPage - 1].classList.remove('hidden');
+  }
+
+  function moveToStart() {
+    BUTTON_RIGHT.addEventListener('click', moveToRight);
+    BUTTON_RIGHTRIGHT.addEventListener('click', movetoEnd);
+    BUTTON_RIGHT.classList.remove('button_disabled');
+    BUTTON_RIGHTRIGHT.classList.remove('button_disabled');
+    BUTTON_CENTER.innerText = 1;
+    BUTTON_LEFT.removeEventListener('click', moveToLeft);
+    BUTTON_LEFTLEFT.removeEventListener('click', moveToStart);
+    BUTTON_LEFT.classList.add('button_disabled');
+    BUTTON_LEFTLEFT.classList.add('button_disabled');
+    ARRsliderTrack.forEach(item => item.classList.add('hidden'));
+    ARRsliderTrack[0].classList.remove('hidden');
+  }
+
+  //popup
+
+  let slideArray = Array.from(document.querySelectorAll('.slider_item'));
+ 
   popupButton.addEventListener('click', removeModal);
-  
+
   function activatePopup() {
     for (let i = 0; i < slideArray.length; i++) {
       slideArray[i].addEventListener('click', () => {
@@ -301,7 +324,7 @@ console.log('1.Реализация burger menu на обеих страница
     }
   }
   activatePopup();
-  
+
   function getPets(nameOfPet) {
     let index = nameArr.findIndex(item => item.name === nameOfPet);
     popupTitle.textContent = nameArr[index].name;
@@ -313,8 +336,8 @@ console.log('1.Реализация burger menu на обеих страница
     popupDiseases.textContent = nameArr[index].diseases;
     popupParasites.textContent = nameArr[index].parasites;
   }
-};
-  
+}
+
 
 
 
