@@ -8,17 +8,17 @@
   <link rel="stylesheet" href="../../sass/style.css">
   <link rel="icon" href="../../assets/favicon.ico">
 </head>
-<body>
+<body class="body">
   <header class="header_our-pets">
     <div class="wrapper header_wrapper pets">
       <div class="logo">
         <h1 class="logo_title"><a href="../main/index.html">Cozy House</a></h1>
         <div class="logo_subtitle pets">Shelter for pets in Boston</div>
       </div>
-      <nav class="navigation">
+      <nav class="navigation pets">
         <ul class="nav_block">
           <li class="nav_item pets"><a href="../main/index.html">About the shelter</a></li>
-          <li class="nav_item pets item_active"><a href="index.html">Our pets</a></li>
+          <li class="nav_item pets item_active"><a href="#!">Our pets</a></li>
           <li class="nav_item pets"><a href="../main/index.html#help">Help the shelter</a></li>
           <li class="nav_item pets"><a href="#contacts">Contacts</a></li>
         </ul>
@@ -127,5 +127,22 @@
       <div><img src="../../assets/footerddog.png" class="footer_image" alt="footer_image"></div>
     </div>
   </footer>
+  <div class="popup">
+    <div class="popup_image"></div>
+    <div class="popup_description">
+      <div class="popup_title"></div>
+      <div class="popup_type"></div>
+      <div class="popup_text"></div>
+      <ul class="popup_data">
+        <li><span><b>Age: </b></span><span class="popup_age"></span></li>
+        <li><span><b>Inoculations: </b></span><span class="popup_inoculations"></span></li>
+        <li><span><b>Diseases: </b></span><span class="popup_diseases"></span></li>
+        <li><span><b>Parasites: </b></span><span class="popup_parasites"></span></li>
+      </ul>
+    </div>
+    <div class="popup_button slider_button"><img src="../../assets/icons/Vector.svg" alt="close"></div>
+  </div>
+  <div class="modal-window"></div>
+  <script src="pets.js"></script>
 </body>
 </html>
