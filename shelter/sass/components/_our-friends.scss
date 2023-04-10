@@ -49,14 +49,14 @@
   column-gap: 40px;
   @include media-tablet-small {
     justify-content: center;
-    >:nth-last-child(-n+2) {
-      display: none;
-    }
+    // >:nth-last-child(-n+2) {
+    //   display: none;
+    // }
   }
   @include media-mobile-small {
-    >:nth-last-child(-n+5) {
-      display: none;
-    }
+    // >:nth-last-child(-n+5) {
+    //   display: none;
+    // }
   }
 }
 

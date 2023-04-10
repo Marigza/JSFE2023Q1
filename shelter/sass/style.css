@@ -731,16 +731,7 @@ p {
   .slider-track_pets {
     justify-content: center;
   }
-  .slider-track_pets > :nth-last-child(-n+2) {
-    display: none;
-  }
 }
-@media (max-width: 510px) {
-  .slider-track_pets > :nth-last-child(-n+5) {
-    display: none;
-  }
-}
-
 .slider_item {
   display: flex;
   flex-direction: column;

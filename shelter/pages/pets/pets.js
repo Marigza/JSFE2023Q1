@@ -1,4 +1,5 @@
-console.log('пагинация реализована только на ширине экрана 1280рх')
+console.log('при изменении ширины экрана пагинация перестраивается и работает ТОЛЬКО после перезагрузки страницы');
+alert('при изменении ширины экрана пагинация перестраивается и работает ТОЛЬКО после перезагрузки страницы')
 
 {
 
@@ -92,7 +93,13 @@ console.log('пагинация реализована только на шир�
       "parasites": ["lice", "fleas"]
     }
   ]
- 
+
+  let shiffledNameArr = nameArr.slice(); 
+  shiffleArray(shiffledNameArr);
+  let nameArr6multiply = shiffledNameArr.concat(shiffledNameArr, shiffledNameArr, shiffledNameArr, shiffledNameArr, shiffledNameArr);
+  console.log(nameArr6multiply);
+
+
   const body = document.querySelector('.body');
   const burger = document.querySelector('.burger');
   const modal = document.querySelector('.modal-window');
@@ -166,10 +173,13 @@ console.log('пагинация реализована только на шир�
     return slideItem;
   }
 
+  let numberOfPages = 6;
+  let numberOfItems = 8;
+
   function createblockCardsTemplate() {
     const sliderTrack = document.createElement('div');
     sliderTrack.classList.add('slider-track_pets');
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < numberOfItems; i++) {
       sliderTrack.appendChild(createCardTemplate());
     }
     return sliderTrack;
@@ -177,40 +187,58 @@ console.log('пагинация реализована только на шир�
 
   sliderContainer.innerHTML = '';
 
-  for (let i = 0; i < 6; i++) {
-    sliderContainer.appendChild(createblockCardsTemplate());
+  
+
+  //window.addEventListener('resize', changeNumber)
+  
+  function selectNumber() {
+    //console.log(innerWidth)
+      if (innerWidth < 900 && innerWidth > 510) {
+        numberOfPages = 8
+        numberOfItems = 6
+    } else if (innerWidth < 510) {
+        numberOfPages = 16
+        numberOfItems = 3
+    } 
+    return (numberOfPages, numberOfItems)
+  };
+  selectNumber();
+
+  console.log('количество страниц = ', numberOfPages)
+  console.log('количество элементов на странице = ', numberOfItems)
+
+
+  for (let i = 0; i < numberOfPages; i++) {                             // строчка для адаптива default = 6
+    sliderContainer.appendChild(createblockCardsTemplate());        
   }
 
   let arrayOfLists = Array.from(sliderContainer.childNodes);
- 
-  let arrayOfItems0 = Array.from(arrayOfLists[0].childNodes);
-  let arrayOfItems1 = Array.from(arrayOfLists[1].childNodes);
-  let arrayOfItems2 = Array.from(arrayOfLists[2].childNodes);
-  let arrayOfItems3 = Array.from(arrayOfLists[3].childNodes);
-  let arrayOfItems4 = Array.from(arrayOfLists[4].childNodes);
-  let arrayOfItems5 = Array.from(arrayOfLists[5].childNodes);
+  arrayOfLists.forEach(elem => Array.from(elem.childNodes))
+  //console.log('pages', arrayOfLists)
+
+  let arrayOfItems0 = Array.from(arrayOfLists[0].childNodes)
+  //console.log('items on page', arrayOfItems0)
 
   const ARRsliderTrack = Array.from(document.querySelectorAll('.slider-track_pets'));
 
   function fillContentToBlock(array) {
-    let workingArr = nameArr.slice();
+    let workingArr = nameArr6multiply.slice(0, numberOfItems);
+    nameArr6multiply = nameArr6multiply.slice(numberOfItems, nameArr6multiply.length);
+    //console.log(workingArr)                                               // строчка для адаптива
     shiffleArray(workingArr);
-    array.forEach((item, index) => {
-      item.childNodes[1].innerText = workingArr[index].name;
-      item.childNodes[0].innerHTML = `<img src="${workingArr[index].img}" class="slider_item-foto" alt="${workingArr[index].name}">`
+    array.forEach((elem, index) => {
+      elem.childNodes[1].innerText = workingArr[index].name;
+      elem.childNodes[0].innerHTML = `<img src="${workingArr[index].img}" class="slider_item-foto" alt="${workingArr[index].name}">`
   })
   };
-  fillContentToBlock(arrayOfItems0);
-  fillContentToBlock(arrayOfItems1);
-  ARRsliderTrack[1].classList.add('hidden')
-  fillContentToBlock(arrayOfItems2);
-  ARRsliderTrack[2].classList.add('hidden')
-  fillContentToBlock(arrayOfItems3);
-  ARRsliderTrack[3].classList.add('hidden')
-  fillContentToBlock(arrayOfItems4);
-  ARRsliderTrack[4].classList.add('hidden')
-  fillContentToBlock(arrayOfItems5);
-  ARRsliderTrack[5].classList.add('hidden')
+
+  arrayOfLists.forEach(item => {
+    fillContentToBlock(Array.from(item.childNodes));
+    //console.log(Array.from(item.childNodes))
+  });
+
+  ARRsliderTrack.forEach(elem => elem.classList.add('hidden'));
+  ARRsliderTrack[0].classList.remove('hidden');
 
   BUTTON_RIGHT.addEventListener('click', moveToRight);
   BUTTON_RIGHTRIGHT.addEventListener('click', movetoEnd);
@@ -221,7 +249,7 @@ console.log('пагинация реализована только на шир�
     BUTTON_LEFT.classList.remove('button_disabled');
     BUTTON_LEFTLEFT.classList.remove('button_disabled');
     BUTTON_CENTER.innerText = Number(BUTTON_CENTER.innerText) + 1;
-    if (Number(BUTTON_CENTER.innerText) === 6) {
+    if (Number(BUTTON_CENTER.innerText) === numberOfPages) {                        // строчка для адаптива 
       BUTTON_RIGHT.removeEventListener('click', moveToRight);
       BUTTON_RIGHTRIGHT.removeEventListener('click', movetoEnd);
       BUTTON_RIGHT.classList.add('button_disabled');
@@ -237,13 +265,13 @@ console.log('пагинация реализована только на шир�
     BUTTON_LEFTLEFT.addEventListener('click', moveToStart);
     BUTTON_LEFT.classList.remove('button_disabled');
     BUTTON_LEFTLEFT.classList.remove('button_disabled');
-    BUTTON_CENTER.innerText = 6;
+    BUTTON_CENTER.innerText = numberOfPages;                                         // строчка для адаптива 
     BUTTON_RIGHT.removeEventListener('click', moveToRight);
     BUTTON_RIGHTRIGHT.removeEventListener('click', movetoEnd);
     BUTTON_RIGHT.classList.add('button_disabled');
     BUTTON_RIGHTRIGHT.classList.add('button_disabled');
     ARRsliderTrack.forEach(item => item.classList.add('hidden'));
-    ARRsliderTrack[5].classList.remove('hidden');
+    ARRsliderTrack[ARRsliderTrack.length - 1].classList.remove('hidden');
   }
 
   function moveToLeft() {
