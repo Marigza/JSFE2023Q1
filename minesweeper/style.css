@@ -1,3 +1,55 @@
 body {
   background-color: aqua;
 }
+
+.main {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.game-block__wrapper {
+  background-color: white;
+}
+
+.game-block__content {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+  width: 500px;
+  height: 500px;
+}
+
+.game-block__item {
+  display: flex;
+  background-color: gray;
+  border-radius: 5px;
+  border: 1px solid white;
+  justify-content: center;
+  align-items: center;
+}
+
+.mine{
+  background-color: red;
+}
+
+.hidden{
+  color: transparent !important;
+  background-color: bisque;
+}
+
+.message {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 100px;
+  height: 100px;
+  background-color: chartreuse;
+}
+
+.message_visible {
+  display: block;
+}
