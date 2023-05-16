@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: aqua;
 }
@@ -9,6 +13,11 @@ body {
 
 .game-block__wrapper {
   background-color: white;
+}
+
+.game-block__header {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .game-block__content {
@@ -30,11 +39,11 @@ body {
   align-items: center;
 }
 
-.mine{
+.mine {
   background-color: red;
 }
 
-.hidden{
+.hidden {
   color: transparent !important;
   background-color: bisque;
 }
@@ -53,3 +62,44 @@ body {
 .message_visible {
   display: block;
 }
+
+.restart {
+  width: fit-content;
+  padding: 20px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.active-mines {
+  width: fit-content;
+    padding: 20px;
+    margin: 20px;
+    background-color: bisque;
+}
+
+.used-flags {
+  width: fit-content;
+  padding: 20px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.game-time {
+  width: fit-content;
+  padding: 20px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.game-clicks {
+  width: fit-content;
+  padding: 20px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.flag {
+  background: url(assets/star.svg) center no-repeat;
+  background-color: chartreuse;
+}
+
