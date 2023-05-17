@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -8,7 +10,7 @@ body {
 
 .main {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 490px;
 }
 
 .game-block__wrapper {
@@ -26,8 +28,23 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   gap: 2px;
-  width: 500px;
-  height: 500px;
+  width: 490px;
+  height: 520px;
+}
+.content_S{
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 2px;
+}
+.content_M{
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  gap: 2px;
+}
+.content_L{
+  grid-template-columns: repeat(25, 1fr);
+  grid-template-rows: repeat(25, 1fr);
+  gap: 0.5px;
 }
 
 .game-block__item {
@@ -103,3 +120,32 @@ body {
   background-color: chartreuse;
 }
 
+.game-mode {
+  display: flex;
+  width: fit-content;
+  padding: 20px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.game-mode__size {
+  border: 1px solid #000;
+  margin: 5px;
+  padding: 5px;
+}
+.game-mode__size_active {
+  background-color: cadetblue;
+}
+
+
+.game-mode__number {
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+}
+
+.game-block__footer {
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+}
