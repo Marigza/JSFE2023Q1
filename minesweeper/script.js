@@ -130,32 +130,40 @@ function getStarted() {
   //console.log(arrayOfCells)
 
   // click for element
-
-    arrayOfCells.forEach(element => {
-      element.addEventListener('click', () => {
-        element.classList.remove('hidden');
-        clicks++;
-        if (clicks === 1) {
-          startTimer();
-          let elementIndex = arrayOfCells.indexOf(element);
-          console.log(elementIndex);
-          createMinePlaces(elementIndex);       
-          fillCellsByMines();
-          fillCellsByContent();
-          console.log('this is first click')
-          console.log(arrayOfMinePlaces);
-        }
-        choiceBehavior(element);
-        countHiddenCells();
-        gameClicks.innerText = `clicks = ${clicks}`;
-      })
-      element.oncontextmenu = function (event) {
+  function handlerByClick(element) {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden');
+      clicks++;
+      if (clicks === 1) {
+        startTimer();
+        let elementIndex = arrayOfCells.indexOf(element);
+        console.log(elementIndex);
+        createMinePlaces(elementIndex);
+        fillCellsByMines();
+        fillCellsByContent();
+        console.log('this is first click');
+        console.log(arrayOfMinePlaces);
+      }
+      choiceBehavior(element);
+      countHiddenCells();
+      gameClicks.innerText = `clicks = ${clicks}`;
+    }
+}
+  arrayOfCells.forEach(element => {
+    element.addEventListener('click', () => handlerByClick(element));
+    element.oncontextmenu = function (event) {
+      if (element.classList.contains('hidden')) {
         event.preventDefault();
         console.log('print flag');
+        element.classList.add('hidden');
         element.classList.toggle('flag');
         element.classList.contains('flag') ? reduceMines() : increaseMines();
+        if (element.classList.contains('flag')) {
+          element.removeEventListener('click', () => handlerByClick(element))              //TODO не работает отключение 
+        }
+      }
       };
-    })
+  })
   
   function createMinePlaces(elementIndex) {
     while (arrayOfMinePlaces.length < amountOfMines) {
@@ -229,38 +237,41 @@ function getStarted() {
 
   function colorSelection() {
     for (let i = 0; i < arrayOfCells.length; i++) {
-      switch (arrayOfCells[i].innerText) {
-        case 'M':
-          arrayOfCells[i].style.color = 'black';
-          break;
-        case '0':
-          arrayOfCells[i].style.color = 'transparent';
-          break;
-        case '1':
-          arrayOfCells[i].style.color = 'white';
-          break;
-        case '2':
-          arrayOfCells[i].style.color = 'yellow';
-          break;
-        case '3':
-          arrayOfCells[i].style.color = 'blue';
-          break;
-        case '4':
-          arrayOfCells[i].style.color = 'chartreuse';
-          break;
-        case '5':
-          arrayOfCells[i].style.color = 'violet';
-          break;
-        case '6':
-          arrayOfCells[i].style.color = 'orange';
-          break;
-        case '7':
-          arrayOfCells[i].style.color = 'red';
-          break;
-        default:
-          arrayOfCells[i].style.color = 'black';
-          break;
-      }
+      
+        switch (arrayOfCells[i].innerText) {
+          case 'M':
+            arrayOfCells[i].style.color = 'black';
+            break;
+          case '0':
+            arrayOfCells[i].style.color = 'transparent';
+            break;
+          case '1':
+            arrayOfCells[i].style.color = 'white';
+            break;
+          case '2':
+            arrayOfCells[i].style.color = 'yellow';
+            break;
+          case '3':
+            arrayOfCells[i].style.color = 'blue';
+            break;
+          case '4':
+            arrayOfCells[i].style.color = 'chartreuse';
+            break;
+          case '5':
+            arrayOfCells[i].style.color = 'violet';
+            break;
+          case '6':
+            arrayOfCells[i].style.color = 'orange';
+            break;
+          case '7':
+            arrayOfCells[i].style.color = 'red';
+            break;
+          default:
+            arrayOfCells[i].style.color = 'black';
+            break;
+        }
+      
+    
     }
   };
 
@@ -291,14 +302,15 @@ function getStarted() {
   function openAllMines() {
     for (let i = 0; i < arrayOfCells.length; i++) {
       if (arrayOfCells[i].classList.contains('mine')) {
-        arrayOfCells[i].classList.remove('hidden')
+        arrayOfCells[i].classList.remove('hidden');
+        arrayOfCells[i].classList.remove('flag');
       }
     }
   }
   function throwGameOverMessage() {
     console.log('game over');
     clearTimeout(timerID);
-    messageGameOver.classList.add('message_visible');
+    messageGameOver.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
   }
 
   function countHiddenCells() {
@@ -308,7 +320,7 @@ function getStarted() {
         count++;
       }
     }
-    if (count === 90) {
+    if (count === amountOfCells - amountOfMines) {
       throwWinMessage();
       clearTimeout(timerID);
     }
@@ -316,7 +328,7 @@ function getStarted() {
 
   function throwWinMessage() {
     console.log(`you win for ${clicks} steps and ${time}`)
-    messageWinner.classList.add('message_visible');
+    messageWinner.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
     messageWinner.innerText = `you win for ${clicks} steps and ${time}`;
   }
 
