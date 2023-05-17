@@ -13,7 +13,14 @@
 const usedFlags = document.createElement('div');
 const gameTime = document.createElement('div');
 const gameClicks = document.createElement('div');
-
+const gameMode = document.createElement('div');
+const gameModeSizeS = document.createElement('div');
+const gameModeSizeM = document.createElement('div');
+const gameModeSizeL = document.createElement('div');
+const gameModeNumberOfMines = document.createElement('div');
+const blockFooter = document.createElement('div');
+const soundCheck = document.createElement('div');
+const themeCheck = document.createElement('div');
 
   header.classList.add('header');
   main.classList.add('main');
@@ -22,24 +29,106 @@ const gameClicks = document.createElement('div');
 
   blockWrapper.classList.add('game-block__wrapper');
   blockHeader.classList.add('game-block__header');
-  blockContent.classList.add('game-block__content');
+blockContent.classList.add('game-block__content', 'content_S');
+blockFooter.classList.add('game-block__footer');
+  
 
-  main.append(blockWrapper);
-  blockWrapper.append(blockHeader);
-  blockWrapper.append(blockContent);
-
+main.append(blockWrapper);
+blockWrapper.append(blockHeader);
+blockWrapper.append(blockContent);
+blockWrapper.append(blockFooter);
+  
   messageGameOver.classList.add('message');
   messageGameOver.innerText = 'Game over';
   messageWinner.classList.add('message');
   restartGame.classList.add('restart');
   restartGame.innerText = 'ReStart!';
 blockHeader.append(restartGame);
+
+gameMode.classList.add('game-mode');
+blockHeader.append(gameMode);
+gameModeSizeS.classList.add('game-mode__size', 'size_S', 'game-mode__size_active');
+gameModeSizeS.innerText = '10x10'
+gameModeSizeM.classList.add('game-mode__size', 'size_M');
+gameModeSizeM.innerText = '15x15'
+gameModeSizeL.classList.add('game-mode__size', 'size_L');
+gameModeSizeL.innerText = '25x25'
+gameModeNumberOfMines.classList.add('game-mode__number');
+gameModeNumberOfMines.innerHTML = `choose the mine amount: <input id='mineAmount' type='text' value='10'>\nPlease, click "ReStart!" to apply )))`
+gameMode.append(gameModeSizeS);
+gameMode.append(gameModeSizeM);
+gameMode.append(gameModeSizeL);
+gameMode.append(gameModeNumberOfMines);
+
+blockFooter.append(soundCheck);
+soundCheck.insertAdjacentHTML("beforeend", `<label><input id="soundCheck" type="checkbox">Sound off</label>`);
+let soundChecking = document.getElementById('soundCheck');
+blockFooter.append(themeCheck);
+themeCheck.insertAdjacentHTML("beforeend", `<label><input id="themeCheck" type="checkbox">Night</label>`);
+let themeChecking = document.getElementById('themeCheck');
+                                                                //TODO прикрутить темную тему
+
 let timerID;
+let gameSize = 10;
+
+let activeGameSize = document.querySelector('.game-mode__size_active');;
+
+let arrayGameSizes = [gameModeSizeS, gameModeSizeM, gameModeSizeL];
+console.log(arrayGameSizes)
+arrayGameSizes.forEach(size => size.addEventListener('click', () => {
+  arrayGameSizes.forEach(elem => elem.classList.remove('game-mode__size_active'));
+  size.classList.add('game-mode__size_active')
+  activeGameSize = size;
+  console.log(activeGameSize);
+  reSize();
+  clearTimeout(timerID);
+  getStarted();
+}))
+
+
+function reSize() {
+  if (activeGameSize.classList.contains('size_S')) {
+    gameSize = 10;
+    blockContent.classList.remove('content_M');
+    blockContent.classList.remove('content_L');
+    blockContent.classList.add('content_S');
+  } else if (activeGameSize.classList.contains('size_M')) {
+    gameSize = 15;
+    blockContent.classList.remove('content_S');
+    blockContent.classList.remove('content_L');
+    blockContent.classList.add('content_M');
+  } else if (activeGameSize.classList.contains('size_L')) {
+    gameSize = 25;
+    blockContent.classList.remove('content_S');
+    blockContent.classList.remove('content_M');
+    blockContent.classList.add('content_L');
+  }
+}
   
 function getStarted() {
+  messageGameOver.classList.remove('message_visible');
+  messageWinner.classList.remove('message_visible');
+  clearTimeout(timerID);
+  reSize();
+  console.log(gameSize);
+  let amountOfMines = 10;
+  let num = document.getElementById('mineAmount').value;
+  if ((num < 10 || num > 99) || isNaN(num)) {
+    alert('Enter number 10 - 99')
+    document.getElementById('mineAmount').value = 10; //TODO допинать проверку числа мин
+    amountOfMines = 10;
+  } else {
+    amountOfMines = num;
+  }
+  //onsole.log(amountOfMines)
+  let amountOfCells = gameSize * gameSize;
+  let arrayOfMinePlaces = [];
+  let clicks = 0;
+  let time; 
+
   function createButtons() {
     blockContent.innerHTML = '';
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < amountOfCells; i++) {
       let button = `<div class="game-block__item"></div>`;
       blockContent.insertAdjacentHTML('beforeend', button);
     }
@@ -50,12 +139,8 @@ function getStarted() {
   blockContent.append(messageWinner);
 
   //create mines
-
-  let amountOfMines = 10;
-  let amountOfCells = 100;
-  let arrayOfMinePlaces = [];
-  let clicks = 0;
-  let time;
+  
+  
   //let timerID;
 
   activeMines.classList.add('active-mines');
@@ -146,6 +231,7 @@ function getStarted() {
       }
       choiceBehavior(element);
       countHiddenCells();
+      //playSound('assets/sounds/click.mp3');
       gameClicks.innerText = `clicks = ${clicks}`;
     }
 }
@@ -157,6 +243,7 @@ function getStarted() {
         console.log('print flag');
         element.classList.add('hidden');
         element.classList.toggle('flag');
+        playSound('assets/sounds/flag.mp3');
         element.classList.contains('flag') ? reduceMines() : increaseMines();
         if (element.classList.contains('flag')) {
           element.removeEventListener('click', () => handlerByClick(element))              //TODO не работает отключение 
@@ -186,9 +273,9 @@ function getStarted() {
       }
     }
     //console.log(arrayOfCells);
-    for (let x = 0; x < 10; x++) {
+    for (let x = 0; x < gameSize; x++) {
       arrayDouble[x] = [];
-      let chunkOfArr = arrayOfCells.slice((x * 10), (x * 10 + 10));
+      let chunkOfArr = arrayOfCells.slice((x * gameSize), (x * gameSize + gameSize));
       arrayDouble[x] = chunkOfArr;
     }
     return arrayDouble;
@@ -237,7 +324,6 @@ function getStarted() {
 
   function colorSelection() {
     for (let i = 0; i < arrayOfCells.length; i++) {
-      
         switch (arrayOfCells[i].innerText) {
           case 'M':
             arrayOfCells[i].style.color = 'black';
@@ -270,8 +356,6 @@ function getStarted() {
             arrayOfCells[i].style.color = 'black';
             break;
         }
-      
-    
     }
   };
 
@@ -289,12 +373,15 @@ function getStarted() {
     if (element.innerText === 'M') {
       openAllMines();
       throwGameOverMessage();
+      playSound('assets/sounds/fail.mp3');
     } else if (element.innerText === '0') {
+      playSound('assets/sounds/click.mp3');
       let abs = arrayOfCells.indexOf(element)
-      let x = Math.floor(abs / 10);
-      let y = abs % 10;
+      let x = Math.floor(abs / gameSize);
+      let y = abs % gameSize;
       openSibling(x, y);
     } else {
+      playSound('assets/sounds/click.mp3');
       console.log('good choise!')
     }
   }
@@ -309,6 +396,7 @@ function getStarted() {
   }
   function throwGameOverMessage() {
     console.log('game over');
+    //playSound('assets/sounds/fail.mp3')
     clearTimeout(timerID);
     messageGameOver.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
   }
@@ -322,6 +410,7 @@ function getStarted() {
     }
     if (count === amountOfCells - amountOfMines) {
       throwWinMessage();
+      playSound('assets/sounds/winner.mp3')
       clearTimeout(timerID);
     }
   }
@@ -403,10 +492,27 @@ function getStarted() {
       sibling[i].classList.remove('hidden');
       if (sibling[i].innerText === '0') {
         let itemAbs = arrayOfCells.indexOf(sibling[i])
-        let itemX = Math.floor(itemAbs / 10);
-        let itemY = itemAbs % 10;
+        let itemX = Math.floor(itemAbs / gameSize);
+        let itemY = itemAbs % gameSize;
         //console.log(itemX, itemY)
         openSibling(itemX, itemY)
+      }
+    }
+  }
+
+  const audio = new Audio();
+  function playSound(src) {
+    audio.src = src;
+    //audio.load();
+    if (soundChecking.checked === false) {
+      let playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          console.log('is playing')
+        })
+          .catch(error => {
+            console.log('is paused')
+          });
       }
     }
   }
@@ -415,9 +521,7 @@ function getStarted() {
 getStarted()
 
 restartGame.addEventListener('click', () => {
-  messageGameOver.classList.remove('message_visible');
-  messageWinner.classList.remove('message_visible');
-  clearTimeout(timerID);
-  getStarted()
+  reSize();
+  getStarted();
 
 })
