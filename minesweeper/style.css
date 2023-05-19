@@ -149,3 +149,24 @@ body {
   padding: 20px;
   justify-content: space-around;
 }
+
+.results__button {
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.results__block {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 200px;
+  height: 200px;
+  background-color: chartreuse;
+}
+
+.results__block_visible {
+  display: block;
+}
