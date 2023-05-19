@@ -1,15 +1,15 @@
 //render page
 
-  const body = document.querySelector('.body');
-  const header = document.createElement('header');
-  const main = document.createElement('main');
-  const blockWrapper = document.createElement('div');
-  const blockHeader = document.createElement('div');
-  const blockContent = document.createElement('div');
-  const messageGameOver = document.createElement('div');
-  const messageWinner = document.createElement('div');
-  const restartGame = document.createElement('div');
-  const activeMines = document.createElement('div');
+const body = document.querySelector('.body');
+const header = document.createElement('header');
+const main = document.createElement('main');
+const blockWrapper = document.createElement('div');
+const blockHeader = document.createElement('div');
+const blockContent = document.createElement('div');
+const messageGameOver = document.createElement('div');
+const messageWinner = document.createElement('div');
+const restartGame = document.createElement('div');
+const activeMines = document.createElement('div');
 const usedFlags = document.createElement('div');
 const gameTime = document.createElement('div');
 const gameClicks = document.createElement('div');
@@ -21,28 +21,33 @@ const gameModeNumberOfMines = document.createElement('div');
 const blockFooter = document.createElement('div');
 const soundCheck = document.createElement('div');
 const themeCheck = document.createElement('div');
+const results = document.createElement('div');
+const resultsBlock = document.createElement('div');
+const resultHeader = document.createElement('div');
+const resultsItem = document.createElement('div');
 
-  header.classList.add('header');
-  main.classList.add('main');
-  body.prepend(main);
-  body.prepend(header);
+header.classList.add('header');
+main.classList.add('main');
+body.prepend(main);
+body.prepend(header);
 
-  blockWrapper.classList.add('game-block__wrapper');
-  blockHeader.classList.add('game-block__header');
+blockWrapper.classList.add('game-block__wrapper');
+blockHeader.classList.add('game-block__header');
 blockContent.classList.add('game-block__content', 'content_S');
 blockFooter.classList.add('game-block__footer');
-  
 
 main.append(blockWrapper);
 blockWrapper.append(blockHeader);
 blockWrapper.append(blockContent);
 blockWrapper.append(blockFooter);
   
-  messageGameOver.classList.add('message');
-  messageGameOver.innerText = 'Game over';
-  messageWinner.classList.add('message');
-  restartGame.classList.add('restart');
-  restartGame.innerText = 'ReStart!';
+messageGameOver.classList.add('message');
+messageGameOver.innerText = 'Game over';
+messageWinner.classList.add('message');
+resultsBlock.classList.add('results__block');
+
+restartGame.classList.add('restart');
+restartGame.innerText = 'New Game';
 blockHeader.append(restartGame);
 
 gameMode.classList.add('game-mode');
@@ -54,7 +59,7 @@ gameModeSizeM.innerText = '15x15'
 gameModeSizeL.classList.add('game-mode__size', 'size_L');
 gameModeSizeL.innerText = '25x25'
 gameModeNumberOfMines.classList.add('game-mode__number');
-gameModeNumberOfMines.innerHTML = `choose the mine amount: <input id='mineAmount' type='text' value='10'>\nPlease, click "ReStart!" to apply )))`
+gameModeNumberOfMines.innerHTML = `choose the mine amount: <input id='mineAmount' type='text' value='10'>\nPlease, click "New Game" to apply )))`
 gameMode.append(gameModeSizeS);
 gameMode.append(gameModeSizeM);
 gameMode.append(gameModeSizeL);
@@ -67,24 +72,31 @@ blockFooter.append(themeCheck);
 themeCheck.insertAdjacentHTML("beforeend", `<label><input id="themeCheck" type="checkbox">Night</label>`);
 let themeChecking = document.getElementById('themeCheck');
                                                                 //TODO прикрутить темную тему
+blockFooter.append(results);
+results.classList.add('results__button');
+results.innerText = 'Last Results';
+results.addEventListener('click', () => {
+  console.log('show results');
+  resultsBlock.classList.toggle('results__block_visible')
+});
 
 let timerID;
 let gameSize = 10;
+let arrayResult = [];
 
 let activeGameSize = document.querySelector('.game-mode__size_active');;
 
 let arrayGameSizes = [gameModeSizeS, gameModeSizeM, gameModeSizeL];
-console.log(arrayGameSizes)
+//console.log(arrayGameSizes)
 arrayGameSizes.forEach(size => size.addEventListener('click', () => {
   arrayGameSizes.forEach(elem => elem.classList.remove('game-mode__size_active'));
   size.classList.add('game-mode__size_active')
   activeGameSize = size;
-  console.log(activeGameSize);
+  //console.log(activeGameSize);
   reSize();
   clearTimeout(timerID);
   getStarted();
 }))
-
 
 function reSize() {
   if (activeGameSize.classList.contains('size_S')) {
@@ -108,14 +120,15 @@ function reSize() {
 function getStarted() {
   messageGameOver.classList.remove('message_visible');
   messageWinner.classList.remove('message_visible');
+  resultsBlock.classList.remove('results__block_visible');
   clearTimeout(timerID);
   reSize();
-  console.log(gameSize);
+  //console.log(gameSize);
   let amountOfMines = 10;
   let num = document.getElementById('mineAmount').value;
   if ((num < 10 || num > 99) || isNaN(num)) {
     alert('Enter number 10 - 99')
-    document.getElementById('mineAmount').value = 10; //TODO допинать проверку числа мин
+    document.getElementById('mineAmount').value = 10;
     amountOfMines = 10;
   } else {
     amountOfMines = num;
@@ -137,11 +150,47 @@ function getStarted() {
 
   blockContent.append(messageGameOver);
   blockContent.append(messageWinner);
+  blockContent.append(resultsBlock);
+  resultsBlock.append(resultHeader);
+  resultHeader.innerText = 'Last Results';
+  resultsBlock.append(resultsItem);
+
+  function fillResultsTable() {
+    resultsItem.innerHTML = '';
+    for (let elem of arrayResult) {
+      let item = `<div class="result__item">${elem}</div>`;
+      resultsItem.insertAdjacentHTML('beforeend', item);
+    }
+  }
+
+  function getLocalStorage() {
+    if (localStorage.getItem('lastResult')) {
+      arrayResult = (localStorage.getItem('lastResult')).split(',');
+      fillResultsTable()
+      //resultsBlock.innerText = arrayResult
+      console.log(arrayResult)
+    } else {
+      arrayResult = [];
+    }
+  }
+  window.addEventListener('load', getLocalStorage);
+
+  function pushArrayResult(clicks, time) {
+    arrayResult.push(`${clicks} clicks by ${time}`);
+    if (arrayResult.length > 10) {
+      arrayResult.shift()
+    }
+    console.log(arrayResult)
+    fillResultsTable()
+    
+  }
+
+  function setLocalStorage() {
+    localStorage.setItem('lastResult', arrayResult);
+  }
+  window.addEventListener('beforeunload', setLocalStorage);
 
   //create mines
-  
-  
-  //let timerID;
 
   activeMines.classList.add('active-mines');
   blockHeader.append(activeMines);
@@ -222,12 +271,12 @@ function getStarted() {
       if (clicks === 1) {
         startTimer();
         let elementIndex = arrayOfCells.indexOf(element);
-        console.log(elementIndex);
+        //console.log(elementIndex);
         createMinePlaces(elementIndex);
         fillCellsByMines();
         fillCellsByContent();
-        console.log('this is first click');
-        console.log(arrayOfMinePlaces);
+        //console.log('this is first click');
+        //console.log(arrayOfMinePlaces);
       }
       choiceBehavior(element);
       countHiddenCells();
@@ -240,7 +289,7 @@ function getStarted() {
     element.oncontextmenu = function (event) {
       if (element.classList.contains('hidden')) {
         event.preventDefault();
-        console.log('print flag');
+        //console.log('print flag');
         element.classList.add('hidden');
         element.classList.toggle('flag');
         playSound('assets/sounds/flag.mp3');
@@ -382,7 +431,7 @@ function getStarted() {
       openSibling(x, y);
     } else {
       playSound('assets/sounds/click.mp3');
-      console.log('good choise!')
+      //console.log('good choise!')
     }
   }
 
@@ -395,7 +444,7 @@ function getStarted() {
     }
   }
   function throwGameOverMessage() {
-    console.log('game over');
+    //console.log('game over');
     //playSound('assets/sounds/fail.mp3')
     clearTimeout(timerID);
     messageGameOver.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
@@ -419,8 +468,12 @@ function getStarted() {
     console.log(`you win for ${clicks} steps and ${time}`)
     messageWinner.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
     messageWinner.innerText = `you win for ${clicks} steps and ${time}`;
+    pushArrayResult(clicks, time);
+    //arrayResult.push([clicks, time])
+    //console.log(arrayResult)
   }
 
+  
   function openSibling(x, y) {
     let sibling = [];
     let top, topRight, right, rightDown, down, downLeft, left, leftTop;
@@ -508,7 +561,7 @@ function getStarted() {
       let playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(_ => {
-          console.log('is playing')
+          //console.log('is playing')
         })
           .catch(error => {
             console.log('is paused')
