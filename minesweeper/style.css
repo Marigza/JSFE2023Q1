@@ -20,6 +20,12 @@ body {
   background-color: transparent;
 }
 
+.game-name {
+  text-align: center;
+  max-width: 10px 0;
+  font-size: 3rem;
+}
+
 .game-mode {
   display: flex;
   width: fit-content;

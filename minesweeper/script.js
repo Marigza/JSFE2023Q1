@@ -13,6 +13,7 @@ const activeMines = document.createElement('div');
 const usedFlags = document.createElement('div');
 const gameTime = document.createElement('div');
 const gameClicks = document.createElement('div');
+const gameName = document.createElement('div');
 const gameMode = document.createElement('div');
 const gameModeSizeS = document.createElement('div');
 const gameModeSizeM = document.createElement('div');
@@ -51,7 +52,9 @@ resultsBlock.classList.add('results__block');
 modalWindow.classList.add('modal');
 modalWindow2.classList.add('modal');
 
-
+blockHeader.append(gameName);
+gameName.classList.add('game-name')
+gameName.innerText = "= MINESWEEPER =";
 gameMode.classList.add('game-mode');
 blockHeader.append(gameMode);
 gameModeSizeS.classList.add('game-mode__size', 'size_S', 'game-mode__size_active');
@@ -311,7 +314,7 @@ function getStarted() {
 }
   arrayOfCells.forEach(element => {
     element.addEventListener('click', () => handlerByClick(element));
-    element.oncontextmenu = function (event) {
+    element.oncontextmenu = function (event) { //TODO сделать кнопку с активацией раздачи флагов для мобильной игры
       if (element.classList.contains('hidden')) {
         event.preventDefault();
         //console.log('print flag');
@@ -493,7 +496,7 @@ function getStarted() {
   function throwWinMessage() {
     //console.log(`Hooray! You found all mines in ${time} seconds and ${clicks} moves!`)
     modalWindow.classList.add('modal_active');
-    messageWinner.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
+    messageWinner.classList.add('message_visible'); 
     messageWinner.innerText = `Hooray! You found all mines in ${time} seconds and ${clicks} moves!`;
     pushArrayResult(clicks, time);
     //arrayResult.push([clicks, time])
