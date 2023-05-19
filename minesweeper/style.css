@@ -2,10 +2,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  background-color: aqua;
+ background: linear-gradient(#45c59a 0%, #7371ea 100%); 
 }
 
 .main {
@@ -14,7 +16,7 @@ body {
 }
 
 .game-block__wrapper {
-  background-color: white;
+  background-color: transparent;
 }
 
 .game-block__header {
@@ -50,19 +52,33 @@ body {
 .game-block__item {
   display: flex;
   background-color: gray;
+  font-weight: bold;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 1px solid gray;
   justify-content: center;
   align-items: center;
+}
+
+.game-block__item-night {
+  background-color: rgb(74, 68, 68);
+  border: 1px solid rgb(74, 68, 68);
 }
 
 .mine {
   background-color: red;
 }
 
+.mine_night {
+  background-color: rgb(203, 4, 4);
+}
+
 .hidden {
   color: transparent !important;
-  background-color: bisque;
+  background-color: rgb(255, 228, 196);
+}
+
+.hidden_night {
+  background-color: rgb(131, 3, 133);
 }
 
 .message {
@@ -70,10 +86,15 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 3;
-  width: 100px;
+  width: 300px;
   height: 100px;
-  background-color: chartreuse;
+  text-align: center;
+  padding-top: 20px;
+  background-color: #45c59a;
+  border-radius: 15px;
+  box-shadow: 0px 25px 25px 14px rgba(0, 0, 0, 0.8);
 }
 
 .message_visible {
@@ -84,48 +105,58 @@ body {
   width: fit-content;
   padding: 20px;
   margin: 20px;
-  background-color: bisque;
+  background-color: #7371ea;
+  border-radius: 10px;
 }
 
 .active-mines {
   width: fit-content;
     padding: 20px;
     margin: 20px;
-    background-color: bisque;
+    background-color: #7371ea;
+    border-radius: 10px;
 }
 
 .used-flags {
   width: fit-content;
   padding: 20px;
   margin: 20px;
-  background-color: bisque;
+  background-color: #7371ea;
+  border-radius: 10px;
 }
 
 .game-time {
   width: fit-content;
   padding: 20px;
   margin: 20px;
-  background-color: bisque;
+  background-color: #7371ea;
+  border-radius: 10px;
 }
 
 .game-clicks {
   width: fit-content;
   padding: 20px;
   margin: 20px;
-  background-color: bisque;
+  background-color: #7371ea;
+  border-radius: 10px;
 }
 
 .flag {
   background: url(assets/star.svg) center no-repeat;
-  background-color: chartreuse;
+  background-color: rgb(255, 228, 196);
+}
+
+.flag_night {
+  background-color: rgb(131, 3, 133);
 }
 
 .game-mode {
   display: flex;
   width: fit-content;
   padding: 20px;
-  margin: 20px;
-  background-color: bisque;
+  margin: 20px 0;
+  background-color: #7371ea;
+  border-radius: 25px;
 }
 
 .game-mode__size {
@@ -150,9 +181,20 @@ body {
   justify-content: space-around;
 }
 
-.results__button {
-  border: 1px solid #000;
+.results__button,
+.sound__button,
+.theme__button {
+  padding: 5px 20px;
+  background-color:#45c59a;
+  border-radius: 10px;
   cursor: pointer;
+}
+
+.results__button:hover,
+.sound__button:hover,
+.theme__button:hover {
+  background-color: #277058;
+  transition: all linear 0.3s;
 }
 
 .results__block {
@@ -163,10 +205,29 @@ body {
   transform: translate(-50%, -50%);
   z-index: 5;
   width: 200px;
-  height: 200px;
-  background-color: chartreuse;
+  height: 250px;
+  padding: 20px;
+  background-color: #45c59a;
+  border-radius: 15px;
+  box-shadow: 0px 25px 25px 7px rgba(0, 0, 0, 0.8);
 }
 
 .results__block_visible {
   display: block;
+}
+
+.results__header {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.result__item:nth-child(odd){
+  padding: 0 5px;
+  background-color: #4ad4a6;
+}
+
+.result__item:nth-child(even) {
+  padding: 0 5px;
+  background-color: #3aa581;
 }

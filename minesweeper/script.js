@@ -66,9 +66,11 @@ gameMode.append(gameModeSizeL);
 gameMode.append(gameModeNumberOfMines);
 
 blockFooter.append(soundCheck);
+soundCheck.classList.add('sound__button');
 soundCheck.insertAdjacentHTML("beforeend", `<label><input id="soundCheck" type="checkbox">Sound off</label>`);
 let soundChecking = document.getElementById('soundCheck');
 blockFooter.append(themeCheck);
+themeCheck.classList.add('theme__button');
 themeCheck.insertAdjacentHTML("beforeend", `<label><input id="themeCheck" type="checkbox">Night</label>`);
 let themeChecking = document.getElementById('themeCheck');
                                                                 //TODO прикрутить темную тему
@@ -152,8 +154,10 @@ function getStarted() {
   blockContent.append(messageWinner);
   blockContent.append(resultsBlock);
   resultsBlock.append(resultHeader);
+  resultHeader.classList.add('results__header')
   resultHeader.innerText = 'Last Results';
   resultsBlock.append(resultsItem);
+  resultsItem.classList.add('results__item')
 
   function fillResultsTable() {
     resultsItem.innerHTML = '';
