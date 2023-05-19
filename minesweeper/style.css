@@ -4,6 +4,7 @@
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
 }
 
 body {
@@ -19,9 +20,21 @@ body {
   background-color: transparent;
 }
 
-.game-block__header {
+.game-mode {
   display: flex;
-  flex-wrap: wrap;
+  width: fit-content;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #7371ea;
+  border-radius: 25px;
+}
+
+.game-counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .game-block__content {
@@ -33,17 +46,20 @@ body {
   width: 490px;
   height: 520px;
 }
-.content_S{
+
+.content_S {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   gap: 2px;
 }
-.content_M{
+
+.content_M {
   grid-template-columns: repeat(15, 1fr);
   grid-template-rows: repeat(15, 1fr);
   gap: 2px;
 }
-.content_L{
+
+.content_L {
   grid-template-columns: repeat(25, 1fr);
   grid-template-rows: repeat(25, 1fr);
   gap: 0.5px;
@@ -102,41 +118,39 @@ body {
 }
 
 .restart {
-  width: fit-content;
+  grid-row: span 2;
   padding: 20px;
-  margin: 20px;
+  font-size: 3rem;
   background-color: #7371ea;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.restart:hover {
+  background-color: #4b49e5;
+  transition: all linear 0.3s;
 }
 
 .active-mines {
-  width: fit-content;
     padding: 20px;
-    margin: 20px;
     background-color: #7371ea;
     border-radius: 10px;
 }
 
 .used-flags {
-  width: fit-content;
   padding: 20px;
-  margin: 20px;
   background-color: #7371ea;
   border-radius: 10px;
 }
 
 .game-time {
-  width: fit-content;
   padding: 20px;
-  margin: 20px;
   background-color: #7371ea;
   border-radius: 10px;
 }
 
 .game-clicks {
-  width: fit-content;
   padding: 20px;
-  margin: 20px;
   background-color: #7371ea;
   border-radius: 10px;
 }
@@ -150,24 +164,21 @@ body {
   background-color: rgb(131, 3, 133);
 }
 
-.game-mode {
-  display: flex;
-  width: fit-content;
-  padding: 20px;
-  margin: 20px 0;
-  background-color: #7371ea;
-  border-radius: 25px;
-}
-
 .game-mode__size {
   border: 1px solid #000;
   margin: 5px;
   padding: 5px;
+  cursor: pointer;
 }
+
+.game-mode__size:hover {
+  background-color: cadetblue;
+  transition: all linear 0.1s;
+}
+
 .game-mode__size_active {
   background-color: cadetblue;
 }
-
 
 .game-mode__number {
   border: 1px solid black;
@@ -230,4 +241,18 @@ body {
 .result__item:nth-child(even) {
   padding: 0 5px;
   background-color: #3aa581;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_active {
+  display: block;
 }

@@ -18,6 +18,7 @@ const gameModeSizeS = document.createElement('div');
 const gameModeSizeM = document.createElement('div');
 const gameModeSizeL = document.createElement('div');
 const gameModeNumberOfMines = document.createElement('div');
+const gameCounter = document.createElement('div');
 const blockFooter = document.createElement('div');
 const soundCheck = document.createElement('div');
 const themeCheck = document.createElement('div');
@@ -25,6 +26,8 @@ const results = document.createElement('div');
 const resultsBlock = document.createElement('div');
 const resultHeader = document.createElement('div');
 const resultsItem = document.createElement('div');
+const modalWindow = document.createElement('div');
+const modalWindow2 = document.createElement('div');
 
 header.classList.add('header');
 main.classList.add('main');
@@ -42,13 +45,12 @@ blockWrapper.append(blockContent);
 blockWrapper.append(blockFooter);
   
 messageGameOver.classList.add('message');
-messageGameOver.innerText = 'Game over';
+messageGameOver.innerText = 'Game over(((\nTry again!';
 messageWinner.classList.add('message');
 resultsBlock.classList.add('results__block');
+modalWindow.classList.add('modal');
+modalWindow2.classList.add('modal');
 
-restartGame.classList.add('restart');
-restartGame.innerText = 'New Game';
-blockHeader.append(restartGame);
 
 gameMode.classList.add('game-mode');
 blockHeader.append(gameMode);
@@ -59,11 +61,17 @@ gameModeSizeM.innerText = '15x15'
 gameModeSizeL.classList.add('game-mode__size', 'size_L');
 gameModeSizeL.innerText = '25x25'
 gameModeNumberOfMines.classList.add('game-mode__number');
-gameModeNumberOfMines.innerHTML = `choose the mine amount: <input id='mineAmount' type='text' value='10'>\nPlease, click "New Game" to apply )))`
+gameModeNumberOfMines.innerHTML = `choose the mine amount:\n <input id='mineAmount' type='text' value='10'>\nPlease, click "New Game" to apply )))`
 gameMode.append(gameModeSizeS);
 gameMode.append(gameModeSizeM);
 gameMode.append(gameModeSizeL);
 gameMode.append(gameModeNumberOfMines);
+
+gameCounter.classList.add('game-counters');
+blockHeader.append(gameCounter);
+restartGame.classList.add('restart');
+restartGame.innerText = 'New Game';
+gameCounter.append(restartGame);
 
 blockFooter.append(soundCheck);
 soundCheck.classList.add('sound__button');
@@ -78,8 +86,9 @@ blockFooter.append(results);
 results.classList.add('results__button');
 results.innerText = 'Last Results';
 results.addEventListener('click', () => {
-  console.log('show results');
-  resultsBlock.classList.toggle('results__block_visible')
+  //console.log('show results');
+  modalWindow2.classList.toggle('modal_active');
+  resultsBlock.classList.toggle('results__block_visible');
 });
 
 let timerID;
@@ -99,6 +108,12 @@ arrayGameSizes.forEach(size => size.addEventListener('click', () => {
   clearTimeout(timerID);
   getStarted();
 }))
+
+// function changeTheme() {
+//   if (themeChecking.checked === true) {
+//     console.log('theme was changed')
+//   }
+// }
 
 function reSize() {
   if (activeGameSize.classList.contains('size_S')) {
@@ -120,6 +135,8 @@ function reSize() {
 }
   
 function getStarted() {
+  modalWindow.classList.remove('modal_active');
+  modalWindow2.classList.remove('modal_active');
   messageGameOver.classList.remove('message_visible');
   messageWinner.classList.remove('message_visible');
   resultsBlock.classList.remove('results__block_visible');
@@ -147,12 +164,15 @@ function getStarted() {
       let button = `<div class="game-block__item"></div>`;
       blockContent.insertAdjacentHTML('beforeend', button);
     }
+    //changeTheme()
   }
   createButtons();
 
   blockContent.append(messageGameOver);
   blockContent.append(messageWinner);
   blockContent.append(resultsBlock);
+  blockContent.append(modalWindow);
+  blockContent.append(modalWindow2);
   resultsBlock.append(resultHeader);
   resultHeader.classList.add('results__header')
   resultHeader.innerText = 'Last Results';
@@ -197,16 +217,17 @@ function getStarted() {
   //create mines
 
   activeMines.classList.add('active-mines');
-  blockHeader.append(activeMines);
+  gameCounter.append(activeMines);
+
   usedFlags.classList.add('used-flags');
-  blockHeader.append(usedFlags);
+  gameCounter.append(usedFlags);
 
   gameTime.classList.add('game-time');
-  blockHeader.append(gameTime);
-  gameTime.innerText = '00:00';
+  gameCounter.append(gameTime);
+  gameTime.innerText = 'time = 00:00';
 
   gameClicks.classList.add('game-clicks');
-  blockHeader.append(gameClicks);
+  gameCounter.append(gameClicks);
   gameClicks.innerText = `clicks = ${clicks}`;
 
   let restOfMines = amountOfMines;
@@ -257,7 +278,7 @@ function getStarted() {
           time = `${Math.floor(seconds / 60)}:${seconds % 60}`
         }
       }
-      gameTime.innerText = time;
+      gameTime.innerText = `time = ${time}`;
       timerID = setTimeout(showTime, 1000);
       return time;
     }
@@ -451,7 +472,8 @@ function getStarted() {
     //console.log('game over');
     //playSound('assets/sounds/fail.mp3')
     clearTimeout(timerID);
-    messageGameOver.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
+    modalWindow.classList.add('modal_active');
+    messageGameOver.classList.add('message_visible');
   }
 
   function countHiddenCells() {
@@ -469,9 +491,10 @@ function getStarted() {
   }
 
   function throwWinMessage() {
-    console.log(`you win for ${clicks} steps and ${time}`)
+    //console.log(`Hooray! You found all mines in ${time} seconds and ${clicks} moves!`)
+    modalWindow.classList.add('modal_active');
     messageWinner.classList.add('message_visible'); //TODO добавить модальное окно чтобы кнпки поля стали неактивны
-    messageWinner.innerText = `you win for ${clicks} steps and ${time}`;
+    messageWinner.innerText = `Hooray! You found all mines in ${time} seconds and ${clicks} moves!`;
     pushArrayResult(clicks, time);
     //arrayResult.push([clicks, time])
     //console.log(arrayResult)
