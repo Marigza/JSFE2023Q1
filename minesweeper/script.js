@@ -64,7 +64,7 @@ gameModeSizeM.innerText = '15x15'
 gameModeSizeL.classList.add('game-mode__size', 'size_L');
 gameModeSizeL.innerText = '25x25'
 gameModeNumberOfMines.classList.add('game-mode__number');
-gameModeNumberOfMines.innerHTML = `choose the mine amount:\n <input id='mineAmount' type='text' value='10'>\nPlease, click "New Game" to apply )))`
+gameModeNumberOfMines.innerHTML = `<span>choose the mine amount:</span><input id='mineAmount' type='text' value='10'><span>Please, click "New Game" to apply</span>`
 gameMode.append(gameModeSizeS);
 gameMode.append(gameModeSizeM);
 gameMode.append(gameModeSizeL);
