@@ -27,6 +27,7 @@ const results = document.createElement('div');
 const resultsBlock = document.createElement('div');
 const resultHeader = document.createElement('div');
 const resultsItem = document.createElement('div');
+const flagSetting = document.createElement('div');
 const modalWindow = document.createElement('div');
 const modalWindow2 = document.createElement('div');
 
@@ -84,7 +85,8 @@ blockFooter.append(themeCheck);
 themeCheck.classList.add('theme__button');
 themeCheck.insertAdjacentHTML("beforeend", `<label><input id="themeCheck" type="checkbox">Night</label>`);
 let themeChecking = document.getElementById('themeCheck');
-                                                                //TODO прикрутить темную тему
+                                                                                              //TODO прикрутить темную тему
+                                                                                              //TODO burger-menu
 blockFooter.append(results);
 results.classList.add('results__button');
 results.innerText = 'Last Results';
@@ -92,6 +94,13 @@ results.addEventListener('click', () => {
   //console.log('show results');
   modalWindow2.classList.toggle('modal_active');
   resultsBlock.classList.toggle('results__block_visible');
+});
+
+flagSetting.classList.add('flag-setting');
+blockFooter.append(flagSetting);
+flagSetting.addEventListener('click', () => {
+  flagSetting.classList.toggle('flag-setting_active');
+  flagSetting.classList.contains('flag-setting_active') ? alert('Now You can MARK mines') : alert('Now You can OPEN field');
 });
 
 let timerID;
@@ -180,7 +189,7 @@ function getStarted() {
   resultHeader.classList.add('results__header')
   resultHeader.innerText = 'Last Results';
   resultsBlock.append(resultsItem);
-  resultsItem.classList.add('results__item')
+  resultsItem.classList.add('results__item');
 
   function fillResultsTable() {
     resultsItem.innerHTML = '';
@@ -208,8 +217,7 @@ function getStarted() {
       arrayResult.shift()
     }
     //console.log(arrayResult)
-    fillResultsTable()
-    
+    fillResultsTable() 
   }
 
   function setLocalStorage() {
@@ -292,6 +300,7 @@ function getStarted() {
   //console.log(arrayOfCells)
 
   // click for element
+
   function handlerByClick(element) {
     if (element.classList.contains('hidden')) {
       element.classList.remove('hidden');
@@ -311,20 +320,30 @@ function getStarted() {
       //playSound('assets/sounds/click.mp3');
       gameClicks.innerText = `clicks = ${clicks}`;
     }
-}
+  }
+
+  function markCells(element) {
+    element.classList.add('hidden');
+    element.classList.toggle('flag');
+    playSound('assets/sounds/flag.mp3');
+    element.classList.contains('flag') ? reduceMines() : increaseMines();
+  }
+
   arrayOfCells.forEach(element => {
-    element.addEventListener('click', () => handlerByClick(element));
-    element.oncontextmenu = function (event) { //TODO сделать кнопку с активацией раздачи флагов для мобильной игры
+    element.addEventListener('click', () => {
+      if (flagSetting.classList.contains('flag-setting_active') && element.classList.contains('hidden')) {
+        markCells(element);
+      } else {
+        handlerByClick(element);
+      }
+    });
+    element.oncontextmenu = function (event) {
       if (element.classList.contains('hidden')) {
         event.preventDefault();
-        //console.log('print flag');
-        element.classList.add('hidden');
-        element.classList.toggle('flag');
-        playSound('assets/sounds/flag.mp3');
-        element.classList.contains('flag') ? reduceMines() : increaseMines();
-        if (element.classList.contains('flag')) {
-          element.removeEventListener('click', () => handlerByClick(element))              //TODO не работает отключение 
-        }
+        markCells(element);
+        // if (element.classList.contains('flag')) {
+        //   element.removeEventListener('click', () => handlerByClick(element))              //TODO не работает отключение 
+        // }
       }
       };
   })

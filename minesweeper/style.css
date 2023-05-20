@@ -203,8 +203,10 @@ body {
 
 .game-block__footer {
   display: flex;
-  padding: 20px;
-  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  justify-content: space-between;
+  /* align-content: center; */
 }
 
 .results__button,
@@ -256,6 +258,26 @@ body {
 .result__item:nth-child(even) {
   padding: 0 5px;
   background-color: #3aa581;
+}
+
+
+.flag-setting {
+  display: none;
+}
+
+@media (max-width: 1000px){
+  .flag-setting {
+    display: block;
+    background: url(assets/star.svg) center no-repeat;
+    background-color: #45c59a;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .flag-setting_active {
+    background-color: #277058;
+  }
 }
 
 .modal {
