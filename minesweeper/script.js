@@ -195,7 +195,7 @@ function getStarted() {
       arrayResult = (localStorage.getItem('lastResult')).split(',');
       fillResultsTable()
       //resultsBlock.innerText = arrayResult
-      console.log(arrayResult)
+      //console.log(arrayResult)
     } else {
       arrayResult = [];
     }
@@ -207,7 +207,7 @@ function getStarted() {
     if (arrayResult.length > 10) {
       arrayResult.shift()
     }
-    console.log(arrayResult)
+    //console.log(arrayResult)
     fillResultsTable()
     
   }
@@ -544,28 +544,28 @@ function getStarted() {
       leftTop = arrayDouble[x - 1][y - 1] || undefined;
     }
 
-    if (top !== undefined && top.classList.contains('hidden')) {
+    if (top !== undefined && top.classList.contains('hidden') && !top.classList.contains('flag')) {
       sibling.push(top)
     }
-    if (topRight !== undefined && topRight.classList.contains('hidden')) {
+    if (topRight !== undefined && topRight.classList.contains('hidden') && !topRight.classList.contains('flag')) {
       sibling.push(topRight)
     }
-    if (right !== undefined && right.classList.contains('hidden')) {
+    if (right !== undefined && right.classList.contains('hidden') && !right.classList.contains('flag')) {
       sibling.push(right)
     }
-    if (rightDown !== undefined && rightDown.classList.contains('hidden')) {
+    if (rightDown !== undefined && rightDown.classList.contains('hidden') && !rightDown.classList.contains('flag')) {
       sibling.push(rightDown)
     }
-    if (down !== undefined && down.classList.contains('hidden')) {
+    if (down !== undefined && down.classList.contains('hidden') && !down.classList.contains('flag')) {
       sibling.push(down)
     }
-    if (downLeft !== undefined && downLeft.classList.contains('hidden')) {
+    if (downLeft !== undefined && downLeft.classList.contains('hidden') && !downLeft.classList.contains('flag')) {
       sibling.push(downLeft)
     }
-    if (left !== undefined && left.classList.contains('hidden')) {
+    if (left !== undefined && left.classList.contains('hidden') && !left.classList.contains('flag')) {
       sibling.push(left)
     }
-    if (leftTop !== undefined && leftTop.classList.contains('hidden')) {
+    if (leftTop !== undefined && leftTop.classList.contains('hidden') && !leftTop.classList.contains('flag')) {
       sibling.push(leftTop)
     }
 
