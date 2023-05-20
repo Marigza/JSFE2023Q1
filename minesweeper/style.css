@@ -87,6 +87,7 @@ body {
 }
 
 .mine {
+  /* background: url(assets/mine.svg) center no-repeat; */
   background-color: red;
 }
 
@@ -97,6 +98,12 @@ body {
 .hidden {
   color: transparent !important;
   background-color: rgb(255, 228, 196);
+  cursor: pointer;
+}
+
+.hidden:hover{
+  background-color: rgb(251, 201, 139);
+  transition: all linear 0.1s;
 }
 
 .hidden_night {
@@ -187,6 +194,8 @@ body {
 }
 
 .game-mode__number {
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   margin: 5px;
   padding: 5px;
