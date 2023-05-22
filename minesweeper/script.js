@@ -302,7 +302,7 @@ function getStarted() {
   // click for element
 
   function handlerByClick(element) {
-    if (element.classList.contains('hidden')) {
+    if (element.classList.contains('hidden') && !element.classList.contains('flag')) {
       element.classList.remove('hidden');
       clicks++;
       if (clicks === 1) {
@@ -341,9 +341,6 @@ function getStarted() {
       if (element.classList.contains('hidden')) {
         event.preventDefault();
         markCells(element);
-        // if (element.classList.contains('flag')) {
-        //   element.removeEventListener('click', () => handlerByClick(element))              //TODO не работает отключение 
-        // }
       }
       };
   })
@@ -459,6 +456,11 @@ function getStarted() {
 
 
   function addClassHidden(array) {
+    // if (themeChecking.checked === true) {
+    //   array.forEach(element => {
+    //     element.classList.add('hidden_night');
+    //   });
+    // }
     array.forEach(element => {
       element.classList.add('hidden');
     });
@@ -505,7 +507,7 @@ function getStarted() {
         count++;
       }
     }
-    if (count === amountOfCells - amountOfMines) {
+    if (count === amountOfCells - amountOfMines && !messageGameOver.classList.contains('message_visible')) {
       throwWinMessage();
       playSound('assets/sounds/winner.mp3')
       clearTimeout(timerID);
@@ -613,7 +615,7 @@ function getStarted() {
           //console.log('is playing')
         })
           .catch(error => {
-            console.log('is paused')
+            //console.log('is paused')
           });
       }
     }
