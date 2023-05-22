@@ -85,13 +85,10 @@ blockFooter.append(themeCheck);
 themeCheck.classList.add('theme__button');
 themeCheck.insertAdjacentHTML("beforeend", `<label><input id="themeCheck" type="checkbox">Night</label>`);
 let themeChecking = document.getElementById('themeCheck');
-                                                                                              //TODO прикрутить темную тему
-                                                                                              //TODO burger-menu
 blockFooter.append(results);
 results.classList.add('results__button');
 results.innerText = 'Last Results';
 results.addEventListener('click', () => {
-  //console.log('show results');
   modalWindow2.classList.toggle('modal_active');
   resultsBlock.classList.toggle('results__block_visible');
 });
@@ -110,19 +107,14 @@ let arrayResult = [];
 let activeGameSize = document.querySelector('.game-mode__size_active');;
 
 let arrayGameSizes = [gameModeSizeS, gameModeSizeM, gameModeSizeL];
-//console.log(arrayGameSizes)
 arrayGameSizes.forEach(size => size.addEventListener('click', () => {
   arrayGameSizes.forEach(elem => elem.classList.remove('game-mode__size_active'));
   size.classList.add('game-mode__size_active')
   activeGameSize = size;
-  //console.log(activeGameSize);
   reSize();
-  //changeTheme()
   clearTimeout(timerID);
   getStarted();
 }))
-
-
 
 function reSize() {
   if (activeGameSize.classList.contains('size_S')) {
@@ -151,8 +143,6 @@ function getStarted() {
   resultsBlock.classList.remove('results__block_visible');
   clearTimeout(timerID);
   reSize();
-  //changeTheme();
-  //console.log(gameSize);
   let amountOfMines = 10;
   let num = document.getElementById('mineAmount').value;
   if ((num < 10 || num > 99) || isNaN(num)) {
@@ -162,7 +152,6 @@ function getStarted() {
   } else {
     amountOfMines = num;
   }
-  //onsole.log(amountOfMines)
   let amountOfCells = gameSize * gameSize;
   let arrayOfMinePlaces = [];
   let clicks = 0;
@@ -174,7 +163,6 @@ function getStarted() {
       let button = `<div class="game-block__item"></div>`;
       blockContent.insertAdjacentHTML('beforeend', button);
     }
-    //changeTheme()
   }
   createButtons();
 
@@ -201,8 +189,6 @@ function getStarted() {
     if (localStorage.getItem('lastResult')) {
       arrayResult = (localStorage.getItem('lastResult')).split(',');
       fillResultsTable()
-      //resultsBlock.innerText = arrayResult
-      //console.log(arrayResult)
     } else {
       arrayResult = [];
     }
@@ -212,10 +198,9 @@ function getStarted() {
   function pushArrayResult(clicks, time) {
     arrayResult.push(`${clicks} clicks by ${time}`);
     if (arrayResult.length > 10) {
-      arrayResult.shift()
+      arrayResult.shift();
     }
-    //console.log(arrayResult)
-    fillResultsTable() 
+    fillResultsTable();
   }
 
   function setLocalStorage() {
@@ -295,8 +280,6 @@ function getStarted() {
   } 
   
   let arrayOfCells = Array.from(document.querySelectorAll('.game-block__item'));
-  //console.log(arrayOfCells)
-
 
   // click for element
 
@@ -308,16 +291,12 @@ function getStarted() {
       if (clicks === 1) {
         startTimer();
         let elementIndex = arrayOfCells.indexOf(element);
-        //console.log(elementIndex);
         createMinePlaces(elementIndex);
         fillCellsByMines();
         fillCellsByContent();
-        //console.log('this is first click');
-        //console.log(arrayOfMinePlaces);
       }
       choiceBehavior(element);
       countHiddenCells();
-      //playSound('assets/sounds/click.mp3');
       gameClicks.innerText = `clicks = ${clicks}`;
     }
   }
@@ -370,7 +349,6 @@ function getStarted() {
         arrayOfCells[i].innerText = ''
       }
     }
-    //console.log(arrayOfCells);
     for (let x = 0; x < gameSize; x++) {
       arrayDouble[x] = [];
       let chunkOfArr = arrayOfCells.slice((x * gameSize), (x * gameSize + gameSize));
@@ -378,17 +356,12 @@ function getStarted() {
     }
     return arrayDouble;
   }
-  //fillCellsByMines();
-
-  //console.log(arrayDouble);
-  //console.log(arrayOfCells);
 
   // fill cells by numbers
 
   function fillCellsByContent() {
     for (x = 0; x < arrayDouble.length; x++) {
       for (y = 0; y < arrayDouble[x].length; y++) {
-        //console.log(arrayDouble[x][y].innerText);
         let sibling;
         if (x === 0 && y === 0) {
           sibling = [arrayDouble[x][y + 1], arrayDouble[x + 1][y], arrayDouble[x + 1][y + 1]]
@@ -418,7 +391,6 @@ function getStarted() {
       }
     }
   };
-  //fillCellsByContent();
 
   function colorSelection() {
     for (let i = 0; i < arrayOfCells.length; i++) {
@@ -467,8 +439,6 @@ function getStarted() {
         element.classList.add('hidden_night');
       }
     });
-
-    //console.log('elements hidden')
   }
 
   function choiceBehavior(element) {
@@ -484,7 +454,6 @@ function getStarted() {
       openSibling(x, y);
     } else {
       playSound('assets/sounds/click.mp3');
-      //console.log('good choise!')
     }
   }
 
@@ -499,8 +468,6 @@ function getStarted() {
     }
   }
   function throwGameOverMessage() {
-    //console.log('game over');
-    //playSound('assets/sounds/fail.mp3')
     clearTimeout(timerID);
     modalWindow.classList.add('modal_active');
     messageGameOver.classList.add('message_visible');
@@ -521,15 +488,11 @@ function getStarted() {
   }
 
   function throwWinMessage() {
-    //console.log(`Hooray! You found all mines in ${time} seconds and ${clicks} moves!`)
     modalWindow.classList.add('modal_active');
     messageWinner.classList.add('message_visible'); 
     messageWinner.innerText = `Hooray! You found all mines in ${time} seconds and ${clicks} moves!`;
     pushArrayResult(clicks, time);
-    //arrayResult.push([clicks, time])
-    //console.log(arrayResult)
   }
-
   
   function openSibling(x, y) {
     let sibling = [];
@@ -596,8 +559,6 @@ function getStarted() {
       sibling.push(leftTop)
     }
 
-    //console.log(sibling)
-
     for (let i = 0; i < sibling.length; i++) {
       sibling[i].classList.remove('hidden');
       sibling[i].classList.remove('hidden_night');
@@ -605,7 +566,6 @@ function getStarted() {
         let itemAbs = arrayOfCells.indexOf(sibling[i])
         let itemX = Math.floor(itemAbs / gameSize);
         let itemY = itemAbs % gameSize;
-        //console.log(itemX, itemY)
         openSibling(itemX, itemY)
       }
     }
@@ -614,15 +574,14 @@ function getStarted() {
   const audio = new Audio();
   function playSound(src) {
     audio.src = src;
-    //audio.load();
     if (soundChecking.checked === false) {
       let playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(_ => {
-          //console.log('is playing')
+          
         })
           .catch(error => {
-            //console.log('is paused')
+            
           });
       }
     }
@@ -634,5 +593,4 @@ getStarted()
 restartGame.addEventListener('click', () => {
   reSize();
   getStarted();
-
 })
