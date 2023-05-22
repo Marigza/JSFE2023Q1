@@ -117,15 +117,12 @@ arrayGameSizes.forEach(size => size.addEventListener('click', () => {
   activeGameSize = size;
   //console.log(activeGameSize);
   reSize();
+  //changeTheme()
   clearTimeout(timerID);
   getStarted();
 }))
 
-// function changeTheme() {
-//   if (themeChecking.checked === true) {
-//     console.log('theme was changed')
-//   }
-// }
+
 
 function reSize() {
   if (activeGameSize.classList.contains('size_S')) {
@@ -154,6 +151,7 @@ function getStarted() {
   resultsBlock.classList.remove('results__block_visible');
   clearTimeout(timerID);
   reSize();
+  //changeTheme();
   //console.log(gameSize);
   let amountOfMines = 10;
   let num = document.getElementById('mineAmount').value;
@@ -299,11 +297,13 @@ function getStarted() {
   let arrayOfCells = Array.from(document.querySelectorAll('.game-block__item'));
   //console.log(arrayOfCells)
 
+
   // click for element
 
   function handlerByClick(element) {
     if (element.classList.contains('hidden') && !element.classList.contains('flag')) {
       element.classList.remove('hidden');
+      element.classList.remove('hidden_night');
       clicks++;
       if (clicks === 1) {
         startTimer();
@@ -325,6 +325,11 @@ function getStarted() {
   function markCells(element) {
     element.classList.add('hidden');
     element.classList.toggle('flag');
+    if (themeChecking.checked === true) {
+      element.classList.add('hidden_night');
+      element.classList.contains('flag') ? element.classList.add('flag_night') : element.classList.remove('flag_night');
+    }
+    
     playSound('assets/sounds/flag.mp3');
     element.classList.contains('flag') ? reduceMines() : increaseMines();
   }
@@ -456,14 +461,13 @@ function getStarted() {
 
 
   function addClassHidden(array) {
-    // if (themeChecking.checked === true) {
-    //   array.forEach(element => {
-    //     element.classList.add('hidden_night');
-    //   });
-    // }
     array.forEach(element => {
       element.classList.add('hidden');
+      if (themeChecking.checked === true) {
+        element.classList.add('hidden_night');
+      }
     });
+
     //console.log('elements hidden')
   }
 
@@ -488,7 +492,9 @@ function getStarted() {
     for (let i = 0; i < arrayOfCells.length; i++) {
       if (arrayOfCells[i].classList.contains('mine')) {
         arrayOfCells[i].classList.remove('hidden');
+        arrayOfCells[i].classList.remove('hidden_night');
         arrayOfCells[i].classList.remove('flag');
+        arrayOfCells[i].classList.remove('flag_night');
       }
     }
   }
@@ -594,6 +600,7 @@ function getStarted() {
 
     for (let i = 0; i < sibling.length; i++) {
       sibling[i].classList.remove('hidden');
+      sibling[i].classList.remove('hidden_night');
       if (sibling[i].innerText === '0') {
         let itemAbs = arrayOfCells.indexOf(sibling[i])
         let itemX = Math.floor(itemAbs / gameSize);
