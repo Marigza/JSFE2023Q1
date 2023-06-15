@@ -1,8 +1,8 @@
  module.exports = {
      plugins: ['prettier', 'import', '@typescript-eslint'],
      extends: [
-         'eslint:recommended',
-         'plugin:@typescript-eslint/recommended',
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
         'prettier'
      ],
@@ -20,6 +20,6 @@
         'no-debugger': 'off',
         'no-console': 0,
         'class-methods-use-this': 'off',
-        '@typescript-eslint / no - explicit - any': 2
+        '@typescript-eslint/no-explicit-any': 'error'
     }
 }
