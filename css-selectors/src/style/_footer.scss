@@ -1,0 +1,44 @@
+
+
+.footer__wrapper {
+  @include columns($width: 20%);
+  font-size: 1.0rem;
+  line-height: 1.4rem;
+  border: 1px solid #000;;
+}
+
+.social-link {
+  box-sizing: content-box;
+  width: 32px;
+  height: 32px;
+}
+
+.link_gh {
+  display: block;
+  box-sizing: content-box;
+  background: url(../src/assets/svg/github.svg) right no-repeat;
+  width: 32px;
+  height: 32px;
+}
+
+.link_icon_gh {
+  display: flex;
+  background-color: transparent;
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.link_rss {
+  display: block;
+  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
+.footer__link {
+  display: block;
+  width: 32px;
+  height: 32px;
+}

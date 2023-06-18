@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1vh;
+  margin: 10px;
+}
+
+.block1 {
+  grid-column: span 4;
+  border: 1px solid #000;
+}
+.block2 {
+  grid-row: span 3;
+  border: 1px solid #000;
+}
+.block3 {
+  grid-area: span 2 / span 2;
+  border: 1px solid #000;
+}
+.block4 {
+  grid-area: span 2 / span 2;
+  border: 1px solid #000;
+}
