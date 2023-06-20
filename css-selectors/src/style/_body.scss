@@ -4,13 +4,17 @@
 
 body {
   display: flex;
+  height: 100%;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 .main {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 1vh;
   margin: 10px;
 }
