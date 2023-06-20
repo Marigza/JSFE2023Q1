@@ -2,9 +2,14 @@ import './index.html';
 import './style.scss';
 import { Table } from './script/render';
 
-const table = new Table(0)
+const table = new Table()
 
 table.renderTable();
+table.renderLevels();
 
-const butttonEnter = document.querySelector('.button');
-butttonEnter?.addEventListener('click', () => table.checkCode());
+const buttonEnter = document.querySelector('.button');
+buttonEnter?.addEventListener('click', () => {
+  table.checkCode();
+});
+
+
