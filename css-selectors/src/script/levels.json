@@ -2,77 +2,77 @@
   {
     "level": "level-1",
     "todo": "select plates",
-    "layout": "<div class='plate'></div><div class='plate'></div>",
+    "layout": "<div class='plate target'></div><div class='plate target'></div>",
     "expectedCSS": "plate",
     "html": "<div class='table'>\n<plate></plate>\n<plate></plate>\n</div>"
   },
   {
     "level": "level-2",
     "todo": "select bento",
-    "layout": "<div class='plate'></div><div class='plate'></div><div class='bento'></div>",
+    "layout": "<div class='plate'></div><div class='plate'></div><div class='bento target'></div>",
     "expectedCSS": "bento",
     "html": "<div class='table'>\n<plate></plate>\n<plate></plate>\n<bento></bento>\n</div>"
   }, 
   {
     "level": "level-3",
     "todo": "select fancy plate",
-    "layout": "<div class='plate'></div><div class='plate'></div><div class='plate plate__fancy'></div>",
+    "layout": "<div class='plate'></div><div class='plate'></div><div class='plate plate__fancy target'></div>",
     "expectedCSS": "plate#fancy",
     "html": "<div class='table'>\n<plate></plate>\n<plate></plate>\n<plate id='fancy'></plate>\n</div>"
   }, 
   {
     "level": "level-4",
     "todo": "select apple on bento",
-    "layout": "<div class='plate'><div class='apple'></div></div><div class='apple'></div><div class='plate'></div><div class='bento'><div class='apple'></div></div>",
+    "layout": "<div class='plate'><div class='apple'></div></div><div class='apple'></div><div class='plate'></div><div class='bento'><div class='apple target'></div></div>",
     "expectedCSS": "bento apple",
     "html": "<div class='table'>\n<plate>\n<apple></apple>\n</plate>\n<apple></apple>\n<plate></plate>\n<bento>\n<apple></apple>\n</bento>\n</div>"
   }, 
   {
     "level": "level-5",
     "todo": "Select the pickle on the fancy plate",
-    "layout": "<div class='plate'></div><div class='plate'><div class='pickle'></div></div><div class='plate plate__fancy'><div class='pickle'></div></div>",
+    "layout": "<div class='plate'></div><div class='plate'><div class='pickle'></div></div><div class='plate plate__fancy'><div class='pickle target'></div></div>",
     "expectedCSS": "plate#fancy pickle",
     "html": "<div class='table'>\n<plate></plate>\n<plate>\n<pickle></pickle>\n</plate>\n<plate id='fancy'>\n<pickle></pickle>\n</plate>\n</div>"
   }, 
   {
     "level": "level-6",
     "todo": "Select the small apples",
-    "layout": "<div class='apple'></div><div class='plate'><div class='apple apple__small'></div></div><div class='apple'></div><div class='apple apple__small'></div>",
+    "layout": "<div class='apple'></div><div class='plate'><div class='apple apple__small target'></div></div><div class='apple'></div><div class='apple apple__small target'></div>",
     "expectedCSS": "apple.small",
     "html": "<div class='table'>\n<apple></apple>\n<plate>\n<apple class='small'></apple>\n</plate>\n<apple></apple>\n<apple class='small'></apple>\n</div>"
   }, 
   {
     "level": "level-7",
     "todo": "Select the small oranges on plate",
-    "layout": "<div class='bento'><div class='orange'></div></div><div class='plate'><div class='orange orange__small'></div></div><div class='plate'><div class='orange orange__small'></div></div><div class='bento'><div class='orange orange__small'></div></div><div class='plate'><div class='apple apple__small'></div></div>",
+    "layout": "<div class='bento'><div class='orange'></div></div><div class='plate'><div class='orange orange__small target'></div></div><div class='plate'><div class='orange orange__small target'></div></div><div class='bento'><div class='orange orange__small'></div></div><div class='plate'><div class='apple apple__small'></div></div>",
     "expectedCSS": "plate orange.small",
     "html": "<div class='table'>\n<bento>\n<orange></orange>\n</bento>\n<plate>\n<orange class='small'></orange>\n</plate>\n<plate>\n<orange class='small'></orange>\n</plate>\n<bento>\n<orange class='small'></orange>\n</bento>\n<plate>\n<apple class='small'></apple>\n</plate>\n</div>"
   }, 
   {
     "level": "level-8",
     "todo": "Select all the plates and bentos",
-    "layout": "<div class='apple'></div><div class='plate'><div class='apple'></div></div><div class='bento'></div><div class='bento'></div>",
+    "layout": "<div class='apple'></div><div class='plate target'><div class='apple'></div></div><div class='bento target'></div><div class='bento target'></div>",
     "expectedCSS": "plate, bento",
     "html": "<div class='table'>\n<apple></apple>\n<plate>\n<apple></apple>\n</plate>\n<bento></bento>\n<bento></bento>\n</div>"
   }, 
   {
     "level": "level-9",
     "todo": "Select all the things",
-    "layout": "<div class='orange'></div><div class='plate'><div class='pickle'></div></div><div class='bento'></div><div class='bento'><div class='orange'></div></div>",
+    "layout": "<div class='orange target'></div><div class='plate target'><div class='pickle target'></div></div><div class='bento target'></div><div class='bento target'><div class='orange target'></div></div>",
     "expectedCSS": "*",
     "html": "<div class='table'>\n<orange></orange>\n<plate>\n<pickle></pickle>\n</plate>\n<bento></bento>\n<bento>\n<orange></orange>\n</bento>\n</div>"
   }, 
   {
     "level": "level-10",
     "todo": "Select everything on a plate",
-    "layout": "<div class='orange'></div><div class='plate'><div class='pickle'></div></div><div class='bento'><div class='pickle'></div></div><div class='plate'><div class='orange'></div></div>",
+    "layout": "<div class='orange'></div><div class='plate'><div class='pickle target'></div></div><div class='bento'><div class='pickle'></div></div><div class='plate'><div class='orange target'></div></div>",
     "expectedCSS": "plate *",
     "html": "<div class='table'>\n<orange></orange>\n<plate>\n<pickle></pickle>\n</plate>\n<bento>\n<pickle></pickle>\n</bento>\n<plate>\n<orange></orange>\n</plate>\n</div>"
   }, 
   {
     "level": "level-11",
     "todo": "Select the 3rd plate",
-    "layout": "<div class='plate'></div><div class='plate plate__fancy'></div><div class='plate'></div><div class='plate'></div>",
+    "layout": "<div class='plate'></div><div class='plate plate__fancy'></div><div class='plate target'></div><div class='plate'></div>",
     "expectedCSS": ":nth-child(3)",
     "html": "<div class='table'>\n<plate></plate>\n<plate class='fancy'></plate>\n<plate></plate>\n<plate></plate>\n</div>"
   }

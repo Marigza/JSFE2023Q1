@@ -93,3 +93,25 @@
   box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
+
+.target {
+  animation: 0.5s infinite normal target-elem;
+}
+
+@keyframes target-elem {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
