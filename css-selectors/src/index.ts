@@ -12,4 +12,17 @@ buttonEnter?.addEventListener('click', () => {
   table.checkCode();
 });
 
+function setLocalStorage() {
+  localStorage.setItem('level', String(table.level));
+}
+window.addEventListener('beforeunload', setLocalStorage);
 
+function getLocalStorage() {
+  if (localStorage.getItem('level')) {
+    table.level = Number(localStorage.getItem('level'));
+    return table.level;
+  }
+}
+window.addEventListener('load', () => {
+  getLocalStorage;
+});

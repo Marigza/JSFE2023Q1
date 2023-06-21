@@ -2,7 +2,7 @@ import levels from './levels.json';
 
 
 export class Table {
-  level = 0;
+  level = Number(localStorage.getItem('level')) || 0;
   length = levels.length;
   input = '';
   renderTable() {
