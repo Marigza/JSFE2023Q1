@@ -38,6 +38,7 @@ export class Table {
         levelBlock.append(levelItem);
       }
     }
+    this.lightningLevel();
   }
   checkCode() {
     this.input = (document.getElementById('input') as HTMLInputElement).value;
@@ -63,14 +64,19 @@ export class Table {
   }
   setLevel() {
     this.level++;
+    this.lightningLevel();
     (document.getElementById('input') as HTMLInputElement).value = '';
     if (this.level >= this.length) {
       this.showWinMessage();
     } else {
       this.renderTable();
     }
-    
+  }
+  lightningLevel() {
+    const allLevels = Array.from(document.querySelectorAll('.block__level'));
+    allLevels.forEach((elem) => elem.classList.remove('block__level_active'));
+    const activeLevel = document.getElementById(levels[this.level].level)?.parentElement;
+    activeLevel?.classList.add('block__level_active');
   }
 }
  
-
