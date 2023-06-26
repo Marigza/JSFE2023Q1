@@ -11,9 +11,19 @@ const buttonEnter = document.querySelector('.button');
 buttonEnter?.addEventListener('click', () => {
   table.checkCode();
 });
+document.addEventListener('keydown', function(event) {
+  if (event.code === 'Enter') {
+    table.checkCode();
+  }
+});
 
 function setLocalStorage() {
-  localStorage.setItem('level', String(table.level));
+  if (table.level <= 10) {
+    localStorage.setItem('level', String(table.level));
+  } else {
+    localStorage.setItem('level', '0');
+  }
+  
 }
 window.addEventListener('beforeunload', setLocalStorage);
 
