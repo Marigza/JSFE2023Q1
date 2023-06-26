@@ -6,26 +6,28 @@ export class Table {
   length = levels.length;
   input = '';
   renderTable() {
-    const task = document.getElementById('task');
-    const divTask = document.createElement('div');
-    const divCode = document.createElement('div');
-    const table = document.querySelector('.table');
-    const html = document.getElementById('html');
-    if (html !== null) {
-      html.innerHTML = '';
+    if (this.level <= 10) {
+      const task = document.getElementById('task');
+      const divTask = document.createElement('div');
+      const divCode = document.createElement('div');
+      const table = document.querySelector('.table');
+      const html = document.getElementById('html');
+      if (html !== null) {
+        html.innerHTML = '';
+      }
+      if (task !== null) {
+        task.innerHTML = '';
+        divTask.innerText = levels[this.level].todo;
+        task.prepend(divTask);
+      }
+      if (table !== null) {
+        table.innerHTML = '';
+        table.innerHTML = levels[this.level].layout;
+        task?.append(table);
+      }
+      divCode.innerText = levels[this.level].html;
+      html?.prepend(divCode);
     }
-    if (task !== null) {
-      task.innerHTML = '';
-      divTask.innerText = levels[this.level].todo;
-      task.prepend(divTask);
-    }
-    if (table !== null) {
-      table.innerHTML = '';
-      table.innerHTML = levels[this.level].layout;
-      task?.append(table);
-    }
-    divCode.innerText = levels[this.level].html;
-    html?.prepend(divCode);
   }
   renderLevels() {
     const levelBlock = document.getElementById('level');
@@ -61,22 +63,27 @@ export class Table {
     divMessage.classList.add('win-message');
     divMessage.textContent = "You finish learning css-selectors. Congratulations!"
     main?.append(divMessage);
+    this.level = 0;
   }
   setLevel() {
-    this.level++;
-    this.lightningLevel();
-    (document.getElementById('input') as HTMLInputElement).value = '';
-    if (this.level >= this.length) {
+    if (this.level === this.length - 1) {
       this.showWinMessage();
     } else {
+      this.level++;
+      this.lightningLevel();
+      (document.getElementById('input') as HTMLInputElement).value = '';
       this.renderTable();
     }
   }
   lightningLevel() {
     const allLevels = Array.from(document.querySelectorAll('.block__level'));
     allLevels.forEach((elem) => elem.classList.remove('block__level_active'));
-    const activeLevel = document.getElementById(levels[this.level].level)?.parentElement;
-    activeLevel?.classList.add('block__level_active');
+    if (this.level <= 10) {
+      const activeLevel = document.getElementById(levels[this.level].level)?.parentElement;
+      console.log(activeLevel);
+      activeLevel?.classList.add('block__level_active');
+    }
+    
   }
 }
  
