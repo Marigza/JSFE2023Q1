@@ -98,6 +98,10 @@
   animation: 0.5s infinite normal target-elem;
 }
 
+.target_answer {
+  animation: 0.5s 1 normal target-answer;
+}
+
 @keyframes target-elem {
   0% {
     transform: scale(1);
@@ -113,5 +117,17 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes target-answer {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }

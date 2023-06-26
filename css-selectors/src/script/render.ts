@@ -48,10 +48,21 @@ export class Table {
     console.log(this.input)
   }
   protected markDoneLevel() {
+    this.animateCorrectAnswer();
     const checkedLevel = document.getElementById(levels[this.level].level);
     checkedLevel?.classList.add('level__icon_active');
-    this.setLevel();
+    setTimeout(()=>this.setLevel(), 500);
   }
+  protected animateCorrectAnswer() {
+    const targetElems = Array.from(document.querySelectorAll('.target'));
+    targetElems.forEach((elem) => {
+      (elem as HTMLElement).classList.add('target_answer');
+      elem?.addEventListener('animationend', () => {
+        elem.classList.remove('target_answer');
+      })
+    });
+  }
+
   protected showMistake() {
     const table = document.querySelector('.table');
     table?.classList.add('table_mistaked');
