@@ -113,5 +113,11 @@ export class Table {
      })
     )
   }
+  resetProgress() {
+    this.level = 0;
+    this.countOfPassLevel = 0;
+    this.renderTable();
+    this.renderLevels();
+  }
 }
  

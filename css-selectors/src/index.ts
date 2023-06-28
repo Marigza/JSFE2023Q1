@@ -2,7 +2,13 @@ import './index.html';
 import './style.scss';
 import { Table } from './script/render';
 
-const table = new Table()
+const table = new Table();
+const buttonReset = document.getElementById('reset');
+const buttonHelp = document.getElementById('help');
+
+buttonReset?.addEventListener('click', () => table.resetProgress());
+
+console.log(buttonHelp);
 
 table.renderTable();
 table.renderLevels();
@@ -29,10 +35,11 @@ window.addEventListener('beforeunload', setLocalStorage);
 
 function getLocalStorage() {
   if (localStorage.getItem('level')) {
-    table.level = Number(localStorage.getItem('level'));
+    //table.level = Number(localStorage.getItem('level'));
     return table.level;
   }
 }
 window.addEventListener('load', () => {
   getLocalStorage;
 });
+
