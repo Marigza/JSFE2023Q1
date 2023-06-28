@@ -41,11 +41,12 @@ export class Table {
       }
     }
     this.lightningLevel();
+    this.choiseLevel();
   }
   checkCode() {
     this.input = (document.getElementById('input') as HTMLInputElement).value;
     this.input === levels[this.level].expectedCSS ? this.markDoneLevel() : this.showMistake();
-    console.log(this.input)
+    // console.log(this.input)
   }
   protected markDoneLevel() {
     this.animateCorrectAnswer();
@@ -91,10 +92,24 @@ export class Table {
     allLevels.forEach((elem) => elem.classList.remove('block__level_active'));
     if (this.level <= 10) {
       const activeLevel = document.getElementById(levels[this.level].level)?.parentElement;
-      console.log(activeLevel);
+      // console.log(activeLevel);
       activeLevel?.classList.add('block__level_active');
     }
-    
+  }
+  choiseLevel() {
+    const allLevels = Array.from(document.querySelectorAll('.block__level'));
+    allLevels.forEach(elem => elem.addEventListener('click', () => {
+      const active = elem.firstElementChild?.id;
+      // console.log(active);
+      const levelArr = levels.map(elem => elem.level);
+      if (active !== undefined) {
+        //console.log(levelArr);
+        //console.log(levelArr.indexOf(active));
+        this.level = levelArr.indexOf(active) - 1;
+        this.setLevel();
+      }
+     })
+    )
   }
 }
  
