@@ -5,6 +5,7 @@ export class Table {
   level = Number(localStorage.getItem('level')) || 0;
   length = levels.length;
   input = '';
+  countOfPassLevel = 0;
   renderTable() {
     if (this.level <= 10) {
       const task = document.getElementById('task');
@@ -50,6 +51,7 @@ export class Table {
   }
   protected markDoneLevel() {
     this.animateCorrectAnswer();
+    this.countOfPassLevel++;
     const checkedLevel = document.getElementById(levels[this.level].level);
     checkedLevel?.classList.add('level__icon_active');
     setTimeout(()=>this.setLevel(), 500);
@@ -78,7 +80,7 @@ export class Table {
     this.level = 0;
   }
   setLevel() {
-    if (this.level === this.length - 1) {
+    if (/*this.level === this.length - 1*/ this.countOfPassLevel === 11) {
       this.showWinMessage();
     } else {
       this.level++;
