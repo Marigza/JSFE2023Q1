@@ -10,6 +10,17 @@ body {
   padding: 0;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.header button {
+  margin: auto 30px;
+  padding: 1vh;
+}
+
 .main {
   position: relative;
   display: grid;
