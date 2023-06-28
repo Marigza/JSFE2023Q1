@@ -26,40 +26,6 @@
   }
 }
 
-.our-friends_content {
-  align-self: stretch;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 53px;
-  @include media-tablet-small {
-    gap: 12px;
-  }
-  @include media-mobile-small {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-}
-
-.slider_button {
-  width: 52px;
-  height: 52px;
-  border-radius: 100px;
-  border: 2px solid $color-primary;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &:hover {
-    background-color: $color-primary-light;
-    border: 2px solid $color-primary-light;
-    transition: all linear 0.3s;
-  }
-  @include media-mobile-small {
-    order: 2;
-  }
-}
 
 .button_disabled {
   border: 2px solid $color-dark-s;
@@ -75,47 +41,6 @@
  background-color: $color-primary;
 }
 
-.slider_button__left {
-  background: url(../assets/icons/Arrow.svg) no-repeat center;
-  transform: rotate(180deg);
-  @include media-mobile-small {
-      
-      margin: 0 30px;
-    }
-}
-
-.slider_button__right {
-  background: url(../assets/icons/Arrow.svg) no-repeat center;
-  @include media-mobile-small {
-     
-      margin: 0 30px;
-    }
-}
-
-.slider_container {
-  flex-grow: 1;
-  @include media-mobile-small {
-    flex-basis: 100%;
-    order: 1;
-  }
-}
-
-.slider-track {
-  display: flex;
-  justify-content: space-between;
-  @include media-tablet {
-    >:last-child {
-      display: none;
-    }
-  }
-  @include media-mobile {
-    justify-content: center;
-    >:nth-child(2) {
-        display: none;
-      }
-  }
-}
-
 .slider-track_pets {
   display: flex;
   justify-content: space-between;
@@ -124,14 +49,14 @@
   column-gap: 40px;
   @include media-tablet-small {
     justify-content: center;
-    >:nth-last-child(-n+2) {
-      display: none;
-    }
+    // >:nth-last-child(-n+2) {
+    //   display: none;
+    // }
   }
   @include media-mobile-small {
-    >:nth-last-child(-n+5) {
-      display: none;
-    }
+    // >:nth-last-child(-n+5) {
+    //   display: none;
+    // }
   }
 }
 
@@ -202,4 +127,8 @@
     gap: 10px;
     margin: 42px 0 42px 0;
   }
+}
+
+.hidden {
+  display: none;
 }
