@@ -87,6 +87,15 @@ body {
   justify-content: center;
   align-items: center;
   gap: 1vh;
+  cursor: pointer;
+}
+
+.block__level:hover {
+  color: rgb(185, 185, 58);
+}
+
+.block__level_active {
+  color: rgb(152, 152, 48);
 }
 
 .win-message {
@@ -201,21 +210,35 @@ body {
 }
 
 .target {
-  animation: 0.2s 4 normal table-change;
+  animation: 0.5s infinite normal target-elem;
 }
 
-@keyframes target {
+.target_answer {
+  animation: 0.5s 1 normal target-answer;
+}
+
+@keyframes target-elem {
   0% {
-    height: 100%;
-    width: 100%;
+    transform: scale(1);
+    opacity: 1;
   }
   50% {
-    height: 90%;
-    width: 110%;
+    transform: scale(0.95);
+    opacity: 0.7;
   }
   100% {
-    height: 100%;
-    width: 100%;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes target-answer {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
 .footer__wrapper {
@@ -265,7 +288,7 @@ body {
   display: block;
   width: 32px;
   height: 32px;
-}`, "",{"version":3,"sources":["webpack://./src/style/_body.scss","webpack://./src/style.scss","webpack://./src/style/_gameBlock.scss","webpack://./src/style/_items.scss","webpack://./src/style/_footer.scss","webpack://./src/style/_constants.scss"],"names":[],"mappings":"AAAA;EACE,sBAAA;ACCF;;ADEA;EACE,aAAA;EACA,YAAA;EACA,sBAAA;EACA,SAAA;EACA,UAAA;ACCF;;ADEA;EACE,kBAAA;EACA,aAAA;EACA,qCAAA;EACA,mCAAA;EACA,aAAA;EAAA,QAAA;EACA,YAAA;ACCF;;ADEA;EACE,mBAAA;EACA,sBAAA;ACCF;;ADCA;EACE,gBAAA;EACA,sBAAA;ACEF;;ADAA;EACE,wBAAA;EACA,sBAAA;ACGF;;ADDA;EACE,wBAAA;EACA,sBAAA;ACIF;;ACvCA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AD0CF;;ACvCA;EACE,oEAAA;AD0CF;;ACvCA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;AD0CF;;ACvCA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,kCAAA;EACA,eAAA;EACA,kBAAA;AD0CF;;ACvCA;EACE,eAAA;AD0CF;;AEzEA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;EACA,mCAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;AF4EF;;AEzEA;EACE,qCAAA;AF4EF;;AEzEA;EACE;IACE,mCAAA;EF4EF;EEzEA;IACE,yCAAA;EF2EF;EExEA;IACE,mCAAA;EF0EF;AACF;AEvEA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,yBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,yBAAA;AFyEF;;AEtEA;EACE,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,uBAAA;EACA,YAAA;EACA,WAAA;AFyEF;;AEtEA;EACE,wBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFyEF;;AEvEA;EACE,YAAA;EACA,WAAA;AF0EF;;AEvEA;;;;;EAKE,8CAAA;EACA,eAAA;AF0EF;;AEvEA;EACE,qCAAA;AF0EF;;AEvEA;EACE;IACE,YAAA;IACA,WAAA;EF0EF;EEvEA;IACE,WAAA;IACA,WAAA;EFyEF;EEtEA;IACE,YAAA;IACA,WAAA;EFwEF;AACF;AGxLA;ECDE,aAAA;EACA,eAAA;EACA,8BAAA;EDCA,eAAA;EACA,mBAAA;EACA,sBAAA;AH4LF;AI7LE;EACE,eDHuB;AHkM3B;;AG5LA;EACE,uBAAA;EACA,WAAA;EACA,YAAA;AH+LF;;AG5LA;EACE,cAAA;EACA,uBAAA;EACA,mEAAA;EACA,WAAA;EACA,YAAA;AH+LF;;AG5LA;EACE,aAAA;EACA,6BAAA;EACA,6BAAA;EAAA,qBAAA;EACA,WAAA;EACA,WAAA;EACA,YAAA;AH+LF;;AG5LA;EACE,cAAA;EACA,kEAAA;EACA,WAAA;EACA,YAAA;AH+LF;;AG5LA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AH+LF","sourcesContent":["* {\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody {\r\n  display: flex;\r\n  height: 100%;\r\n  flex-direction: column;\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n.main {\r\n  position: relative;\r\n  display: grid;\r\n  grid-template-columns: repeat(5, 1fr);\r\n  grid-template-rows: repeat(2, auto);\r\n  gap: 1vh;\r\n  margin: 10px;\r\n}\r\n\r\n.block1 {\r\n  grid-column: span 4;\r\n  border: 1px solid #000;\r\n}\r\n.block2 {\r\n  grid-row: span 3;\r\n  border: 1px solid #000;\r\n}\r\n.block3 {\r\n  grid-area: span 2 / span 2;\r\n  border: 1px solid #000;\r\n}\r\n.block4 {\r\n  grid-area: span 2 / span 2;\r\n  border: 1px solid #000;\r\n}","* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n\n.block3 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.block4 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n}\n\n.table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes target {\n  0% {\n    height: 100%;\n    width: 100%;\n  }\n  50% {\n    height: 90%;\n    width: 110%;\n  }\n  100% {\n    height: 100%;\n    width: 100%;\n  }\n}\n.footer__wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  font-size: 1rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;\n}\n.footer__wrapper > * {\n  flex-basis: 20%;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}",".level__icon {\r\n  display: block;\r\n  width: 24px;\r\n  height: 24px;\r\n  \r\n}\r\n.level__icon_active {\r\n  background: url(../src/assets/svg/done.svg) center no-repeat;\r\n}\r\n\r\n.block__level {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 1vh;\r\n}\r\n\r\n.win-message {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n  width: 300px;\r\n  height: 200px;\r\n  padding: 1vh;\r\n  background-color: rgb(255, 179, 0);\r\n  font-size: 2rem;\r\n  text-align: center;\r\n}\r\n\r\n.button {\r\n  cursor: pointer;\r\n}",".table {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 1vh;\r\n  background-color: rgb(185, 185, 58);\r\n  height: 100px;\r\n  margin: 1vh 3vh;\r\n  padding: 1vh;\r\n}\r\n\r\n.table_mistaked {\r\n  animation: 0.2s 4 normal table-change;\r\n}\r\n\r\n@keyframes table-change {\r\n  0% {\r\n    background-color: rgb(185, 185, 58);\r\n  }\r\n\r\n  50% {\r\n    background-color: rgba(185, 185, 58, 0.2);\r\n  }\r\n\r\n  100% {\r\n    background-color: rgb(185, 185, 58);\r\n  }\r\n}\r\n\r\n.plate {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: #ffffff;\r\n  border-radius: 50%;\r\n  height: 80px;\r\n  width: 80px;\r\n}\r\n\r\n.apple {\r\n  background-color: red;\r\n  border-radius: 50%;\r\n  height: 40px;\r\n  width: 40px;\r\n}\r\n\r\n.apple__small {\r\n  height: 20px;\r\n  width: 20px;\r\n}\r\n\r\n.plate__fancy {\r\n  border: 5px solid skyblue;\r\n}\r\n\r\n.pickle {\r\n  background-color: green;\r\n  border-radius: 20px;\r\n  height: 40px;\r\n  width: 20px;\r\n}\r\n\r\n.pickle__small {\r\n  height: 20px;\r\n  width: 10px;\r\n}\r\n\r\n.bento {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: brown;\r\n  height: 80px;\r\n  width: 80px;\r\n}\r\n\r\n.orange {\r\n  background-color: orange;\r\n  border-radius: 50%;\r\n  height: 40px;\r\n  width: 40px;\r\n}\r\n.orange__small {\r\n  height: 20px;\r\n  width: 20px;\r\n}\r\n\r\n.orange:hover,\r\n.bento:hover,\r\n.pickle:hover,\r\n.apple:hover,\r\n.plate:hover {\r\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\r\n  cursor: pointer;\r\n}\r\n\r\n.target {\r\n  animation: 0.2s 4 normal table-change;\r\n}\r\n\r\n@keyframes target {\r\n  0% {\r\n    height: 100%;\r\n    width: 100%;\r\n  }\r\n\r\n  50% {\r\n    height: 90%;\r\n    width: 110%;\r\n  }\r\n\r\n  100% {\r\n    height: 100%;\r\n    width: 100%;\r\n  }\r\n}","\r\n\r\n.footer__wrapper {\r\n  @include columns($width: 20%);\r\n  font-size: 1.0rem;\r\n  line-height: 1.4rem;\r\n  border: 1px solid #000;;\r\n}\r\n\r\n.social-link {\r\n  box-sizing: content-box;\r\n  width: 32px;\r\n  height: 32px;\r\n}\r\n\r\n.link_gh {\r\n  display: block;\r\n  box-sizing: content-box;\r\n  background: url(../src/assets/svg/github.svg) right no-repeat;\r\n  width: 32px;\r\n  height: 32px;\r\n}\r\n\r\n.link_icon_gh {\r\n  display: flex;\r\n  background-color: transparent;\r\n  text-decoration: none;\r\n  color: #000;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.link_rss {\r\n  display: block;\r\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.footer__link {\r\n  display: block;\r\n  width: 32px;\r\n  height: 32px;\r\n}","@mixin columns ($width) {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: space-between;\r\n\r\n  >* {\r\n    flex-basis: $width;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style/_body.scss","webpack://./src/style.scss","webpack://./src/style/_gameBlock.scss","webpack://./src/style/_items.scss","webpack://./src/style/_footer.scss","webpack://./src/style/_constants.scss"],"names":[],"mappings":"AAAA;EACE,sBAAA;ACCF;;ADEA;EACE,aAAA;EACA,YAAA;EACA,sBAAA;EACA,SAAA;EACA,UAAA;ACCF;;ADEA;EACE,kBAAA;EACA,aAAA;EACA,qCAAA;EACA,mCAAA;EACA,aAAA;EAAA,QAAA;EACA,YAAA;ACCF;;ADEA;EACE,mBAAA;EACA,sBAAA;ACCF;;ADCA;EACE,gBAAA;EACA,sBAAA;ACEF;;ADAA;EACE,wBAAA;EACA,sBAAA;ACGF;;ADDA;EACE,wBAAA;EACA,sBAAA;ACIF;;ACvCA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AD0CF;;ACvCA;EACE,oEAAA;AD0CF;;ACvCA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;EACA,eAAA;AD0CF;;ACvCA;EACE,wBAAA;AD0CF;;ACvCA;EACE,wBAAA;AD0CF;;ACvCA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,kCAAA;EACA,eAAA;EACA,kBAAA;AD0CF;;ACvCA;EACE,eAAA;AD0CF;;AElFA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;EACA,mCAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;AFqFF;;AElFA;EACE,qCAAA;AFqFF;;AElFA;EACE;IACE,mCAAA;EFqFF;EElFA;IACE,yCAAA;EFoFF;EEjFA;IACE,mCAAA;EFmFF;AACF;AEhFA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,yBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,yBAAA;AFkFF;;AE/EA;EACE,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,uBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,wBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AEhFA;EACE,YAAA;EACA,WAAA;AFmFF;;AEhFA;;;;;EAKE,8CAAA;EACA,eAAA;AFmFF;;AEhFA;EACE,2CAAA;AFmFF;;AEhFA;EACE,sCAAA;AFmFF;;AEhFA;EACE;IACE,mBAAA;IACA,UAAA;EFmFF;EEhFA;IACE,sBAAA;IACA,YAAA;EFkFF;EE9EA;IACE,mBAAA;IACA,UAAA;EFgFF;AACF;AE7EA;EACE;IACE,mBAAA;IACA,UAAA;EF+EF;EE5EA;IACE,mBAAA;IACA,UAAA;EF8EF;AACF;AG/MA;ECDE,aAAA;EACA,eAAA;EACA,8BAAA;EDCA,eAAA;EACA,mBAAA;EACA,sBAAA;AHmNF;AIpNE;EACE,eDHuB;AHyN3B;;AGnNA;EACE,uBAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,uBAAA;EACA,mEAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,aAAA;EACA,6BAAA;EACA,6BAAA;EAAA,qBAAA;EACA,WAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,kEAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AHsNF","sourcesContent":["* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n.block3 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}\n.block4 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}","* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n\n.block3 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.block4 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n}\n\n.table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}\n.footer__wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  font-size: 1rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;\n}\n.footer__wrapper > * {\n  flex-basis: 20%;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}",".level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n  \n}\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n}",".table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  \n\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}","\n\n.footer__wrapper {\n  @include columns($width: 20%);\n  font-size: 1.0rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}","@mixin columns ($width) {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  >* {\n    flex-basis: $width;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -778,31 +801,33 @@ __webpack_require__.r(__webpack_exports__);
 
 class Table {
     constructor() {
-        this.level = 0;
+        this.level = Number(localStorage.getItem('level')) || 0;
         this.length = _levels_json__WEBPACK_IMPORTED_MODULE_0__.length;
         this.input = '';
     }
     renderTable() {
-        const task = document.getElementById('task');
-        const divTask = document.createElement('div');
-        const divCode = document.createElement('div');
-        const table = document.querySelector('.table');
-        const html = document.getElementById('html');
-        if (html !== null) {
-            html.innerHTML = '';
+        if (this.level <= 10) {
+            const task = document.getElementById('task');
+            const divTask = document.createElement('div');
+            const divCode = document.createElement('div');
+            const table = document.querySelector('.table');
+            const html = document.getElementById('html');
+            if (html !== null) {
+                html.innerHTML = '';
+            }
+            if (task !== null) {
+                task.innerHTML = '';
+                divTask.innerText = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].todo;
+                task.prepend(divTask);
+            }
+            if (table !== null) {
+                table.innerHTML = '';
+                table.innerHTML = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].layout;
+                task === null || task === void 0 ? void 0 : task.append(table);
+            }
+            divCode.innerText = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].html;
+            html === null || html === void 0 ? void 0 : html.prepend(divCode);
         }
-        if (task !== null) {
-            task.innerHTML = '';
-            divTask.innerText = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].todo;
-            task.prepend(divTask);
-        }
-        if (table !== null) {
-            table.innerHTML = '';
-            table.innerHTML = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].layout;
-            task === null || task === void 0 ? void 0 : task.append(table);
-        }
-        divCode.innerText = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].html;
-        html === null || html === void 0 ? void 0 : html.prepend(divCode);
     }
     renderLevels() {
         const levelBlock = document.getElementById('level');
@@ -815,6 +840,7 @@ class Table {
                 levelBlock.append(levelItem);
             }
         }
+        this.lightningLevel();
     }
     checkCode() {
         this.input = document.getElementById('input').value;
@@ -822,9 +848,19 @@ class Table {
         console.log(this.input);
     }
     markDoneLevel() {
+        this.animateCorrectAnswer();
         const checkedLevel = document.getElementById(_levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].level);
         checkedLevel === null || checkedLevel === void 0 ? void 0 : checkedLevel.classList.add('level__icon_active');
-        this.setLevel();
+        setTimeout(() => this.setLevel(), 500);
+    }
+    animateCorrectAnswer() {
+        const targetElems = Array.from(document.querySelectorAll('.target'));
+        targetElems.forEach((elem) => {
+            elem.classList.add('target_answer');
+            elem === null || elem === void 0 ? void 0 : elem.addEventListener('animationend', () => {
+                elem.classList.remove('target_answer');
+            });
+        });
     }
     showMistake() {
         const table = document.querySelector('.table');
@@ -837,15 +873,27 @@ class Table {
         divMessage.classList.add('win-message');
         divMessage.textContent = "You finish learning css-selectors. Congratulations!";
         main === null || main === void 0 ? void 0 : main.append(divMessage);
+        this.level = 0;
     }
     setLevel() {
-        this.level++;
-        document.getElementById('input').value = '';
-        if (this.level >= this.length) {
+        if (this.level === this.length - 1) {
             this.showWinMessage();
         }
         else {
+            this.level++;
+            this.lightningLevel();
+            document.getElementById('input').value = '';
             this.renderTable();
+        }
+    }
+    lightningLevel() {
+        var _a;
+        const allLevels = Array.from(document.querySelectorAll('.block__level'));
+        allLevels.forEach((elem) => elem.classList.remove('block__level_active'));
+        if (this.level <= 10) {
+            const activeLevel = (_a = document.getElementById(_levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].level)) === null || _a === void 0 ? void 0 : _a.parentElement;
+            console.log(activeLevel);
+            activeLevel === null || activeLevel === void 0 ? void 0 : activeLevel.classList.add('block__level_active');
         }
     }
 }
@@ -889,7 +937,7 @@ module.exports = __webpack_require__.p + "ad178c0df28bc133be34.svg";
   \********************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('[{"level":"level-1","todo":"select plates","layout":"<div class=\'plate\'></div><div class=\'plate\'></div>","expectedCSS":"plate","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n</div>"},{"level":"level-2","todo":"select bento","layout":"<div class=\'plate\'></div><div class=\'plate\'></div><div class=\'bento\'></div>","expectedCSS":"bento","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n<bento></bento>\\n</div>"},{"level":"level-3","todo":"select fancy plate","layout":"<div class=\'plate\'></div><div class=\'plate\'></div><div class=\'plate plate__fancy\'></div>","expectedCSS":"plate#fancy","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n<plate id=\'fancy\'></plate>\\n</div>"},{"level":"level-4","todo":"select apple on bento","layout":"<div class=\'plate\'><div class=\'apple\'></div></div><div class=\'apple\'></div><div class=\'plate\'></div><div class=\'bento\'><div class=\'apple\'></div></div>","expectedCSS":"bento apple","html":"<div class=\'table\'>\\n<plate>\\n<apple></apple>\\n</plate>\\n<apple></apple>\\n<plate></plate>\\n<bento>\\n<apple></apple>\\n</bento>\\n</div>"},{"level":"level-5","todo":"Select the pickle on the fancy plate","layout":"<div class=\'plate\'></div><div class=\'plate\'><div class=\'pickle\'></div></div><div class=\'plate plate__fancy\'><div class=\'pickle\'></div></div>","expectedCSS":"plate#fancy pickle","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<plate id=\'fancy\'>\\n<pickle></pickle>\\n</plate>\\n</div>"},{"level":"level-6","todo":"Select the small apples","layout":"<div class=\'apple\'></div><div class=\'plate\'><div class=\'apple apple__small\'></div></div><div class=\'apple\'></div><div class=\'apple apple__small\'></div>","expectedCSS":"apple.small","html":"<div class=\'table\'>\\n<apple></apple>\\n<plate>\\n<apple class=\'small\'></apple>\\n</plate>\\n<apple></apple>\\n<apple class=\'small\'></apple>\\n</div>"},{"level":"level-7","todo":"Select the small oranges on plate","layout":"<div class=\'bento\'><div class=\'orange\'></div></div><div class=\'plate\'><div class=\'orange orange__small\'></div></div><div class=\'plate\'><div class=\'orange orange__small\'></div></div><div class=\'bento\'><div class=\'orange orange__small\'></div></div><div class=\'plate\'><div class=\'apple apple__small\'></div></div>","expectedCSS":"plate orange.small","html":"<div class=\'table\'>\\n<bento>\\n<orange></orange>\\n</bento>\\n<plate>\\n<orange class=\'small\'></orange>\\n</plate>\\n<plate>\\n<orange class=\'small\'></orange>\\n</plate>\\n<bento>\\n<orange class=\'small\'></orange>\\n</bento>\\n<plate>\\n<apple class=\'small\'></apple>\\n</plate>\\n</div>"},{"level":"level-8","todo":"Select all the plates and bentos","layout":"<div class=\'apple\'></div><div class=\'plate\'><div class=\'apple\'></div></div><div class=\'bento\'></div><div class=\'bento\'></div>","expectedCSS":"plate, bento","html":"<div class=\'table\'>\\n<apple></apple>\\n<plate>\\n<apple></apple>\\n</plate>\\n<bento></bento>\\n<bento></bento>\\n</div>"},{"level":"level-9","todo":"Select all the things","layout":"<div class=\'orange\'></div><div class=\'plate\'><div class=\'pickle\'></div></div><div class=\'bento\'></div><div class=\'bento\'><div class=\'orange\'></div></div>","expectedCSS":"*","html":"<div class=\'table\'>\\n<orange></orange>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<bento></bento>\\n<bento>\\n<orange></orange>\\n</bento>\\n</div>"},{"level":"level-10","todo":"Select everything on a plate","layout":"<div class=\'orange\'></div><div class=\'plate\'><div class=\'pickle\'></div></div><div class=\'bento\'><div class=\'pickle\'></div></div><div class=\'plate\'><div class=\'orange\'></div></div>","expectedCSS":"plate *","html":"<div class=\'table\'>\\n<orange></orange>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<bento>\\n<pickle></pickle>\\n</bento>\\n<plate>\\n<orange></orange>\\n</plate>\\n</div>"},{"level":"level-11","todo":"Select the 3rd plate","layout":"<div class=\'plate\'></div><div class=\'plate plate__fancy\'></div><div class=\'plate\'></div><div class=\'plate\'></div>","expectedCSS":":nth-child(3)","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate class=\'fancy\'></plate>\\n<plate></plate>\\n<plate></plate>\\n</div>"}]');
+module.exports = JSON.parse('[{"level":"level-1","todo":"select plates","layout":"<div class=\'plate target\'></div><div class=\'plate target\'></div>","expectedCSS":"plate","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n</div>"},{"level":"level-2","todo":"select bento","layout":"<div class=\'plate\'></div><div class=\'plate\'></div><div class=\'bento target\'></div>","expectedCSS":"bento","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n<bento></bento>\\n</div>"},{"level":"level-3","todo":"select fancy plate","layout":"<div class=\'plate\'></div><div class=\'plate\'></div><div class=\'plate plate__fancy target\'></div>","expectedCSS":"plate#fancy","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate></plate>\\n<plate id=\'fancy\'></plate>\\n</div>"},{"level":"level-4","todo":"select apple on bento","layout":"<div class=\'plate\'><div class=\'apple\'></div></div><div class=\'apple\'></div><div class=\'plate\'></div><div class=\'bento\'><div class=\'apple target\'></div></div>","expectedCSS":"bento apple","html":"<div class=\'table\'>\\n<plate>\\n<apple></apple>\\n</plate>\\n<apple></apple>\\n<plate></plate>\\n<bento>\\n<apple></apple>\\n</bento>\\n</div>"},{"level":"level-5","todo":"Select the pickle on the fancy plate","layout":"<div class=\'plate\'></div><div class=\'plate\'><div class=\'pickle\'></div></div><div class=\'plate plate__fancy\'><div class=\'pickle target\'></div></div>","expectedCSS":"plate#fancy pickle","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<plate id=\'fancy\'>\\n<pickle></pickle>\\n</plate>\\n</div>"},{"level":"level-6","todo":"Select the small apples","layout":"<div class=\'apple\'></div><div class=\'plate\'><div class=\'apple apple__small target\'></div></div><div class=\'apple\'></div><div class=\'apple apple__small target\'></div>","expectedCSS":"apple.small","html":"<div class=\'table\'>\\n<apple></apple>\\n<plate>\\n<apple class=\'small\'></apple>\\n</plate>\\n<apple></apple>\\n<apple class=\'small\'></apple>\\n</div>"},{"level":"level-7","todo":"Select the small oranges on plate","layout":"<div class=\'bento\'><div class=\'orange\'></div></div><div class=\'plate\'><div class=\'orange orange__small target\'></div></div><div class=\'plate\'><div class=\'orange orange__small target\'></div></div><div class=\'bento\'><div class=\'orange orange__small\'></div></div><div class=\'plate\'><div class=\'apple apple__small\'></div></div>","expectedCSS":"plate orange.small","html":"<div class=\'table\'>\\n<bento>\\n<orange></orange>\\n</bento>\\n<plate>\\n<orange class=\'small\'></orange>\\n</plate>\\n<plate>\\n<orange class=\'small\'></orange>\\n</plate>\\n<bento>\\n<orange class=\'small\'></orange>\\n</bento>\\n<plate>\\n<apple class=\'small\'></apple>\\n</plate>\\n</div>"},{"level":"level-8","todo":"Select all the plates and bentos","layout":"<div class=\'apple\'></div><div class=\'plate target\'><div class=\'apple\'></div></div><div class=\'bento target\'></div><div class=\'bento target\'></div>","expectedCSS":"plate, bento","html":"<div class=\'table\'>\\n<apple></apple>\\n<plate>\\n<apple></apple>\\n</plate>\\n<bento></bento>\\n<bento></bento>\\n</div>"},{"level":"level-9","todo":"Select all the things","layout":"<div class=\'orange target\'></div><div class=\'plate target\'><div class=\'pickle target\'></div></div><div class=\'bento target\'></div><div class=\'bento target\'><div class=\'orange target\'></div></div>","expectedCSS":"*","html":"<div class=\'table\'>\\n<orange></orange>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<bento></bento>\\n<bento>\\n<orange></orange>\\n</bento>\\n</div>"},{"level":"level-10","todo":"Select everything on a plate","layout":"<div class=\'orange\'></div><div class=\'plate\'><div class=\'pickle target\'></div></div><div class=\'bento\'><div class=\'pickle\'></div></div><div class=\'plate\'><div class=\'orange target\'></div></div>","expectedCSS":"plate *","html":"<div class=\'table\'>\\n<orange></orange>\\n<plate>\\n<pickle></pickle>\\n</plate>\\n<bento>\\n<pickle></pickle>\\n</bento>\\n<plate>\\n<orange></orange>\\n</plate>\\n</div>"},{"level":"level-11","todo":"Select the 3rd plate","layout":"<div class=\'plate\'></div><div class=\'plate plate__fancy\'></div><div class=\'plate target\'></div><div class=\'plate\'></div>","expectedCSS":":nth-child(3)","html":"<div class=\'table\'>\\n<plate></plate>\\n<plate class=\'fancy\'></plate>\\n<plate></plate>\\n<plate></plate>\\n</div>"}]');
 
 /***/ })
 
@@ -1049,6 +1097,29 @@ table.renderLevels();
 const buttonEnter = document.querySelector('.button');
 buttonEnter === null || buttonEnter === void 0 ? void 0 : buttonEnter.addEventListener('click', () => {
     table.checkCode();
+});
+document.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter') {
+        table.checkCode();
+    }
+});
+function setLocalStorage() {
+    if (table.level <= 10) {
+        localStorage.setItem('level', String(table.level));
+    }
+    else {
+        localStorage.setItem('level', '0');
+    }
+}
+window.addEventListener('beforeunload', setLocalStorage);
+function getLocalStorage() {
+    if (localStorage.getItem('level')) {
+        table.level = Number(localStorage.getItem('level'));
+        return table.level;
+    }
+}
+window.addEventListener('load', () => {
+    getLocalStorage;
 });
 
 })();
