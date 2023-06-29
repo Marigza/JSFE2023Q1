@@ -23,12 +23,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/done.svg */ "./src/assets/svg/done.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/github.svg */ "./src/assets/svg/github.svg"), __webpack_require__.b);
-var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/rs_school_js.svg */ "./src/assets/svg/rs_school_js.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/done-helped.svg */ "./src/assets/svg/done-helped.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/github.svg */ "./src/assets/svg/github.svg"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../src/assets/svg/rs_school_js.svg */ "./src/assets/svg/rs_school_js.svg"), __webpack_require__.b);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
 var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_3___);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `* {
   box-sizing: border-box;
@@ -40,6 +42,12 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
 
 .main {
@@ -82,6 +90,10 @@ body {
   background: url(${___CSS_LOADER_URL_REPLACEMENT_0___}) center no-repeat;
 }
 
+.level__icon_activeHelp {
+  background: url(${___CSS_LOADER_URL_REPLACEMENT_1___}) center no-repeat;
+}
+
 .block__level {
   display: flex;
   justify-content: center;
@@ -113,6 +125,12 @@ body {
 
 .button {
   cursor: pointer;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 1px solid #000;
+  padding: 1vh;
 }
 
 .table {
@@ -262,7 +280,7 @@ body {
 .link_gh {
   display: block;
   box-sizing: content-box;
-  background: url(${___CSS_LOADER_URL_REPLACEMENT_1___}) right no-repeat;
+  background: url(${___CSS_LOADER_URL_REPLACEMENT_2___}) right no-repeat;
   width: 32px;
   height: 32px;
 }
@@ -279,7 +297,7 @@ body {
 
 .link_rss {
   display: block;
-  background: url(${___CSS_LOADER_URL_REPLACEMENT_2___}) left no-repeat;
+  background: url(${___CSS_LOADER_URL_REPLACEMENT_3___}) left no-repeat;
   width: 100%;
   height: 100%;
 }
@@ -288,7 +306,42 @@ body {
   display: block;
   width: 32px;
   height: 32px;
-}`, "",{"version":3,"sources":["webpack://./src/style/_body.scss","webpack://./src/style.scss","webpack://./src/style/_gameBlock.scss","webpack://./src/style/_items.scss","webpack://./src/style/_footer.scss","webpack://./src/style/_constants.scss"],"names":[],"mappings":"AAAA;EACE,sBAAA;ACCF;;ADEA;EACE,aAAA;EACA,YAAA;EACA,sBAAA;EACA,SAAA;EACA,UAAA;ACCF;;ADEA;EACE,kBAAA;EACA,aAAA;EACA,qCAAA;EACA,mCAAA;EACA,aAAA;EAAA,QAAA;EACA,YAAA;ACCF;;ADEA;EACE,mBAAA;EACA,sBAAA;ACCF;;ADCA;EACE,gBAAA;EACA,sBAAA;ACEF;;ADAA;EACE,wBAAA;EACA,sBAAA;ACGF;;ADDA;EACE,wBAAA;EACA,sBAAA;ACIF;;ACvCA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AD0CF;;ACvCA;EACE,oEAAA;AD0CF;;ACvCA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;EACA,eAAA;AD0CF;;ACvCA;EACE,wBAAA;AD0CF;;ACvCA;EACE,wBAAA;AD0CF;;ACvCA;EACE,kBAAA;EACA,QAAA;EACA,SAAA;EACA,gCAAA;EACA,YAAA;EACA,aAAA;EACA,YAAA;EACA,kCAAA;EACA,eAAA;EACA,kBAAA;AD0CF;;ACvCA;EACE,eAAA;AD0CF;;AElFA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,QAAA;EACA,mCAAA;EACA,aAAA;EACA,eAAA;EACA,YAAA;AFqFF;;AElFA;EACE,qCAAA;AFqFF;;AElFA;EACE;IACE,mCAAA;EFqFF;EElFA;IACE,yCAAA;EFoFF;EEjFA;IACE,mCAAA;EFmFF;AACF;AEhFA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,yBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,yBAAA;AFkFF;;AE/EA;EACE,uBAAA;EACA,mBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,uBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AE/EA;EACE,wBAAA;EACA,kBAAA;EACA,YAAA;EACA,WAAA;AFkFF;;AEhFA;EACE,YAAA;EACA,WAAA;AFmFF;;AEhFA;;;;;EAKE,8CAAA;EACA,eAAA;AFmFF;;AEhFA;EACE,2CAAA;AFmFF;;AEhFA;EACE,sCAAA;AFmFF;;AEhFA;EACE;IACE,mBAAA;IACA,UAAA;EFmFF;EEhFA;IACE,sBAAA;IACA,YAAA;EFkFF;EE9EA;IACE,mBAAA;IACA,UAAA;EFgFF;AACF;AE7EA;EACE;IACE,mBAAA;IACA,UAAA;EF+EF;EE5EA;IACE,mBAAA;IACA,UAAA;EF8EF;AACF;AG/MA;ECDE,aAAA;EACA,eAAA;EACA,8BAAA;EDCA,eAAA;EACA,mBAAA;EACA,sBAAA;AHmNF;AIpNE;EACE,eDHuB;AHyN3B;;AGnNA;EACE,uBAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,uBAAA;EACA,mEAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,aAAA;EACA,6BAAA;EACA,6BAAA;EAAA,qBAAA;EACA,WAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,kEAAA;EACA,WAAA;EACA,YAAA;AHsNF;;AGnNA;EACE,cAAA;EACA,WAAA;EACA,YAAA;AHsNF","sourcesContent":["* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n.block3 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}\n.block4 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}","* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n\n.block3 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.block4 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n}\n\n.table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}\n.footer__wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  font-size: 1rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;\n}\n.footer__wrapper > * {\n  flex-basis: 20%;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}",".level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n  \n}\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n}",".table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  \n\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}","\n\n.footer__wrapper {\n  @include columns($width: 20%);\n  font-size: 1.0rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}","@mixin columns ($width) {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  >* {\n    flex-basis: $width;\n  }\n}\n"],"sourceRoot":""}]);
+}
+
+.block__content#css {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2vh;
+}
+
+.input_block {
+  position: relative;
+}
+
+.block__append-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 22px;
+  background-color: white;
+  border: 1px solid #000;
+}
+
+.letter {
+  animation: 0.1s 0s 1 text normal both running linear;
+  display: inline-block;
+}
+
+@keyframes text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}`, "",{"version":3,"sources":["webpack://./src/style/_body.scss","webpack://./src/style.scss","webpack://./src/style/_gameBlock.scss","webpack://./src/style/_items.scss","webpack://./src/style/_footer.scss","webpack://./src/style/_constants.scss","webpack://./src/style/_textAnimated.scss"],"names":[],"mappings":"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","sourcesContent":["* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.header {\n  display: flex;\n  justify-content: space-between;\n  margin: 10px;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n.block3 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}\n.block4 {\n  grid-area: span 2 / span 2;\n  border: 1px solid #000;\n}","* {\n  box-sizing: border-box;\n}\n\nbody {\n  display: flex;\n  height: 100%;\n  flex-direction: column;\n  margin: 0;\n  padding: 0;\n}\n\n.header {\n  display: flex;\n  justify-content: space-between;\n  margin: 10px;\n}\n\n.main {\n  position: relative;\n  display: grid;\n  grid-template-columns: repeat(5, 1fr);\n  grid-template-rows: repeat(2, auto);\n  gap: 1vh;\n  margin: 10px;\n}\n\n.block1 {\n  grid-column: span 4;\n  border: 1px solid #000;\n}\n\n.block2 {\n  grid-row: span 3;\n  border: 1px solid #000;\n}\n\n.block3 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.block4 {\n  grid-area: span 2/span 2;\n  border: 1px solid #000;\n}\n\n.level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n}\n\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.level__icon_activeHelp {\n  background: url(../src/assets/svg/done-helped.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n  height: fit-content;\n  width: fit-content;\n  border: 1px solid #000;\n  padding: 1vh;\n}\n\n.table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}\n.footer__wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  font-size: 1rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;\n}\n.footer__wrapper > * {\n  flex-basis: 20%;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}\n\n.block__content#css {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 2vh;\n}\n\n.input_block {\n  position: relative;\n}\n\n.block__append-text {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 170px;\n  height: 22px;\n  background-color: white;\n  border: 1px solid #000;\n}\n\n.letter {\n  animation: 0.1s 0s 1 text normal both running linear;\n  display: inline-block;\n}\n\n@keyframes text {\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n}",".level__icon {\n  display: block;\n  width: 24px;\n  height: 24px;\n  \n}\n.level__icon_active {\n  background: url(../src/assets/svg/done.svg) center no-repeat;\n}\n\n.level__icon_activeHelp {\n  background: url(../src/assets/svg/done-helped.svg) center no-repeat;\n}\n\n.block__level {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  cursor: pointer;\n}\n\n.block__level:hover {\n  color: rgb(185, 185, 58);\n}\n\n.block__level_active {\n  color: rgb(152, 152, 48);\n}\n\n.win-message {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 300px;\n  height: 200px;\n  padding: 1vh;\n  background-color: rgb(255, 179, 0);\n  font-size: 2rem;\n  text-align: center;\n}\n\n.button {\n  cursor: pointer;\n  height: fit-content;\n  width: fit-content;\n  border: 1px solid #000;\n  padding: 1vh;\n}\n",".table {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 1vh;\n  background-color: rgb(185, 185, 58);\n  height: 100px;\n  margin: 1vh 3vh;\n  padding: 1vh;\n}\n\n.table_mistaked {\n  animation: 0.2s 4 normal table-change;\n}\n\n@keyframes table-change {\n  0% {\n    background-color: rgb(185, 185, 58);\n  }\n\n  50% {\n    background-color: rgba(185, 185, 58, 0.2);\n  }\n\n  100% {\n    background-color: rgb(185, 185, 58);\n  }\n}\n\n.plate {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #ffffff;\n  border-radius: 50%;\n  height: 80px;\n  width: 80px;\n}\n\n.apple {\n  background-color: red;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n\n.apple__small {\n  height: 20px;\n  width: 20px;\n}\n\n.plate__fancy {\n  border: 5px solid skyblue;\n}\n\n.pickle {\n  background-color: green;\n  border-radius: 20px;\n  height: 40px;\n  width: 20px;\n}\n\n.pickle__small {\n  height: 20px;\n  width: 10px;\n}\n\n.bento {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: brown;\n  height: 80px;\n  width: 80px;\n}\n\n.orange {\n  background-color: orange;\n  border-radius: 50%;\n  height: 40px;\n  width: 40px;\n}\n.orange__small {\n  height: 20px;\n  width: 20px;\n}\n\n.orange:hover,\n.bento:hover,\n.pickle:hover,\n.apple:hover,\n.plate:hover {\n  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);\n  cursor: pointer;\n}\n\n.target {\n  animation: 0.5s infinite normal target-elem;\n}\n\n.target_answer {\n  animation: 0.5s 1 normal target-answer;\n}\n\n@keyframes target-elem {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  50% {\n    transform: scale(0.95);\n    opacity: 0.7;\n  }\n  \n\n  100% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n\n@keyframes target-answer {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n\n  100% {\n    transform: scale(0);\n    opacity: 0;\n  }\n}","\n\n.footer__wrapper {\n  @include columns($width: 20%);\n  font-size: 1.0rem;\n  line-height: 1.4rem;\n  border: 1px solid #000;;\n}\n\n.social-link {\n  box-sizing: content-box;\n  width: 32px;\n  height: 32px;\n}\n\n.link_gh {\n  display: block;\n  box-sizing: content-box;\n  background: url(../src/assets/svg/github.svg) right no-repeat;\n  width: 32px;\n  height: 32px;\n}\n\n.link_icon_gh {\n  display: flex;\n  background-color: transparent;\n  text-decoration: none;\n  color: #000;\n  width: 100%;\n  height: 100%;\n}\n\n.link_rss {\n  display: block;\n  background: url(../src/assets/svg/rs_school_js.svg) left no-repeat;\n  width: 100%;\n  height: 100%;\n}\n\n.footer__link {\n  display: block;\n  width: 32px;\n  height: 32px;\n}","@mixin columns ($width) {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n\n  >* {\n    flex-basis: $width;\n  }\n}\n",".block__content#css {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  gap: 2vh;\r\n}\r\n\r\n.input_block {\r\n  position: relative;\r\n}\r\n\r\n.block__append-text {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 170px;\r\n  height: 22px;\r\n  background-color: white;\r\n  border: 1px solid #000;\r\n}\r\n\r\n.letter {\r\n  animation: .1s 0s 1 text normal both running linear;\r\n  display: inline-block;\r\n}\r\n\r\n@keyframes text {\r\n  0% {\r\n    opacity: 0;\r\n    }\r\n  \r\n  100% {\r\n    opacity: 1;\r\n  }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -460,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CSS-Selectors</title>\n</head>\n<body>\n  <header><h1>CSS-Selectors</h1></header>\n  <main class=\"main\">\n    <section class=\"block1\">\n      <h2 class=\"block__header\">Your task</h2>\n      <div class=\"block__content\" id=\"task\">\n        <div class=\"table\">\n          <div class=\"plate\">\n            <div class=\"apple\"></div>\n            <div class=\"apple apple_small\"></div>\n          </div>\n          <div class=\"plate plate_fancy\">\n            <div class=\"pickle pickle__small\"></div>\n          </div>\n          <div class=\"bento\">\n            <div class=\"orange\"></div>\n            <div class=\"orange orange__small\"></div>\n          </div>\n          <div class=\"pickle\"></div>\n        </div>\n      </div>\n    </section>\n    <section class=\"block2\">\n      <h2 class=\"block__header\">Level</h2>\n      <div class=\"block__content\" id=\"level\"></div>\n    </section>\n    <section class=\"block3\">\n      <h2 class=\"block__header\">CSS Editor</h2>\n      <div class=\"block__content\" id=\"css\">\n        <input id=\"input\" type=\"text\">\n        <button class=\"button\">Enter</button>\n      </div>\n    </section>\n    <section class=\"block4\">\n      <h2 class=\"block__header\">HTML Viewer</h2>\n      <div class=\"block__content\" id=\"html\"></div>\n    </section>\n  </main>\n  <footer><div class=\"wrapper footer__wrapper\">\n    <div class=\"footer__element\">\n      <div ><a target=\"_blank\" href=\"https://github.com/Marigza\" class=\"link_icon_gh\"><span class=\"link_gh\"></span><span>Marigza</span></a></div>\n    </div>\n    <div class=\"footer__element\">Rolling Scopes School 2023</div>\n    <div class=\"footer__element\">\n      <div class=\"link_rss\"><a target=\"_blank\" href=\"https://rs.school/js/\" class=\"link_rss\"></a></div>\n    </div>\n  </div></footer>\n</body>\n</html>";
+var code = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>CSS-Selectors</title>\n</head>\n<body>\n  <header class=\"header\">\n    <h1>CSS-Selectors</h1>\n    <div class=\"button\" id=\"reset\">Reset</div>\n    <div class=\"button\" id=\"help\">Help</div>\n  </header>\n  <main class=\"main\">\n    <section class=\"block1\">\n      <h2 class=\"block__header\">Your task</h2>\n      <div class=\"block__content\" id=\"task\">\n        <div class=\"table\">\n          <div class=\"plate\">\n            <div class=\"apple\"></div>\n            <div class=\"apple apple_small\"></div>\n          </div>\n          <div class=\"plate plate_fancy\">\n            <div class=\"pickle pickle__small\"></div>\n          </div>\n          <div class=\"bento\">\n            <div class=\"orange\"></div>\n            <div class=\"orange orange__small\"></div>\n          </div>\n          <div class=\"pickle\"></div>\n        </div>\n      </div>\n    </section>\n    <section class=\"block2\">\n      <h2 class=\"block__header\">Level</h2>\n      <div class=\"block__content\" id=\"level\"></div>\n    </section>\n    <section class=\"block3\">\n      <h2 class=\"block__header\">CSS Editor</h2>\n      <div class=\"block__content\" id=\"css\">\n        <div class=\"input_block\">\n          <input id=\"input\" type=\"text\">\n        </div>\n        <div class=\"button\" id=\"enter\">Enter</div>\n      </div>\n    </section>\n    <section class=\"block4\">\n      <h2 class=\"block__header\">HTML Viewer</h2>\n      <div class=\"block__content\" id=\"html\"></div>\n    </section>\n  </main>\n  <footer><div class=\"wrapper footer__wrapper\">\n    <div class=\"footer__element\">\n      <div ><a target=\"_blank\" href=\"https://github.com/Marigza\" class=\"link_icon_gh\"><span class=\"link_gh\"></span><span>Marigza</span></a></div>\n    </div>\n    <div class=\"footer__element\">Rolling Scopes School 2023</div>\n    <div class=\"footer__element\">\n      <div class=\"link_rss\"><a target=\"_blank\" href=\"https://rs.school/js/\" class=\"link_rss\"></a></div>\n    </div>\n  </div></footer>\n</body>\n</html>";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
@@ -798,12 +851,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Table: () => (/* binding */ Table)
 /* harmony export */ });
 /* harmony import */ var _levels_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./levels.json */ "./src/script/levels.json");
+/* harmony import */ var _textAnimation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./textAnimation */ "./src/script/textAnimation.ts");
+
 
 class Table {
     constructor() {
         this.level = Number(localStorage.getItem('level')) || 0;
         this.length = _levels_json__WEBPACK_IMPORTED_MODULE_0__.length;
         this.input = '';
+        this.countOfPassLevel = 0;
+        this.isHelped = false;
     }
     renderTable() {
         if (this.level <= 10) {
@@ -841,17 +898,26 @@ class Table {
             }
         }
         this.lightningLevel();
+        this.choiseLevel();
     }
     checkCode() {
         this.input = document.getElementById('input').value;
         this.input === _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].expectedCSS ? this.markDoneLevel() : this.showMistake();
-        console.log(this.input);
     }
     markDoneLevel() {
         this.animateCorrectAnswer();
+        this.countOfPassLevel++;
         const checkedLevel = document.getElementById(_levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].level);
-        checkedLevel === null || checkedLevel === void 0 ? void 0 : checkedLevel.classList.add('level__icon_active');
-        setTimeout(() => this.setLevel(), 500);
+        if (this.isHelped) {
+            checkedLevel === null || checkedLevel === void 0 ? void 0 : checkedLevel.classList.add('level__icon_activeHelp');
+        }
+        else {
+            checkedLevel === null || checkedLevel === void 0 ? void 0 : checkedLevel.classList.add('level__icon_active');
+        }
+        setTimeout(() => {
+            this.setLevel();
+            this.isHelped = false;
+        }, 500);
     }
     animateCorrectAnswer() {
         const targetElems = Array.from(document.querySelectorAll('.target'));
@@ -876,7 +942,7 @@ class Table {
         this.level = 0;
     }
     setLevel() {
-        if (this.level === this.length - 1) {
+        if (this.countOfPassLevel === 11) {
             this.showWinMessage();
         }
         else {
@@ -892,12 +958,95 @@ class Table {
         allLevels.forEach((elem) => elem.classList.remove('block__level_active'));
         if (this.level <= 10) {
             const activeLevel = (_a = document.getElementById(_levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].level)) === null || _a === void 0 ? void 0 : _a.parentElement;
-            console.log(activeLevel);
+            // console.log(activeLevel);
             activeLevel === null || activeLevel === void 0 ? void 0 : activeLevel.classList.add('block__level_active');
         }
     }
+    choiseLevel() {
+        const allLevels = Array.from(document.querySelectorAll('.block__level'));
+        allLevels.forEach(elem => elem.addEventListener('click', () => {
+            var _a;
+            const active = (_a = elem.firstElementChild) === null || _a === void 0 ? void 0 : _a.id;
+            // console.log(active);
+            const levelArr = _levels_json__WEBPACK_IMPORTED_MODULE_0__.map(elem => elem.level);
+            if (active !== undefined) {
+                //console.log(levelArr);
+                //console.log(levelArr.indexOf(active));
+                this.level = levelArr.indexOf(active) - 1;
+                this.setLevel();
+            }
+        }));
+    }
+    resetProgress() {
+        this.level = 0;
+        this.countOfPassLevel = 0;
+        document.getElementById('input').value = '';
+        this.renderTable();
+        this.renderLevels();
+    }
+    showAnswer() {
+        const text = new _textAnimation__WEBPACK_IMPORTED_MODULE_1__.TextAnimation(_levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].expectedCSS);
+        text.renderBlock();
+        document.getElementById('input').value = _levels_json__WEBPACK_IMPORTED_MODULE_0__[this.level].expectedCSS;
+        this.isHelped = true;
+    }
 }
 
+
+/***/ }),
+
+/***/ "./src/script/textAnimation.ts":
+/*!*************************************!*\
+  !*** ./src/script/textAnimation.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TextAnimation: () => (/* binding */ TextAnimation)
+/* harmony export */ });
+class TextAnimation {
+    constructor(text) {
+        this.divblock = document.createElement('div');
+        this.parentBlock = document.querySelector('.input_block');
+        this.text = text;
+    }
+    renderBlock() {
+        this.divblock.classList.add('block__append-text');
+        this.parentBlock.appendChild(this.divblock);
+        this.showText();
+        //this.divblock.addEventListener('animationend', ()=>this.hideblock());
+        setTimeout(() => this.hideblock(), 2000);
+    }
+    showText() {
+        const textArr = this.text.split('');
+        for (let i = 0; i < textArr.length; i++) {
+            const letter = document.createElement('span');
+            letter.classList.add('letter');
+            letter.textContent = textArr[i];
+            if (letter.textContent.match(/\s/)) {
+                letter.style.margin = 'auto 3px';
+            }
+            letter.style.animationDelay = (i / 10) + 's';
+            this.divblock.appendChild(letter);
+        }
+    }
+    hideblock() {
+        var _a;
+        (_a = this.divblock) === null || _a === void 0 ? void 0 : _a.remove();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/assets/svg/done-helped.svg":
+/*!****************************************!*\
+  !*** ./src/assets/svg/done-helped.svg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "a01c355a6338e08c9011.svg";
 
 /***/ }),
 
@@ -907,7 +1056,7 @@ class Table {
   \*********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "aec6fd6c8a9686ce92dc.svg";
+module.exports = __webpack_require__.p + "7e812218750439d9825e.svg";
 
 /***/ }),
 
@@ -1092,9 +1241,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const table = new _script_render__WEBPACK_IMPORTED_MODULE_2__.Table();
+const buttonReset = document.getElementById('reset');
+const buttonHelp = document.getElementById('help');
+buttonReset === null || buttonReset === void 0 ? void 0 : buttonReset.addEventListener('click', () => table.resetProgress());
+buttonHelp === null || buttonHelp === void 0 ? void 0 : buttonHelp.addEventListener('click', () => table.showAnswer());
+console.log(buttonHelp);
 table.renderTable();
 table.renderLevels();
-const buttonEnter = document.querySelector('.button');
+const buttonEnter = document.getElementById('enter');
 buttonEnter === null || buttonEnter === void 0 ? void 0 : buttonEnter.addEventListener('click', () => {
     table.checkCode();
 });
@@ -1114,7 +1268,7 @@ function setLocalStorage() {
 window.addEventListener('beforeunload', setLocalStorage);
 function getLocalStorage() {
     if (localStorage.getItem('level')) {
-        table.level = Number(localStorage.getItem('level'));
+        //table.level = Number(localStorage.getItem('level'));
         return table.level;
     }
 }
