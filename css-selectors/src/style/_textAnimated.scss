@@ -1,0 +1,35 @@
+.block__content#css {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2vh;
+}
+
+.input_block {
+  position: relative;
+}
+
+.block__append-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 22px;
+  background-color: white;
+  border: 1px solid #000;
+}
+
+.letter {
+  animation: .1s 0s 1 text normal both running linear;
+  display: inline-block;
+}
+
+@keyframes text {
+  0% {
+    opacity: 0;
+    }
+  
+  100% {
+    opacity: 1;
+  }
+}
