@@ -1,11 +1,12 @@
 import levels from './levels.json';
-
+import { TextAnimation } from './textAnimation';
 
 export class Table {
   level = Number(localStorage.getItem('level')) || 0;
   length = levels.length;
   input = '';
   countOfPassLevel = 0;
+  isHelped = false;
   renderTable() {
     if (this.level <= 10) {
       const task = document.getElementById('task');
@@ -47,14 +48,20 @@ export class Table {
   checkCode() {
     this.input = (document.getElementById('input') as HTMLInputElement).value;
     this.input === levels[this.level].expectedCSS ? this.markDoneLevel() : this.showMistake();
-    // console.log(this.input)
   }
   protected markDoneLevel() {
     this.animateCorrectAnswer();
     this.countOfPassLevel++;
     const checkedLevel = document.getElementById(levels[this.level].level);
-    checkedLevel?.classList.add('level__icon_active');
-    setTimeout(()=>this.setLevel(), 500);
+    if (this.isHelped) {
+      checkedLevel?.classList.add('level__icon_activeHelp')
+    } else {
+      checkedLevel?.classList.add('level__icon_active')
+    }
+    setTimeout(() => {
+      this.setLevel();
+      this.isHelped = false;
+    }, 500);
   }
   protected animateCorrectAnswer() {
     const targetElems = Array.from(document.querySelectorAll('.target'));
@@ -80,7 +87,7 @@ export class Table {
     this.level = 0;
   }
   setLevel() {
-    if (/*this.level === this.length - 1*/ this.countOfPassLevel === 11) {
+    if (this.countOfPassLevel === 11) {
       this.showWinMessage();
     } else {
       this.level++;
@@ -116,8 +123,16 @@ export class Table {
   resetProgress() {
     this.level = 0;
     this.countOfPassLevel = 0;
+    (document.getElementById('input') as HTMLInputElement).value = '';
     this.renderTable();
     this.renderLevels();
   }
+  showAnswer() {
+    const text = new TextAnimation(levels[this.level].expectedCSS);
+    text.renderBlock();
+    (document.getElementById('input') as HTMLInputElement).value = levels[this.level].expectedCSS;
+    this.isHelped = true;
+  }
+
 }
  

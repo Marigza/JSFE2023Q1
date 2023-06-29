@@ -3,17 +3,19 @@ import './style.scss';
 import { Table } from './script/render';
 
 const table = new Table();
+
 const buttonReset = document.getElementById('reset');
 const buttonHelp = document.getElementById('help');
 
 buttonReset?.addEventListener('click', () => table.resetProgress());
+buttonHelp?.addEventListener('click', () => table.showAnswer());
 
 console.log(buttonHelp);
 
 table.renderTable();
 table.renderLevels();
 
-const buttonEnter = document.querySelector('.button');
+const buttonEnter = document.getElementById('enter');
 buttonEnter?.addEventListener('click', () => {
   table.checkCode();
 });
