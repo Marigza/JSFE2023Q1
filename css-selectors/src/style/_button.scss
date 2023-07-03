@@ -1,0 +1,19 @@
+.button {
+  cursor: pointer;
+  height: fit-content;
+  width: fit-content;
+  font-size: 16px;
+  background-color: white;
+  border: 3px solid rgb(152, 152, 48);
+  border-radius: 5px;
+  padding: 1vh 3vh;
+  transition: 0.3s all linear;
+
+  &:hover {
+    background-color: rgb(229, 229, 73);
+  }
+
+  &:active {
+    background-color: rgb(152, 152, 48);
+  }
+}
