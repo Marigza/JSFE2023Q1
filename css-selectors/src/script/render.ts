@@ -5,8 +5,8 @@ export class Table {
   level = Number(localStorage.getItem('level')) || 0;
   length = levels.length;
   input = '';
-  countOfPassLevel = 0;
   isHelped = false;
+  divMessage = document.createElement('div');
   renderTable() {
     if (this.level <= 10) {
       const task = document.getElementById('task');
@@ -52,7 +52,6 @@ export class Table {
   }
   protected markDoneLevel() {
     this.animateCorrectAnswer();
-    this.countOfPassLevel++;
     const checkedLevel = document.getElementById(levels[this.level].level);
     if (this.isHelped) {
       checkedLevel?.classList.add('level__icon_activeHelp')
@@ -81,14 +80,16 @@ export class Table {
   }
   protected showWinMessage() {
     const main = document.querySelector('.main');
-    const divMessage = document.createElement('div');
-    divMessage.classList.add('win-message');
-    divMessage.textContent = "You finish learning css-selectors. Congratulations!"
-    main?.append(divMessage);
+    this.divMessage.classList.add('win-message');
+    this.divMessage.textContent = "You finish learning css-selectors. Congratulations!"
+    main?.append(this.divMessage);
     this.level = 0;
   }
+  protected removeWinMessage() {
+    this.divMessage.remove();
+  }
   setLevel() {
-    if (this.countOfPassLevel === 11) {
+    if (this.level === 10) {
       this.showWinMessage();
     } else {
       this.level++;
@@ -123,10 +124,10 @@ export class Table {
   }
   resetProgress() {
     this.level = 0;
-    this.countOfPassLevel = 0;
     (document.getElementById('input') as HTMLInputElement).value = '';
     this.renderTable();
     this.renderLevels();
+    this.removeWinMessage();
   }
   showAnswer() {
     const text = new TextAnimation(levels[this.level].expectedCSS);
