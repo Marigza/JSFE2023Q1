@@ -22,6 +22,8 @@ buttonEnter?.addEventListener('click', () => {
 document.addEventListener('keydown', function(event) {
   if (event.code === 'Enter') {
     table.checkCode();
+    buttonEnter?.classList.add('button_active');
+    setTimeout(() => buttonEnter?.classList.remove('button_active'), 300);
   }
 });
 
