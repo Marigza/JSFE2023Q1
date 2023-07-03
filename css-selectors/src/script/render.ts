@@ -11,6 +11,7 @@ export class Table {
     if (this.level <= 10) {
       const task = document.getElementById('task');
       const divTask = document.createElement('div');
+      divTask.classList.add('task__header');
       const divCode = document.createElement('div');
       const table = document.querySelector('.table');
       const html = document.getElementById('html');
