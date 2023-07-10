@@ -9,7 +9,6 @@ const buttonHelp = document.getElementById('help');
 const buttonEnter = document.getElementById('enter');
 
 buttonReset?.addEventListener('click', () => table.resetProgress());
-
 buttonHelp?.addEventListener('click', () => table.showAnswer());
 
 table.renderTable();
@@ -20,30 +19,25 @@ buttonEnter?.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', function (event) {
-  
   if (event.code === 'Enter') {
     table.checkCode();
     buttonEnter?.classList.add('button_active');
     
     setTimeout(() => buttonEnter?.classList.remove('button_active'), 300);
   }
-
 });
 
 function setLocalStorage() {
-
   if (table.level <= 10) {
     localStorage.setItem('level', String(table.level));
   } else {
     localStorage.setItem('level', '0');
   }
-
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
 
 function getLocalStorage() {
-
   if (localStorage.getItem('level')) {
     return table.level;
   }
@@ -52,4 +46,3 @@ function getLocalStorage() {
 window.addEventListener('load', () => {
   getLocalStorage;
 });
-

@@ -9,7 +9,6 @@ export class Table {
   divMessage = document.createElement('div');
 
   renderTable() {
-
     if (this.level <= 10) {
       const task = document.getElementById('task');
       const divTask = document.createElement('div');
@@ -51,7 +50,6 @@ export class Table {
         levelItem.innerHTML = `<span class="level__icon" id="${levels[i].level}"></span><span>${levels[i].level}</span>`;
         levelBlock.append(levelItem);
       }
-
     }
 
     this.lightningLevel();
@@ -88,15 +86,13 @@ export class Table {
         elem.classList.remove('target_answer');
       })
     });
-
   }
 
   protected showMistake() {
     const table = document.querySelector('.table');
+
     table?.classList.add('table_mistaked');
-
     table?.addEventListener('animationend', () => table?.classList.remove('table_mistaked'));
-
   }
 
   protected showWinMessage() {
@@ -112,7 +108,6 @@ export class Table {
   }
 
   setLevel() {
-
     if (this.level === 10) {
       this.showWinMessage();
     } else {
@@ -121,7 +116,6 @@ export class Table {
       (document.getElementById('input') as HTMLInputElement).value = '';
       this.renderTable();
     }
-
   }
 
   lightningLevel() {
@@ -133,7 +127,6 @@ export class Table {
       const activeLevel = document.getElementById(levels[this.level].level)?.parentElement;
       activeLevel?.classList.add('block__level_active');
     }
-
   }
 
   choiseLevel() {
@@ -147,9 +140,7 @@ export class Table {
         this.level = levelArr.indexOf(active) - 1;
         this.setLevel();
       }
-      
     })
-      
     )
   }
 

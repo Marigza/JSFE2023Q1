@@ -13,7 +13,6 @@ export class TextAnimation {
     this.showText();
 
     setTimeout(() => this.hideblock(), 2000);
-
   }
 
   // https://ru.stackoverflow.com/questions/1431728/
@@ -33,11 +32,9 @@ export class TextAnimation {
       letter.style.animationDelay = delay;
       this.divblock.appendChild(letter);
     }
-
   }
 
   hideblock() {
     this.divblock?.remove();
   }
-
 }
