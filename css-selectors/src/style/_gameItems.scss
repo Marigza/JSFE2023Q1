@@ -1,0 +1,172 @@
+.table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+  background-color: rgb(185, 185, 58);
+  height: 100px;
+  margin: 1vh;
+  padding: 1vh;
+}
+
+.table_mistaked {
+  animation: 0.2s 4 normal table-change;
+}
+
+@keyframes table-change {
+  0% {
+    background-color: rgb(185, 185, 58);
+  }
+
+  50% {
+    background-color: rgba(185, 185, 58, 0.2);
+  }
+
+  100% {
+    background-color: rgb(185, 185, 58);
+  }
+}
+
+.plate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+
+  @media(max-width: 650px) {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.apple {
+  background-color: red;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+
+  @media(max-width: 650px) {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.apple__small {
+  height: 20px;
+  width: 20px;
+
+  @media(max-width: 650px) {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.plate__fancy {
+  border: 5px solid skyblue;
+}
+
+.pickle {
+  background-color: green;
+  border-radius: 20px;
+  height: 40px;
+  width: 20px;
+
+  @media(max-width: 650px) {
+    height: 30px;
+    width: 15px;
+  }
+}
+
+.pickle__small {
+  height: 20px;
+  width: 10px;
+
+  @media(max-width: 650px) {
+    height: 15px;
+    width: 8px;
+  }
+}
+
+.bento {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: brown;
+  height: 80px;
+  width: 80px;
+
+  @media(max-width: 650px){
+    height: 60px;
+    width: 60px;
+  }
+}
+
+.orange {
+  background-color: orange;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+
+  @media(max-width: 650px) {
+    height: 30px;
+    width: 30px;
+  }
+}
+.orange__small {
+  height: 20px;
+  width: 20px;
+
+  @media(max-width: 650px) {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.orange:hover,
+.bento:hover,
+.pickle:hover,
+.apple:hover,
+.plate:hover {
+  box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.target {
+  animation: 0.5s infinite normal target-elem;
+}
+
+.target_answer {
+  animation: 0.5s 1 normal target-answer;
+}
+
+@keyframes target-elem {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes target-answer {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

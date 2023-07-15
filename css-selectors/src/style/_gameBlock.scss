@@ -1,0 +1,62 @@
+.block__content {
+  margin: 0 2vh;
+}
+
+.block__content#level {
+  @media(max-width: 650px) {
+    margin: 0 0;
+  }
+}
+
+.task__header {
+  font-size: 16px;
+}
+
+.level__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  
+}
+.level__icon_active {
+  background: url(../src/assets/svg/done.svg) center no-repeat;
+}
+
+.level__icon_activeHelp {
+  background: url(../src/assets/svg/done-helped.svg) center no-repeat;
+}
+
+.block__level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+  font-size: 16px;
+  cursor: pointer;
+
+  @media(max-width: 650px) {
+    font-size: 12px;
+  }
+}
+
+.block__level:hover {
+  color: rgb(185, 185, 58);
+}
+
+.block__level_active {
+  color: rgb(152, 152, 48);
+}
+
+.win-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  padding: 1vh;
+  background-color: rgb(255, 179, 0);
+  font-size: 2rem;
+  text-align: center;
+}
+
