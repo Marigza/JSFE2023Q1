@@ -1,0 +1,38 @@
+.svg-car {
+  width: 50px;
+  height: 50px;
+}
+
+.button_car-view{
+  padding: 2px 5px;
+  font-size: 1rem;
+}
+
+.car-view {
+  margin-bottom: 5px;
+}
+
+.car-view__check-view{
+  display: flex;
+  gap: 10px;
+}
+
+.car-view__track {
+  height: 50px;
+  border-bottom: 1px dashed #000;
+}
+
+.car__animation {
+  animation-name: slidein;
+  animation-timing-function: linear;
+}
+  
+@keyframes slidein {
+  from {
+    margin-left: 0%;
+  }
+  
+  to {
+    margin-left: calc(100% - 50px);
+  }
+}
