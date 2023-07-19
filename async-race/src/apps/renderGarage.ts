@@ -78,13 +78,20 @@ export class Garage {
   garageBlock = new NewElement('div', 'garage-block', '').elem;
   createCarButton = new NewElement('div', 'button', 'create car!').elem;
   updateCarButton = new NewElement('div', 'button', 'update car!').elem;
+  generateCarsButton = new NewElement('div', 'button', 'generate too many cars!').elem;
   garageBlockContent = new NewElement('div', 'garage-block_content', '').elem;
+  
 
   async getCarsOnGarage() {
     const result = await request.getCars();
     console.log(result);
+    console.log(Math.ceil(result.length / 7));
     this.garageBlockHeader = new NewElement('div', 'garage-block_header', `Garage (${result.length})`).elem;
     this.garageBlock.prepend(this.garageBlockHeader);
+  }
+
+  async showAllCars() {
+    const result = await request.getCars();
     for (const item of result) {
       this.appendNewCar(item.name, item.color);
     }
@@ -95,7 +102,9 @@ export class Garage {
     mainBlock.append(this.garageBlock);
     this.createCarBlock.append(this.createCarButton);
     this.createCarBlock.append(this.updateCarButton);
+    this.createCarBlock.append(this.generateCarsButton);
     this.getCarsOnGarage();
+    this.showAllCars();
     this.garageBlock.append(this.garageBlockContent);
     this.createCarBlock.classList.remove('hide');
     this.garageBlock.classList.remove('hide');
@@ -120,10 +129,20 @@ export class Garage {
   addListners() {
     this.createCarButton.addEventListener('click', () => {
       this.garageBlockHeader.remove();
+      this.garageBlockContent.innerHTML = '';
       // TODO здесь происходит дерганье элементов. Подумать как это убрать
-      this.getCarsOnGarage();
+      this.showAllCars()
       this.showNewCarOnGarage();
-    }) 
+      this.getCarsOnGarage();
+    })
+    
+    this.generateCarsButton.addEventListener('click', () => {
+      this.garageBlockHeader.remove();
+      this.garageBlockContent.innerHTML = '';
+      // TODO здесь происходит дерганье элементов. Подумать как это убрать
+      this.showAllCars()
+      this.generateCars();
+    })
   }
 
   async showNewCarOnGarage() {
@@ -131,6 +150,13 @@ export class Garage {
     console.log(result);
     this.appendNewCar(result.name, result.color);
     return result;
+  }
+
+  async generateCars() {
+     for (let i = 0; i < 100; i++) {
+       await this.showNewCarOnGarage();
+    }
+    this.getCarsOnGarage();
   }
 }
 
