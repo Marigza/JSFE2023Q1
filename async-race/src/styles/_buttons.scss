@@ -12,3 +12,12 @@
     background-color: $colorHoverButtons;
   }
 }
+
+.disabled {
+  cursor: default;
+  background-color: gray;
+
+  &:hover {
+    background-color: gray;
+  }
+}
