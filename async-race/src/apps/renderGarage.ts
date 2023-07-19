@@ -1,5 +1,6 @@
 import { NewElement } from "./createElement";
 import { newCar } from "./generateNewCar";
+import { Pagination } from "./pagination";
 import { Request } from "./serverRequest";
 
 export const mainBlock = new NewElement('div', 'main-block', '').elem;
@@ -74,25 +75,42 @@ class carTrackView{
 
 export class Garage {
   garageBlockHeader!: HTMLElement;
+  garagePaginationBlock!: HTMLElement;
   createCarBlock = new NewElement('div', 'create-block', '').elem;
   garageBlock = new NewElement('div', 'garage-block', '').elem;
   createCarButton = new NewElement('div', 'button', 'create car!').elem;
   updateCarButton = new NewElement('div', 'button', 'update car!').elem;
   generateCarsButton = new NewElement('div', 'button', 'generate too many cars!').elem;
   garageBlockContent = new NewElement('div', 'garage-block_content', '').elem;
-  
+  carsPerPage = 7;
 
   async getCarsOnGarage() {
     const result = await request.getCars();
-    console.log(result);
-    console.log(Math.ceil(result.length / 7));
+    const pagination = new Pagination(result.length, this.carsPerPage);
+    // console.log(result);
+    console.log(Math.ceil(result.length / this.carsPerPage));
     this.garageBlockHeader = new NewElement('div', 'garage-block_header', `Garage (${result.length})`).elem;
+    this.garagePaginationBlock = pagination.createPaginationView();
+    this.garageBlock.prepend(this.garagePaginationBlock);
     this.garageBlock.prepend(this.garageBlockHeader);
+    console.log(pagination.currentPage);
+    const chunkedResult = this.getChunkResult(result, this.carsPerPage);
+    this.showCarsOnCurrentPage(chunkedResult, 1);
+    pagination.nextButton.addEventListener('click', () => this.showCarsOnCurrentPage(chunkedResult, pagination.currentPage))
+    pagination.prevButton.addEventListener('click', () => this.showCarsOnCurrentPage(chunkedResult, pagination.currentPage))
   }
 
-  async showAllCars() {
-    const result = await request.getCars();
-    for (const item of result) {
+  getChunkResult(arr: newCar[], chunkSize: number, cache: newCar[][] = []) {
+    const tmp = [...arr];
+    if (chunkSize <= 0) return cache;
+    while (tmp.length) cache.push(tmp.splice(0, chunkSize));
+    // console.log(cache);
+    return cache;
+  }
+
+  showCarsOnCurrentPage(array: newCar[][], page: number) {
+    this.garageBlockContent.innerText = '';
+    for (const item of array[page - 1]) {
       this.appendNewCar(item.name, item.color);
     }
   }
@@ -104,7 +122,6 @@ export class Garage {
     this.createCarBlock.append(this.updateCarButton);
     this.createCarBlock.append(this.generateCarsButton);
     this.getCarsOnGarage();
-    this.showAllCars();
     this.garageBlock.append(this.garageBlockContent);
     this.createCarBlock.classList.remove('hide');
     this.garageBlock.classList.remove('hide');
@@ -129,32 +146,34 @@ export class Garage {
   addListners() {
     this.createCarButton.addEventListener('click', () => {
       this.garageBlockHeader.remove();
+      this.garagePaginationBlock.remove();
       this.garageBlockContent.innerHTML = '';
       // TODO здесь происходит дерганье элементов. Подумать как это убрать
-      this.showAllCars()
       this.showNewCarOnGarage();
       this.getCarsOnGarage();
     })
     
     this.generateCarsButton.addEventListener('click', () => {
       this.garageBlockHeader.remove();
+      this.garagePaginationBlock.remove();
       this.garageBlockContent.innerHTML = '';
       // TODO здесь происходит дерганье элементов. Подумать как это убрать
-      this.showAllCars()
+      // TODO долго генерируются машинки. в это время пустое поле игры...
       this.generateCars();
     })
   }
 
   async showNewCarOnGarage() {
     const result = await request.createCar(new newCar);
-    console.log(result);
-    this.appendNewCar(result.name, result.color);
+    // console.log(result);
+    // this.appendNewCar(result.name, result.color);
     return result;
   }
 
   async generateCars() {
-     for (let i = 0; i < 100; i++) {
-       await this.showNewCarOnGarage();
+    alert('Please, wait some moments...');
+    for (let i = 0; i < 100; i++) {
+      await this.showNewCarOnGarage();
     }
     this.getCarsOnGarage();
   }
