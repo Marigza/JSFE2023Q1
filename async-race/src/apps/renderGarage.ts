@@ -53,6 +53,11 @@ class carTrackView{
     this.carViewTrack.innerHTML = carSVG;
   }
 
+  async deleteCarFromGarage(id: number) {
+    const result = await request.deleteCar(id);
+    return result;
+  }
+
   addListners() {
     const velocity = '3s'
     const activeCar = this.carViewTrack.firstElementChild as HTMLDivElement;
@@ -69,6 +74,12 @@ class carTrackView{
     this.carMoveStop.addEventListener('click', () => {
       console.log('stop car...');
       activeCar?.classList.remove('car__animation');
+    })
+
+    this.carRemoveButton.addEventListener('click', () => {
+      this.deleteCarFromGarage(+this.carView.id);
+      this.carView.remove();
+      //TODO обновить общее количество машин в гараже и страниц с машинами...
     })
   }
 }
@@ -111,7 +122,8 @@ export class Garage {
   showCarsOnCurrentPage(array: newCar[][], page: number) {
     this.garageBlockContent.innerText = '';
     for (const item of array[page - 1]) {
-      this.appendNewCar(item.name, item.color);
+      console.log(item.id);
+      this.appendNewCar(item.name, item.color, item.id);
     }
   }
 
@@ -127,9 +139,10 @@ export class Garage {
     this.garageBlock.classList.remove('hide');
   }
 
-  appendNewCar(name: string, color: string) {
+  appendNewCar(name: string, color: string, id: number) {
     const carTrack = new carTrackView(name, color);
     this.garageBlockContent.append(carTrack.carView);
+    carTrack.carView.setAttribute('id', id.toString())
     return carTrack;
   }
 
@@ -165,7 +178,7 @@ export class Garage {
 
   async showNewCarOnGarage() {
     const result = await request.createCar(new newCar);
-    // console.log(result);
+    // console.log(result.id);
     // this.appendNewCar(result.name, result.color);
     return result;
   }

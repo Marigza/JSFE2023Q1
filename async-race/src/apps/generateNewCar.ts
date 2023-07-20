@@ -2,10 +2,12 @@
 export class newCar {
   name: string;
   color: string;
+  id: number;
   
   constructor() {
     this.name = this.createName();
     this.color = this.createColor();
+    this.id = 0;
   }
 
   createName() {
@@ -26,4 +28,8 @@ export class newCar {
     }
     return `#${readyColor.join('')}`
   }
+
+  // async getCarId() {
+    
+  // }
 }
