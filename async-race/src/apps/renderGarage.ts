@@ -69,12 +69,9 @@ class carTrackView{
     this.carMoveStop.classList.remove('disabled');
     const result = await request.enginePatch(+this.carView.id, 'started');
     const time = (result.distance / result.velocity) / 1000;
-    //console.log(result);
-    //console.log(time);
-    //console.log(this.activeCar);
-    
     this.activeCar.classList.add('car__animation');
     this.activeCar.style.animationDuration = `${time.toString()}s`;
+    this.getDriveRequest();
     this.activeCar.addEventListener('animationend', () => {
       this.activeCar.classList.remove('car__animation');
       this.carMoveStart.removeAttribute('disabled');
@@ -83,6 +80,17 @@ class carTrackView{
       this.carMoveStop.setAttribute('disabled', 'true')
     });
     return this.activeCar;
+  }
+
+  async getDriveRequest() {
+    try {
+      const isDrive = await request.enginePatch(+this.carView.id, 'drive');
+      // console.log(isDrive);
+      return isDrive;
+    } catch {
+      this.activeCar.style.animationPlayState = 'paused';
+      console.log('check engine!!!')
+    }
   }
 
   addListners() {
