@@ -62,6 +62,7 @@ class carTrackView{
     const result = await request.deleteCar(id);
     return result;
   }
+
   async getVelocity() {
     this.carMoveStart.classList.add('disabled');
     this.carMoveStart.setAttribute('disabled', 'true');
@@ -70,14 +71,11 @@ class carTrackView{
     const result = await request.enginePatch(+this.carView.id, 'started');
     const time = (result.distance / result.velocity) / 1000;
     this.activeCar.classList.add('car__animation');
+    this.activeCar.style.animationPlayState = 'running';
     this.activeCar.style.animationDuration = `${time.toString()}s`;
     this.getDriveRequest();
     this.activeCar.addEventListener('animationend', () => {
-      this.activeCar.classList.remove('car__animation');
-      this.carMoveStart.removeAttribute('disabled');
-      this.carMoveStart.classList.remove('disabled');
-      this.carMoveStop.classList.add('disabled');
-      this.carMoveStop.setAttribute('disabled', 'true')
+      this.stopMoving();
     });
     return this.activeCar;
   }
@@ -93,17 +91,19 @@ class carTrackView{
     }
   }
 
+  stopMoving() {
+    this.activeCar.classList.remove('car__animation');
+    this.carMoveStart.removeAttribute('disabled');
+    this.carMoveStart.classList.remove('disabled');
+    this.carMoveStop.classList.add('disabled');
+    this.carMoveStop.setAttribute('disabled', 'true')
+  }
+
   addListners() {
     
-    this.carMoveStart.addEventListener('click', () => this.getVelocity())
+    this.carMoveStart.addEventListener('click', () => this.getVelocity());
 
-    this.carMoveStop.addEventListener('click', () => {
-      this.activeCar.classList.remove('car__animation');
-      this.carMoveStart.removeAttribute('disabled');
-      this.carMoveStart.classList.remove('disabled');
-      this.carMoveStop.classList.add('disabled');
-      this.carMoveStop.setAttribute('disabled', 'true')
-    })
+    this.carMoveStop.addEventListener('click', () => this.stopMoving());
 
     this.carRemoveButton.addEventListener('click', () => {
       this.deleteCarFromGarage(+this.carView.id);
@@ -115,6 +115,7 @@ class carTrackView{
 
 export class Garage {
   garageBlockHeader!: HTMLElement;
+  garageRaceBlock!: HTMLElement;
   garagePaginationBlock!: HTMLElement;
   createCarBlock = new NewElement('div', 'create-block', '').elem;
   garageBlock = new NewElement('div', 'garage-block', '').elem;
@@ -122,6 +123,8 @@ export class Garage {
   updateCarButton = new NewElement('div', 'button', 'update car!').elem;
   generateCarsButton = new NewElement('div', 'button', 'generate too many cars!').elem;
   garageBlockContent = new NewElement('div', 'garage-block_content', '').elem;
+  startRaceButton = new NewElement('button', 'button', 'Start Race!').elem;
+  resetRaceButton = new NewElement('button', 'button', 'Reset Race').elem;
   carsPerPage = 7;
 
   async getCarsOnGarage() {
@@ -130,9 +133,15 @@ export class Garage {
     // console.log(result);
     console.log(Math.ceil(result.length / this.carsPerPage));
     this.garageBlockHeader = new NewElement('div', 'garage-block_header', `Garage (${result.length})`).elem;
+    this.garageRaceBlock = new NewElement('div', 'garage__race-block', '').elem;
     this.garagePaginationBlock = pagination.createPaginationView();
     this.garageBlock.prepend(this.garagePaginationBlock);
+    this.garageBlock.prepend(this.garageRaceBlock);
     this.garageBlock.prepend(this.garageBlockHeader);
+    this.garageRaceBlock.append(this.startRaceButton);
+    this.garageRaceBlock.append(this.resetRaceButton);
+    this.resetRaceButton.setAttribute('disabled', 'true');
+    this.resetRaceButton.classList.add('disabled');
     console.log(pagination.currentPage);
     const chunkedResult = this.getChunkResult(result, this.carsPerPage);
     this.showCarsOnCurrentPage(chunkedResult, 1);
@@ -151,7 +160,7 @@ export class Garage {
   showCarsOnCurrentPage(array: newCar[][], page: number) {
     this.garageBlockContent.innerText = '';
     for (const item of array[page - 1]) {
-      console.log(item.id);
+      //console.log(item.id);
       this.appendNewCar(item.name, item.color, item.id);
     }
   }
@@ -170,8 +179,23 @@ export class Garage {
 
   appendNewCar(name: string, color: string, id: number) {
     const carTrack = new carTrackView(name, color);
+    //console.log(carTrack);
     this.garageBlockContent.append(carTrack.carView);
-    carTrack.carView.setAttribute('id', id.toString())
+    carTrack.carView.setAttribute('id', id.toString());
+    this.startRaceButton.addEventListener('click', () => {
+      carTrack.getVelocity();
+      this.startRaceButton.setAttribute('disabled', 'true');
+      this.startRaceButton.classList.add('disabled');
+      this.resetRaceButton.removeAttribute('disabled');
+      this.resetRaceButton.classList.remove('disabled');
+    });
+    this.resetRaceButton.addEventListener('click', () => {
+      carTrack.stopMoving();
+      this.startRaceButton.removeAttribute('disabled');
+      this.startRaceButton.classList.remove('disabled');
+      this.resetRaceButton.setAttribute('disabled', 'true');
+      this.resetRaceButton.classList.add('disabled');
+    });
     return carTrack;
   }
 
@@ -202,6 +226,10 @@ export class Garage {
       // TODO здесь происходит дерганье элементов. Подумать как это убрать
       // TODO долго генерируются машинки. в это время пустое поле игры...
       this.generateCars();
+    })
+
+    this.resetRaceButton.addEventListener('click', () => {
+      console.log('stop race')
     })
   }
 
