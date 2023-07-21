@@ -38,6 +38,15 @@ export class Request {
     return response;
   }
 
+  async enginePatch(id: number, status='started'||'stopped'||'drive') {
+    const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
+      method: 'PATCH',
+    })
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+
 }
 
 
