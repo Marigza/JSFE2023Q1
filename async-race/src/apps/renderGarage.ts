@@ -1,13 +1,13 @@
 import { NewElement } from "./createElement";
 import { newCar } from "./generateNewCar";
 import { Pagination } from "./pagination";
-import { Request } from "./serverRequest";
+import { Request, Winner } from "./serverRequest";
 
 export const mainBlock = new NewElement('div', 'main-block', '').elem;
 
 const request = new Request();
-// console.log(request.getCar(3)); //promise!!!
-// console.log(request.createCar(new newCar)); //promise!!!
+
+let isWinner = false;
 
 class carTrackView{
   name: string;
@@ -76,6 +76,12 @@ class carTrackView{
     this.getDriveRequest();
     this.activeCar.addEventListener('animationend', () => {
       this.stopMoving();
+      if (isWinner === false) {
+        isWinner = true;
+        const timeRound = Math.round(time * 1000) / 1000;
+        this.showWinMessage(timeRound);
+        this.writeWinnerToRecords(timeRound);
+      }
     });
     return this.activeCar;
   }
@@ -97,6 +103,26 @@ class carTrackView{
     this.carMoveStart.classList.remove('disabled');
     this.carMoveStop.classList.add('disabled');
     this.carMoveStop.setAttribute('disabled', 'true')
+  }
+
+  showWinMessage(time: number) {
+    console.log(`${this.name} run first by ${time} seconds`);
+  }
+
+  async writeWinnerToRecords(time: number) {
+    console.log(`${this.carView.id} - for - ${time}`);
+    const winnersArray: Winner[] = await request.getWinners();
+    console.log(winnersArray);
+    if (winnersArray.some(el => el.id === +this.carView.id)) {
+      const winnerAgainIndex = winnersArray.findIndex(el => el.id === +this.carView.id);
+      winnersArray[winnerAgainIndex].wins++;
+      if (winnersArray[winnerAgainIndex].time > time) {
+        winnersArray[winnerAgainIndex].time = time;
+      }
+      request.updateWinner(winnersArray[winnerAgainIndex]);
+    } else {
+      request.createWinner({id: +this.carView.id, wins: 1, time: time});
+    }
   }
 
   addListners() {
@@ -182,6 +208,7 @@ export class Garage {
     //console.log(carTrack);
     this.garageBlockContent.append(carTrack.carView);
     carTrack.carView.setAttribute('id', id.toString());
+    // TODO при запуске гонки запрос идет по всем машинам, а не только по тем, которые на экране. Долго обрабатывается и вообще...
     this.startRaceButton.addEventListener('click', () => {
       carTrack.getVelocity();
       this.startRaceButton.setAttribute('disabled', 'true');
@@ -195,6 +222,7 @@ export class Garage {
       this.startRaceButton.classList.remove('disabled');
       this.resetRaceButton.setAttribute('disabled', 'true');
       this.resetRaceButton.classList.add('disabled');
+      isWinner = false;
     });
     return carTrack;
   }

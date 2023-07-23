@@ -2,6 +2,12 @@ import { newCar } from "./generateNewCar";
 
 //console.log(new newCar);
 
+export interface Winner {
+  id: number,
+  wins: number,
+  time: number
+}
+
 export class Request {
 
   async getCars() {
@@ -41,6 +47,39 @@ export class Request {
   async enginePatch(id: number, status='started'||'stopped'||'drive') {
     const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
       method: 'PATCH',
+    })
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+
+  async createWinner(winner: Winner/*id: number, wins: number, time: number*/) {
+    const response = await fetch('http://127.0.0.1:3000/winners', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(winner/*{id: id, wins: wins, time: time}*/)
+    })
+    const result = await response.json();
+    console.log(result);
+    return result;
+  }
+
+  async getWinners() {
+    const response = await fetch('http://127.0.0.1:3000/winners');
+    const winners = await response.json();
+    // console.log(winners);
+    return winners;
+  }
+
+  async updateWinner(winner: Winner) {
+    const response = await fetch(`http://127.0.0.1:3000/winners/${winner.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(winner)
     })
     const result = await response.json();
     console.log(result)
