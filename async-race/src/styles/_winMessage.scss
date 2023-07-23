@@ -1,0 +1,18 @@
+.win-message__block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 100px;
+  border: 3px solid $colorButtons;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: $colorBackground-alfa;
+}
