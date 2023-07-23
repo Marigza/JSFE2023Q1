@@ -138,7 +138,10 @@ class carTrackView{
 
   addListners() {
     
-    this.carMoveStart.addEventListener('click', () => this.getVelocity());
+    this.carMoveStart.addEventListener('click', () => {
+      isWinner = true;
+      this.getVelocity()
+    });
 
     this.carMoveStop.addEventListener('click', () => this.stopMoving());
 
@@ -221,6 +224,7 @@ export class Garage {
     carTrack.carView.setAttribute('id', id.toString());
     // TODO при запуске гонки запрос идет по всем машинам, а не только по тем, которые на экране. Долго обрабатывается и вообще...
     this.startRaceButton.addEventListener('click', () => {
+      isWinner = false;
       carTrack.getVelocity();
       this.startRaceButton.setAttribute('disabled', 'true');
       this.startRaceButton.classList.add('disabled');
