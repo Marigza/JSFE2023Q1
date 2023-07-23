@@ -107,6 +107,17 @@ class carTrackView{
 
   showWinMessage(time: number) {
     console.log(`${this.name} run first by ${time} seconds`);
+    const winMessage = new NewElement('div', 'win-message__block', `${this.name} run first by ${time} seconds`).elem;
+    const winMessageButton = new NewElement('button', 'button', 'OK').elem;
+    const modalWindow = new NewElement('div', 'modal_window', '').elem;
+    winMessageButton.classList.add('button_car-view');
+    mainBlock?.append(modalWindow);
+    mainBlock?.append(winMessage);
+    winMessage.append(winMessageButton);
+    winMessageButton.addEventListener('click', () => {
+      modalWindow.remove();
+      winMessage.remove();
+    })
   }
 
   async writeWinnerToRecords(time: number) {
