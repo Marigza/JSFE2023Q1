@@ -27,15 +27,48 @@ export class Winners {
     this.tableRow.append(new NewElement('td', 'td', 'N').elem);
     this.tableRow.append(new NewElement('td', 'td', 'Image of the car').elem);
     this.tableRow.append(new NewElement('td', 'td', 'Name of the car').elem);
-    this.tableRow.append(new NewElement('td', 'td', 'Wins number').elem);
-    this.tableRow.append(new NewElement('td', 'td', 'Best time in seconds').elem);
+    const winsNumber = new NewElement('td', 'td', '').elem;
+    winsNumber.classList.add('td_button');
+    const spanWins = new NewElement('span', 'span_text', 'Wins number').elem;
+    const spanWinsIcon = new NewElement('span', 'span-icon', '').elem;
+    winsNumber.append(spanWins);
+    winsNumber.append(spanWinsIcon);
+    this.tableRow.append(winsNumber);
+    const bestTime = new NewElement('td', 'td', '').elem;
+    bestTime.classList.add('td_button');
+    const spanTime = new NewElement('span', 'span_text', 'Best time in seconds').elem;
+    const spanTimeIcon = new NewElement('span', 'span-icon', '').elem;
+    bestTime.append(spanTime);
+    bestTime.append(spanTimeIcon);
+    this.tableRow.append(bestTime);
     this.getWinners();
+    let isASCwins = true;
+    winsNumber.addEventListener('click', () => {
+      console.log('sort by wins');
+      isASCwins = !isASCwins;
+      !isASCwins ? this.sortWinners('wins', 'ASC') : this.sortWinners('wins', 'DESC');
+    });
+    let isASCtime = true;
+    bestTime.addEventListener('click', () => {
+      console.log('sort by time');
+      isASCtime = !isASCtime;
+      !isASCtime ? this.sortWinners('time', 'ASC') : this.sortWinners('time', 'DESC');
+    });
   }
 
   async getWinners() {
     const response: Winner[] = await request.getWinners();
     console.log(response);
+    this.fillWinnersTable(response);
+  }
 
+  async sortWinners(sortedBy: 'id'|'wins'|'time', order: 'ASC'|'DESC') {
+    const response: Winner[] = await request.sortWinners(sortedBy, order);
+    this.fillWinnersTable(response);
+  }
+
+  async fillWinnersTable(response: Winner[]) {
+    this.tableBody.innerHTML = '';
     for (let i = 0; i < response.length; i++){
       console.log(response[i].id);
       const car = await request.getCar(response[i].id);

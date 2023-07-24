@@ -37,6 +37,19 @@ export class Request {
     return result;
   }
 
+  async updateCar(car: newCar) {
+    const response = await fetch(`http://127.0.0.1:3000/garage/${car.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(car)
+    })
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+
   async deleteCar(id: number) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
       method: 'DELETE',
@@ -53,13 +66,13 @@ export class Request {
     return result;
   }
 
-  async createWinner(winner: Winner/*id: number, wins: number, time: number*/) {
+  async createWinner(winner: Winner) {
     const response = await fetch('http://127.0.0.1:3000/winners', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(winner/*{id: id, wins: wins, time: time}*/)
+      body: JSON.stringify(winner)
     })
     const result = await response.json();
     console.log(result);
@@ -69,7 +82,12 @@ export class Request {
   async getWinners() {
     const response = await fetch('http://127.0.0.1:3000/winners');
     const winners = await response.json();
-    // console.log(winners);
+    return winners;
+  }
+
+  async sortWinners(sortedBy: 'id'|'wins'|'time', order: 'ASC'|'DESC') {
+    const response = await fetch(`http://127.0.0.1:3000/winners?_sort=${sortedBy}&_order=${order}`);
+    const winners = await response.json();
     return winners;
   }
 
