@@ -66,7 +66,8 @@ class carTrackView{
   }
 
   async getVelocity() {
-    this.carMoveStart.classList.add('disabled');
+    try {
+      this.carMoveStart.classList.add('disabled');
     this.carMoveStart.setAttribute('disabled', 'true');
     this.carMoveStop.removeAttribute('disabled');
     this.carMoveStop.classList.remove('disabled');
@@ -86,6 +87,10 @@ class carTrackView{
       }
     });
     return this.activeCar;
+    } catch {
+      console.log('Car with such id was not found in the garage')
+    }
+    
   }
 
   async getDriveRequest() {
@@ -99,7 +104,8 @@ class carTrackView{
   }
 
   async stopMoving() {
-    const result = await request.enginePatch(+this.carView.id, 'stopped');
+    try {
+      const result = await request.enginePatch(+this.carView.id, 'stopped');
     if (result.velocity === 0) {
       this.activeCar.classList.remove('car__animation');
       this.carMoveStart.removeAttribute('disabled');
@@ -107,6 +113,10 @@ class carTrackView{
       this.carMoveStop.classList.add('disabled');
       this.carMoveStop.setAttribute('disabled', 'true');
     }
+    } catch {
+      console.log('Car with such id was not found in the garage')
+    }
+    
   }
 
   showWinMessage(time: number) {
@@ -149,7 +159,6 @@ class carTrackView{
     this.carRemoveButton.addEventListener('click', () => {
       this.deleteCarFromGarage(+this.carView.id);
       this.carView.remove();
-      //TODO обновить общее количество машин в гараже и страниц с машинами...
     })
   }
 }
@@ -181,10 +190,21 @@ export class Garage {
     this.garageRaceBlock.append(this.resetRaceButton);
     this.resetRaceButton.setAttribute('disabled', 'true');
     this.resetRaceButton.classList.add('disabled');
-    const chunkedResult = this.getChunkResult(result, this.carsPerPage);
-    this.showCarsOnCurrentPage(chunkedResult, 1);
-    pagination.nextButton.addEventListener('click', () => this.showCarsOnCurrentPage(chunkedResult, pagination.currentPage))
-    pagination.prevButton.addEventListener('click', () => this.showCarsOnCurrentPage(chunkedResult, pagination.currentPage))
+    let chunkedResult = await this.getCurrentPage(pagination.currentPage);
+    this.showCarsOnCurrentPage(chunkedResult);
+    pagination.nextButton.addEventListener('click', async () => {
+      chunkedResult = await this.getCurrentPage(pagination.currentPage);
+      this.showCarsOnCurrentPage(chunkedResult);
+    })
+    pagination.prevButton.addEventListener('click', async () => {
+      chunkedResult = await this.getCurrentPage(pagination.currentPage);
+      this.showCarsOnCurrentPage(chunkedResult)
+    })
+  }
+
+  async getCurrentPage(number: number) {
+    const chunkedResult = await request.getCurrentCars(number);
+    return chunkedResult;
   }
 
   getChunkResult(arr: newCar[], chunkSize: number, cache: newCar[][] = []) {
@@ -194,11 +214,34 @@ export class Garage {
     return cache;
   }
 
-  showCarsOnCurrentPage(array: newCar[][], page: number) {
+  showCarsOnCurrentPage(array: newCar[]) {
     this.garageBlockContent.innerText = '';
-    for (const item of array[page - 1]) {
-      this.appendNewCar(item.name, item.color, item.id);
+    const currentArray = [];
+    for (const item of array) {
+      const raceCar = this.appendNewCar(item.name, item.color, item.id);
+      currentArray.push(raceCar);
     }
+    this.addListnersForRace(currentArray);
+    return currentArray;
+  }
+
+  addListnersForRace(array: carTrackView[]) {
+    this.startRaceButton.addEventListener('click', () => {
+        isWinner = false;
+        array.forEach((item)=> item.getVelocity());
+        this.startRaceButton.setAttribute('disabled', 'true');
+        this.startRaceButton.classList.add('disabled');
+        this.resetRaceButton.removeAttribute('disabled');
+        this.resetRaceButton.classList.remove('disabled');
+      });
+      this.resetRaceButton.addEventListener('click', () => {
+        array.forEach((elem)=>elem.stopMoving());
+        this.startRaceButton.removeAttribute('disabled');
+        this.startRaceButton.classList.remove('disabled');
+        this.resetRaceButton.setAttribute('disabled', 'true');
+        this.resetRaceButton.classList.add('disabled');
+        isWinner = false;
+      });
   }
 
   render() {
@@ -217,23 +260,6 @@ export class Garage {
     const carTrack = new carTrackView(name, color);
     this.garageBlockContent.append(carTrack.carView);
     carTrack.carView.setAttribute('id', id.toString());
-    // TODO при запуске гонки запрос идет по всем машинам, а не только по тем, которые на экране. Долго обрабатывается и вообще...
-    this.startRaceButton.addEventListener('click', () => {
-      isWinner = false;
-      carTrack.getVelocity();
-      this.startRaceButton.setAttribute('disabled', 'true');
-      this.startRaceButton.classList.add('disabled');
-      this.resetRaceButton.removeAttribute('disabled');
-      this.resetRaceButton.classList.remove('disabled');
-    });
-    this.resetRaceButton.addEventListener('click', () => {
-      carTrack.stopMoving();
-      this.startRaceButton.removeAttribute('disabled');
-      this.startRaceButton.classList.remove('disabled');
-      this.resetRaceButton.setAttribute('disabled', 'true');
-      this.resetRaceButton.classList.add('disabled');
-      isWinner = false;
-    });
     return carTrack;
   }
 
@@ -252,7 +278,6 @@ export class Garage {
       this.garageBlockHeader.remove();
       this.garagePaginationBlock.remove();
       this.garageBlockContent.innerHTML = '';
-      // TODO здесь происходит дерганье элементов. Подумать как это убрать
       this.showNewCarOnGarage();
       this.getCarsOnGarage();
     })
@@ -261,14 +286,8 @@ export class Garage {
       this.garageBlockHeader.remove();
       this.garagePaginationBlock.remove();
       this.garageBlockContent.innerHTML = '';
-      // TODO здесь происходит дерганье элементов. Подумать как это убрать
-      // TODO долго генерируются машинки. в это время пустое поле игры...
       this.generateCars();
     })
-
-    // this.resetRaceButton.addEventListener('click', () => {
-    //   console.log('stop race')
-    // })
   }
 
   async showNewCarOnGarage() {

@@ -13,6 +13,12 @@ export class Request {
     const cars = await response.json();
   return cars;
   }
+
+  async getCurrentCars(page: number) {
+    const response = await fetch(`http://127.0.0.1:3000/garage?_limit=7&_page=${page}`);
+    const cars = await response.json();
+  return cars;
+  }
   
   async getCar(id: number) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
