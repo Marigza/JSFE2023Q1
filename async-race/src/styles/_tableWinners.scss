@@ -12,3 +12,21 @@
 .td {
   padding: 5px 10px;
 }
+
+.td_button {
+  cursor: pointer;
+  @extend %transition;
+  &:hover {
+    background-color: $colorBackground-hover;
+  }
+  &:active{
+    background-color: $colorBackground;
+  }
+}
+
+.span-icon {
+  background: url('../src/assets/arrow_icon_244421.svg') center no-repeat;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
