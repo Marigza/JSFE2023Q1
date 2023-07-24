@@ -98,12 +98,15 @@ class carTrackView{
     }
   }
 
-  stopMoving() {
-    this.activeCar.classList.remove('car__animation');
-    this.carMoveStart.removeAttribute('disabled');
-    this.carMoveStart.classList.remove('disabled');
-    this.carMoveStop.classList.add('disabled');
-    this.carMoveStop.setAttribute('disabled', 'true')
+  async stopMoving() {
+    const result = await request.enginePatch(+this.carView.id, 'stopped');
+    if (result.velocity === 0) {
+      this.activeCar.classList.remove('car__animation');
+      this.carMoveStart.removeAttribute('disabled');
+      this.carMoveStart.classList.remove('disabled');
+      this.carMoveStop.classList.add('disabled');
+      this.carMoveStop.setAttribute('disabled', 'true');
+    }
   }
 
   showWinMessage(time: number) {
@@ -263,9 +266,9 @@ export class Garage {
       this.generateCars();
     })
 
-    this.resetRaceButton.addEventListener('click', () => {
-      console.log('stop race')
-    })
+    // this.resetRaceButton.addEventListener('click', () => {
+    //   console.log('stop race')
+    // })
   }
 
   async showNewCarOnGarage() {
