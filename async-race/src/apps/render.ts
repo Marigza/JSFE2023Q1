@@ -13,6 +13,8 @@ const buttonWinners = new NewElement('div', 'button', 'WINNERS').elem;
 const garage = new Garage();
 const winners = new Winners();
 garage.render();
+winners.render();
+winners.hideBlock();
 garage.addListners();
 
 body?.append(header);
