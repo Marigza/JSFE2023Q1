@@ -1,4 +1,5 @@
 import { NewElement } from "./createElement";
+import { Pagination } from "./pagination";
 import { mainBlock } from "./renderGarage";
 import { Request, Winner } from "./serverRequest";
 
@@ -15,7 +16,7 @@ export class Winners {
     mainBlock.prepend(this.winnerBlock);
   }
   
-  renderTable() {
+  async renderTable() {
     this.winnerBlock.innerHTML = '';
     this.winnerBlock.append(this.winnerTable);
     this.winnerTable.append(this.tableHead);
@@ -41,30 +42,45 @@ export class Winners {
     bestTime.append(spanTime);
     bestTime.append(spanTimeIcon);
     this.tableRow.append(bestTime);
-    this.getWinners();
+    const winnersCount = (await this.getWinners()).length;
+    //const pageCount = Math.ceil(winnersCount / 10);
+    const currentPage = 1;
+    const pagination = new Pagination(winnersCount, 10);
+    const winnerPaginationBlock = pagination.createPaginationView();
+    this.winnerBlock.prepend(winnerPaginationBlock);
+    // this.changePage(currentPage, pageCount);
+    this.getWinnersPerPage(currentPage);
+    //console.log('winnersCount=', winnersCount);
+    const winnerCountBlock = new NewElement('div', 'winner-count_block', `total winners = ${winnersCount}`).elem;
+    this.winnerBlock.prepend(winnerCountBlock);
     let isASCwins = true;
     winsNumber.addEventListener('click', () => {
       console.log('sort by wins');
       isASCwins = !isASCwins;
-      !isASCwins ? this.sortWinners('wins', 'ASC') : this.sortWinners('wins', 'DESC');
+      !isASCwins ? this.sortWinners('wins', 'ASC', currentPage) : this.sortWinners('wins', 'DESC', currentPage);
     });
     let isASCtime = true;
     bestTime.addEventListener('click', () => {
       console.log('sort by time');
       isASCtime = !isASCtime;
-      !isASCtime ? this.sortWinners('time', 'ASC') : this.sortWinners('time', 'DESC');
+      !isASCtime ? this.sortWinners('time', 'ASC', currentPage) : this.sortWinners('time', 'DESC', currentPage);
     });
   }
 
   async getWinners() {
     const response: Winner[] = await request.getWinners();
-    console.log(response);
+    return response;
+  }
+
+  async getWinnersPerPage(page: number) {
+    const response: Winner[] = await request.getWinnersPerPage(page);
     this.fillWinnersTable(response);
   }
 
-  async sortWinners(sortedBy: 'id'|'wins'|'time', order: 'ASC'|'DESC') {
-    const response: Winner[] = await request.sortWinners(sortedBy, order);
+  async sortWinners(sortedBy: 'id' | 'wins' | 'time', order: 'ASC' | 'DESC', page: number) {
+    const response: Winner[] = await request.sortWinners(sortedBy, order, page);
     this.fillWinnersTable(response);
+    return response;
   }
 
   async fillWinnersTable(response: Winner[]) {

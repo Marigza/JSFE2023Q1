@@ -85,8 +85,14 @@ export class Request {
     return winners;
   }
 
-  async sortWinners(sortedBy: 'id'|'wins'|'time', order: 'ASC'|'DESC') {
-    const response = await fetch(`http://127.0.0.1:3000/winners?_sort=${sortedBy}&_order=${order}`);
+  async getWinnersPerPage(number: number) {
+    const response = await fetch(`http://127.0.0.1:3000/winners?_limit=10&_page=${number}`);
+    const winners = await response.json();
+    return winners;
+  }
+
+  async sortWinners(sortedBy: 'id' | 'wins' | 'time', order: 'ASC' | 'DESC', number: number) {
+    const response = await fetch(`http://127.0.0.1:3000/winners?_limit=10&_page=${number}&_sort=${sortedBy}&_order=${order}`);
     const winners = await response.json();
     return winners;
   }
