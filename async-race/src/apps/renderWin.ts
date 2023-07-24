@@ -50,18 +50,15 @@ export class Winners {
     this.winnerBlock.prepend(winnerPaginationBlock);
     // this.changePage(currentPage, pageCount);
     this.getWinnersPerPage(currentPage);
-    //console.log('winnersCount=', winnersCount);
     const winnerCountBlock = new NewElement('div', 'winner-count_block', `total winners = ${winnersCount}`).elem;
     this.winnerBlock.prepend(winnerCountBlock);
     let isASCwins = true;
     winsNumber.addEventListener('click', () => {
-      console.log('sort by wins');
       isASCwins = !isASCwins;
       !isASCwins ? this.sortWinners('wins', 'ASC', currentPage) : this.sortWinners('wins', 'DESC', currentPage);
     });
     let isASCtime = true;
     bestTime.addEventListener('click', () => {
-      console.log('sort by time');
       isASCtime = !isASCtime;
       !isASCtime ? this.sortWinners('time', 'ASC', currentPage) : this.sortWinners('time', 'DESC', currentPage);
     });
@@ -86,7 +83,6 @@ export class Winners {
   async fillWinnersTable(response: Winner[]) {
     this.tableBody.innerHTML = '';
     for (let i = 0; i < response.length; i++){
-      console.log(response[i].id);
       const car = await request.getCar(response[i].id);
       this.renderRow(response[i], i + 1, car.color, car.name);
     }

@@ -89,7 +89,6 @@ class carTrackView{
   async getDriveRequest() {
     try {
       const isDrive = await request.enginePatch(+this.carView.id, 'drive');
-      // console.log(isDrive);
       return isDrive;
     } catch {
       this.activeCar.style.animationPlayState = 'paused';
@@ -106,7 +105,6 @@ class carTrackView{
   }
 
   showWinMessage(time: number) {
-    console.log(`${this.name} run first by ${time} seconds`);
     const winMessage = new NewElement('div', 'win-message__block', `${this.name} run first by ${time} seconds`).elem;
     const winMessageButton = new NewElement('button', 'button', 'OK').elem;
     const modalWindow = new NewElement('div', 'modal_window', '').elem;
@@ -121,9 +119,7 @@ class carTrackView{
   }
 
   async writeWinnerToRecords(time: number) {
-    console.log(`${this.carView.id} - for - ${time}`);
     const winnersArray: Winner[] = await request.getWinners();
-    console.log(winnersArray);
     if (winnersArray.some(el => el.id === +this.carView.id)) {
       const winnerAgainIndex = winnersArray.findIndex(el => el.id === +this.carView.id);
       winnersArray[winnerAgainIndex].wins++;
@@ -170,8 +166,6 @@ export class Garage {
   async getCarsOnGarage() {
     const result = await request.getCars();
     const pagination = new Pagination(result.length, this.carsPerPage);
-    // console.log(result);
-    console.log(Math.ceil(result.length / this.carsPerPage));
     this.garageBlockHeader = new NewElement('div', 'garage-block_header', `Garage (${result.length})`).elem;
     this.garageRaceBlock = new NewElement('div', 'garage__race-block', '').elem;
     this.garagePaginationBlock = pagination.createPaginationView();
@@ -182,7 +176,6 @@ export class Garage {
     this.garageRaceBlock.append(this.resetRaceButton);
     this.resetRaceButton.setAttribute('disabled', 'true');
     this.resetRaceButton.classList.add('disabled');
-    console.log(pagination.currentPage);
     const chunkedResult = this.getChunkResult(result, this.carsPerPage);
     this.showCarsOnCurrentPage(chunkedResult, 1);
     pagination.nextButton.addEventListener('click', () => this.showCarsOnCurrentPage(chunkedResult, pagination.currentPage))
@@ -193,14 +186,12 @@ export class Garage {
     const tmp = [...arr];
     if (chunkSize <= 0) return cache;
     while (tmp.length) cache.push(tmp.splice(0, chunkSize));
-    // console.log(cache);
     return cache;
   }
 
   showCarsOnCurrentPage(array: newCar[][], page: number) {
     this.garageBlockContent.innerText = '';
     for (const item of array[page - 1]) {
-      //console.log(item.id);
       this.appendNewCar(item.name, item.color, item.id);
     }
   }
@@ -219,7 +210,6 @@ export class Garage {
 
   appendNewCar(name: string, color: string, id: number) {
     const carTrack = new carTrackView(name, color);
-    //console.log(carTrack);
     this.garageBlockContent.append(carTrack.carView);
     carTrack.carView.setAttribute('id', id.toString());
     // TODO при запуске гонки запрос идет по всем машинам, а не только по тем, которые на экране. Долго обрабатывается и вообще...
@@ -278,8 +268,6 @@ export class Garage {
 
   async showNewCarOnGarage() {
     const result = await request.createCar(new newCar);
-    // console.log(result.id);
-    // this.appendNewCar(result.name, result.color);
     return result;
   }
 

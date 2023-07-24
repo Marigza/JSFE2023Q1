@@ -1,7 +1,5 @@
 import { newCar } from "./generateNewCar";
 
-//console.log(new newCar);
-
 export interface Winner {
   id: number,
   wins: number,
@@ -13,14 +11,12 @@ export class Request {
   async getCars() {
   const response = await fetch('http://127.0.0.1:3000/garage');
     const cars = await response.json();
-    console.log(cars.length);
   return cars;
   }
   
   async getCar(id: number) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${id}`);
     const choiseCar = await response.json();
-    console.log(choiseCar);
     return choiseCar;
   }
 
@@ -33,7 +29,6 @@ export class Request {
       body: JSON.stringify(createdCar)
     })
     const result = await response.json();
-    console.log(result);
     return result;
   }
 
@@ -46,7 +41,6 @@ export class Request {
       body: JSON.stringify(car)
     })
     const result = await response.json();
-    console.log(result)
     return result;
   }
 
@@ -62,7 +56,6 @@ export class Request {
       method: 'PATCH',
     })
     const result = await response.json();
-    console.log(result)
     return result;
   }
 
@@ -75,7 +68,6 @@ export class Request {
       body: JSON.stringify(winner)
     })
     const result = await response.json();
-    console.log(result);
     return result;
   }
 
@@ -106,10 +98,8 @@ export class Request {
       body: JSON.stringify(winner)
     })
     const result = await response.json();
-    console.log(result)
     return result;
   }
-
 }
 
 

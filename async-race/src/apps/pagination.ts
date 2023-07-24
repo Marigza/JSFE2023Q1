@@ -48,7 +48,6 @@ export class Pagination {
         this.nextButton.classList.add('disabled');
         this.nextButton.removeEventListener('click', this.showNextBind);
       }
-      // console.log(this.currentPage);
       return this.currentPage;
     }
   }
@@ -63,7 +62,6 @@ export class Pagination {
         this.prevButton.classList.add('disabled');
         this.prevButton.removeEventListener('click', this.showPrevBind);
       }
-      // console.log(this.currentPage);
       return this.currentPage;
     }
   }
