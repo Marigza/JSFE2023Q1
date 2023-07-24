@@ -59,8 +59,10 @@ class carTrackView{
   }
 
   async deleteCarFromGarage(id: number) {
-    const result = await request.deleteCar(id);
-    return result;
+    const deleteCar = await request.deleteCar(id);
+    const deleteWin = await request.deleteWinner(id);
+    const deleted = `${deleteCar}, ${deleteWin}`;
+    return deleted;
   }
 
   async getVelocity() {
