@@ -6,6 +6,7 @@ export const body = document.querySelector('body');
 
 const header = new NewElement('header', 'header', 'Start Race!!!').elem;
 const main = new NewElement('main', 'main', '').elem;
+const mainButtons = new NewElement('div', 'buttons_wrapper', '').elem;
 
 const buttonGarage = new NewElement('div', 'button', 'GARAGE').elem;
 const buttonWinners = new NewElement('div', 'button', 'WINNERS').elem;
@@ -19,8 +20,9 @@ garage.addListners();
 
 body?.append(header);
 body?.append(main);
-main?.append(buttonGarage);
-main?.append(buttonWinners);
+main.prepend(mainButtons);
+mainButtons?.append(buttonGarage);
+mainButtons?.append(buttonWinners);
 main?.append(mainBlock);
 
 buttonGarage.addEventListener('click', () => {

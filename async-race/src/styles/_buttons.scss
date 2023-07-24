@@ -1,8 +1,14 @@
+.buttons_wrapper {
+  display:  flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
 .button {
   background-color: $colorButtons;
   display: inline-block;
   font-size: 1.5rem;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
   border: 2px solid $colorText;
   cursor: pointer;
