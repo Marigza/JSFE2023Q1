@@ -5,9 +5,9 @@ export class Pagination {
   pages: number;
   itemsCount: number;
   currentPage = 1;
-  prevButton = new NewElement('div', 'button', 'prev').elem;
-  nextButton = new NewElement('div', 'button', 'next').elem;
-  pageBlock = new NewElement('div', 'page__block', '').elem;
+  prevButton = new NewElement({ tag: 'div', classlist: 'button', content: 'prev' }).elem;
+  nextButton = new NewElement({ tag: 'div', classlist: 'button', content: 'next' }).elem;
+  pageBlock = new NewElement({ tag: 'div', classlist: 'page__block', content: '' }).elem;
   showNextBind = this.showNextPage.bind(this);
   showPrevBind = this.showPrevPage.bind(this);
 
@@ -26,7 +26,7 @@ export class Pagination {
       this.nextButton.classList.add('disabled');
     }
   
-    const paginationBlock = new NewElement('div', 'pagination__block', '').elem;
+    const paginationBlock = new NewElement({ tag: 'div', classlist: 'pagination__block', content: '' }).elem;
     paginationBlock.append(this.pageBlock);
     this.changePageNumber();
     paginationBlock.append(this.prevButton);
