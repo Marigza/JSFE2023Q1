@@ -5,6 +5,7 @@ export class Pagination {
   pages: number;
   itemsCount: number;
   currentPage = 1;
+  minPagesCount = 1;
   prevButton = new NewElement({ tag: 'div', classlist: 'button', content: 'prev' }).elem;
   nextButton = new NewElement({ tag: 'div', classlist: 'button', content: 'next' }).elem;
   pageBlock = new NewElement({ tag: 'div', classlist: 'page__block', content: '' }).elem;
@@ -22,15 +23,18 @@ export class Pagination {
     this.nextButton.classList.add('button_pagination-view');
     this.prevButton.classList.add('button_pagination-view');
     this.prevButton.classList.add('disabled');
-    if (this.pages === 1) {
+
+    if (this.pages === this.minPagesCount) {
       this.nextButton.classList.add('disabled');
     }
   
     const paginationBlock = new NewElement({ tag: 'div', classlist: 'pagination__block', content: '' }).elem;
+
     paginationBlock.append(this.pageBlock);
     this.changePageNumber();
     paginationBlock.append(this.prevButton);
     paginationBlock.append(this.nextButton);
+
     return paginationBlock;
   }
 
@@ -39,29 +43,33 @@ export class Pagination {
   }
 
   showNextPage() {
-    if (this.pages > 1) {
+    if (this.pages > this.minPagesCount) {
       this.currentPage++;
       this.changePageNumber();
       this.prevButton.classList.remove('disabled');
       this.prevButton.addEventListener('click', this.showPrevBind);
+
       if (this.currentPage >= this.pages) {
         this.nextButton.classList.add('disabled');
         this.nextButton.removeEventListener('click', this.showNextBind);
       }
+
       return this.currentPage;
     }
   }
 
   showPrevPage() {
-    if (this.pages > 1) {
+    if (this.pages > this.minPagesCount) {
       this.currentPage--;
       this.changePageNumber();
       this.nextButton.classList.remove('disabled');
       this.nextButton.addEventListener('click', this.showNextBind);
-      if (this.currentPage <= 1) {
+
+      if (this.currentPage <= this.minPagesCount) {
         this.prevButton.classList.add('disabled');
         this.prevButton.removeEventListener('click', this.showPrevBind);
       }
+      
       return this.currentPage;
     }
   }
