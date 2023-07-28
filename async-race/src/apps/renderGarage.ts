@@ -59,45 +59,57 @@ class carTrackView{
   }
 
   async deleteCarFromGarage(id: number) {
-    const deleteCar = await request.deleteCar(id);
-    const deleteWin = await request.deleteWinner(id);
-    const deleted = `${deleteCar}, ${deleteWin}`;
-    return deleted;
+    await request.deleteCar(id);
+    const winners: Winner[] = await request.getWinners();
+    const winID = winners.map(item => item.id);
+
+    if (winID.includes(id)) {
+      await request.deleteWinner(id);
+    }
   }
 
   async getVelocity() {
     try {
+
       this.carMoveStart.classList.add('disabled');
-    this.carMoveStart.setAttribute('disabled', 'true');
-    this.carMoveStop.removeAttribute('disabled');
-    this.carMoveStop.classList.remove('disabled');
-    const result = await request.enginePatch(+this.carView.id, 'started');
-    const time = (result.distance / result.velocity) / 1000;
-    this.activeCar.classList.add('car__animation');
-    this.activeCar.style.animationPlayState = 'running';
-    this.activeCar.style.animationDuration = `${time.toString()}s`;
-    this.getDriveRequest();
-    this.activeCar.addEventListener('animationend', () => {
-      this.stopMoving();
-      if (isWinner === false) {
-        isWinner = true;
-        const timeRound = Math.round(time * 1000) / 1000;
-        this.showWinMessage(timeRound);
-        this.writeWinnerToRecords(timeRound);
-      }
-    });
-    return this.activeCar;
+      this.carMoveStart.setAttribute('disabled', 'true');
+      this.carMoveStop.removeAttribute('disabled');
+      this.carMoveStop.classList.remove('disabled');
+      const result = await request.enginePatch(+this.carView.id, 'started');
+      const multiplier = 1000;
+      const time = (result.distance / result.velocity) / multiplier;
+      this.activeCar.classList.add('car__animation');
+      this.activeCar.style.animationPlayState = 'running';
+      this.activeCar.style.animationDuration = `${time.toString()}s`;
+      this.getDriveRequest();
+
+      this.activeCar.addEventListener('animationend', () => {
+        this.stopMoving();
+        
+        if (isWinner === false) {
+          isWinner = true;
+          const timeRound = Math.round(time * multiplier) / multiplier;
+          this.showWinMessage(timeRound);
+          this.writeWinnerToRecords(timeRound);
+        }
+      });
+
+      return this.activeCar;
+
     } catch {
+
       console.log('Car with such id was not found in the garage')
     }
-    
   }
 
   async getDriveRequest() {
     try {
+
       const isDrive = await request.enginePatch(+this.carView.id, 'drive');
       return isDrive;
+
     } catch {
+
       this.activeCar.style.animationPlayState = 'paused';
       console.log('check engine!!!')
     }
@@ -105,28 +117,33 @@ class carTrackView{
 
   async stopMoving() {
     try {
+
       const result = await request.enginePatch(+this.carView.id, 'stopped');
-    if (result.velocity === 0) {
-      this.activeCar.classList.remove('car__animation');
-      this.carMoveStart.removeAttribute('disabled');
-      this.carMoveStart.classList.remove('disabled');
-      this.carMoveStop.classList.add('disabled');
-      this.carMoveStop.setAttribute('disabled', 'true');
-    }
+
+      if (result.velocity === 0) {
+        this.activeCar.classList.remove('car__animation');
+        this.carMoveStart.removeAttribute('disabled');
+        this.carMoveStart.classList.remove('disabled');
+        this.carMoveStop.classList.add('disabled');
+        this.carMoveStop.setAttribute('disabled', 'true');
+      }
+
     } catch {
+
       console.log('Car with such id was not found in the garage')
     }
-    
   }
 
   showWinMessage(time: number) {
     const winMessage = new NewElement({ tag: 'div', classlist: 'win-message__block', content: `${this.name} run first by ${time} seconds` }).elem;
     const winMessageButton = new NewElement({ tag: 'button', classlist: 'button', content: 'OK' }).elem;
     const modalWindow = new NewElement({ tag: 'div', classlist: 'modal_window', content: '' }).elem;
+
     winMessageButton.classList.add('button_car-view');
     mainBlock?.append(modalWindow);
     mainBlock?.append(winMessage);
     winMessage.append(winMessageButton);
+
     winMessageButton.addEventListener('click', () => {
       modalWindow.remove();
       winMessage.remove();
@@ -135,20 +152,24 @@ class carTrackView{
 
   async writeWinnerToRecords(time: number) {
     const winnersArray: Winner[] = await request.getWinners();
+
     if (winnersArray.some(el => el.id === +this.carView.id)) {
       const winnerAgainIndex = winnersArray.findIndex(el => el.id === +this.carView.id);
       winnersArray[winnerAgainIndex].wins++;
+
       if (winnersArray[winnerAgainIndex].time > time) {
         winnersArray[winnerAgainIndex].time = time;
       }
+
       request.updateWinner(winnersArray[winnerAgainIndex]);
+
     } else {
+      
       request.createWinner({id: +this.carView.id, wins: 1, time: time});
     }
   }
 
   addListners() {
-    
     this.carMoveStart.addEventListener('click', () => {
       isWinner = true;
       this.getVelocity()
@@ -180,6 +201,7 @@ export class Garage {
   async getCarsOnGarage() {
     const result = await request.getCars();
     const pagination = new Pagination(result.length, this.carsPerPage);
+
     this.garageBlockHeader = new NewElement({ tag: 'div', classlist: 'garage-block_header', content: `Garage (${result.length})` }).elem;
     this.garageRaceBlock = new NewElement({ tag: 'div', classlist: 'garage__race-block', content: '' }).elem;
     this.garagePaginationBlock = pagination.createPaginationView();
@@ -192,10 +214,12 @@ export class Garage {
     this.resetRaceButton.classList.add('disabled');
     let chunkedResult = await this.getCurrentPage(pagination.currentPage);
     this.showCarsOnCurrentPage(chunkedResult);
+
     pagination.nextButton.addEventListener('click', async () => {
       chunkedResult = await this.getCurrentPage(pagination.currentPage);
       this.showCarsOnCurrentPage(chunkedResult);
     })
+
     pagination.prevButton.addEventListener('click', async () => {
       chunkedResult = await this.getCurrentPage(pagination.currentPage);
       this.showCarsOnCurrentPage(chunkedResult)
@@ -209,39 +233,45 @@ export class Garage {
 
   getChunkResult(arr: newCar[], chunkSize: number, cache: newCar[][] = []) {
     const tmp = [...arr];
+
     if (chunkSize <= 0) return cache;
+
     while (tmp.length) cache.push(tmp.splice(0, chunkSize));
+
     return cache;
   }
 
   showCarsOnCurrentPage(array: newCar[]) {
     this.garageBlockContent.innerText = '';
     const currentArray = [];
+
     for (const item of array) {
       const raceCar = this.appendNewCar(item.name, item.color, item.id);
       currentArray.push(raceCar);
     }
+
     this.addListnersForRace(currentArray);
     return currentArray;
   }
 
   addListnersForRace(array: carTrackView[]) {
     this.startRaceButton.addEventListener('click', () => {
-        isWinner = false;
-        array.forEach((item)=> item.getVelocity());
-        this.startRaceButton.setAttribute('disabled', 'true');
-        this.startRaceButton.classList.add('disabled');
-        this.resetRaceButton.removeAttribute('disabled');
-        this.resetRaceButton.classList.remove('disabled');
-      });
-      this.resetRaceButton.addEventListener('click', () => {
-        array.forEach((elem)=>elem.stopMoving());
-        this.startRaceButton.removeAttribute('disabled');
-        this.startRaceButton.classList.remove('disabled');
-        this.resetRaceButton.setAttribute('disabled', 'true');
-        this.resetRaceButton.classList.add('disabled');
-        isWinner = false;
-      });
+      isWinner = false;
+      array.forEach((item)=> item.getVelocity());
+      this.startRaceButton.setAttribute('disabled', 'true');
+      this.startRaceButton.classList.add('disabled');
+      this.resetRaceButton.removeAttribute('disabled');
+      this.resetRaceButton.classList.remove('disabled');
+    });
+
+    this.resetRaceButton.addEventListener('click', () => {
+      array.forEach((elem)=>elem.stopMoving());
+      this.startRaceButton.removeAttribute('disabled');
+      this.startRaceButton.classList.remove('disabled');
+      this.resetRaceButton.setAttribute('disabled', 'true');
+      this.resetRaceButton.classList.add('disabled');
+      isWinner = false;
+    });
   }
 
   render() {
@@ -296,10 +326,15 @@ export class Garage {
   }
 
   async generateCars() {
+    const numberOfGeneratedCars = 100;
+
     alert('Please, wait some moments...');
-    for (let i = 0; i < 100; i++) {
+    
+
+    for (let i = 0; i < numberOfGeneratedCars; i++) {
       await this.showNewCarOnGarage();
     }
+
     this.getCarsOnGarage();
   }
 }
