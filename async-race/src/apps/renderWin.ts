@@ -17,6 +17,18 @@ export class Winners {
   }
   
   async renderTable() {
+    const winsNumber = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
+    const spanWins = new NewElement({ tag: 'span', classlist: 'span_text', content: 'Wins number' }).elem;
+    const spanWinsIcon = new NewElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
+    const bestTime = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
+    const spanTime = new NewElement({ tag: 'span', classlist: 'span_text', content: 'Best time in seconds' }).elem;
+    const spanTimeIcon = new NewElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
+    const winnersCount = (await this.getWinners()).length;
+    const currentPage = 1;
+    const pagination = new Pagination(winnersCount, 10);
+    const winnerPaginationBlock = pagination.createPaginationView();
+    const winnerCountBlock = new NewElement({ tag: 'div', classlist: 'winner-count_block', content: `total winners = ${winnersCount}` }).elem;
+
     this.winnerBlock.innerHTML = '';
     this.winnerBlock.append(this.winnerTable);
     this.winnerTable.append(this.tableHead);
@@ -28,72 +40,67 @@ export class Winners {
     this.tableRow.append(new NewElement({ tag: 'td', classlist: 'td', content: 'N' }).elem);
     this.tableRow.append(new NewElement({ tag: 'td', classlist: 'td', content: 'Image of the car' }).elem);
     this.tableRow.append(new NewElement({ tag: 'td', classlist: 'td', content: 'Name of the car' }).elem);
-    const winsNumber = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
     winsNumber.classList.add('td_button');
-    const spanWins = new NewElement({ tag: 'span', classlist: 'span_text', content: 'Wins number' }).elem;
-    const spanWinsIcon = new NewElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
     winsNumber.append(spanWins);
     winsNumber.append(spanWinsIcon);
     this.tableRow.append(winsNumber);
-    const bestTime = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
     bestTime.classList.add('td_button');
-    const spanTime = new NewElement({ tag: 'span', classlist: 'span_text', content: 'Best time in seconds' }).elem;
-    const spanTimeIcon = new NewElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
     bestTime.append(spanTime);
     bestTime.append(spanTimeIcon);
     this.tableRow.append(bestTime);
-    const winnersCount = (await this.getWinners()).length;
-    //const pageCount = Math.ceil(winnersCount / 10);
-    const currentPage = 1;
-    const pagination = new Pagination(winnersCount, 10);
-    const winnerPaginationBlock = pagination.createPaginationView();
+    
     this.winnerBlock.prepend(winnerPaginationBlock);
-    // this.changePage(currentPage, pageCount);
     this.getWinnersPerPage(currentPage);
-    const winnerCountBlock = new NewElement({ tag: 'div', classlist: 'winner-count_block', content: `total winners = ${winnersCount}` }).elem;
     this.winnerBlock.prepend(winnerCountBlock);
-    let isASCwins = true;
-    winsNumber.addEventListener('click', () => {
-      isASCwins = !isASCwins;
-      !isASCwins ? this.sortWinners('wins', 'ASC', currentPage) : this.sortWinners('wins', 'DESC', currentPage);
-    });
-    let isASCtime = true;
-    bestTime.addEventListener('click', () => {
-      isASCtime = !isASCtime;
-      !isASCtime ? this.sortWinners('time', 'ASC', currentPage) : this.sortWinners('time', 'DESC', currentPage);
-    });
+    this.activateSorting(winsNumber, currentPage, 'wins');
+    this.activateSorting(bestTime, currentPage, 'time');
   }
 
   async getWinners() {
     const response: Winner[] = await request.getWinners();
+
     return response;
   }
 
   async getWinnersPerPage(page: number) {
     const response: Winner[] = await request.getWinnersPerPage(page);
+
     this.fillWinnersTable(response);
+  }
+
+  activateSorting(button: HTMLElement, currentPage: number, sortParam: 'wins' |'time') {
+    let isASC = true;
+
+    button.addEventListener('click', () => {
+      isASC = !isASC;
+      isASC ? this.sortWinners(sortParam, 'ASC', currentPage) : this.sortWinners(sortParam, 'DESC', currentPage);
+    });
   }
 
   async sortWinners(sortedBy: 'id' | 'wins' | 'time', order: 'ASC' | 'DESC', page: number) {
     const response: Winner[] = await request.sortWinners(sortedBy, order, page);
+
     this.fillWinnersTable(response);
     return response;
   }
 
   async fillWinnersTable(response: Winner[]) {
     this.tableBody.innerHTML = '';
+
     for (let i = 0; i < response.length; i++){
       const car = await request.getCar(response[i].id);
       this.renderRow(response[i], i + 1, car.color, car.name);
     }
+
     return response;
   }
 
   renderRow(car: Winner, number: number, color: string, name: string) {
     const newRow = new NewElement({ tag: 'tr', classlist: 'tr', content: '' }).elem;
+    const carImage = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
+
     this.tableBody.append(newRow);
     newRow.append(new NewElement({ tag: 'td', classlist: 'td', content: `${number}` }).elem);
-    const carImage = new NewElement({ tag: 'td', classlist: 'td', content: '' }).elem;
     newRow.append(carImage);
     newRow.append(new NewElement({ tag: 'td', classlist: 'td', content: `${name}` }).elem);
     newRow.append(new NewElement({ tag: 'td', classlist: 'td', content: `${car.wins}` }).elem);
