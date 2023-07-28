@@ -6,6 +6,13 @@ export interface Winner {
   time: number
 }
 
+enum method {
+  post = 'POST',
+  put = 'PUT',
+  delete = 'DELETE',
+  patch = 'PATCH'
+}
+
 export class Request {
 
   async getCars() {
@@ -28,7 +35,7 @@ export class Request {
 
   async createCar(createdCar: newCar) {
     const response = await fetch('http://127.0.0.1:3000/garage', {
-      method: 'POST',
+      method: method.post,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -40,7 +47,7 @@ export class Request {
 
   async updateCar(car: newCar) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${car.id}`, {
-      method: 'PUT',
+      method: method.put,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -52,21 +59,21 @@ export class Request {
 
   async deleteCar(id: number) {
     const response = await fetch(`http://127.0.0.1:3000/garage/${id}`, {
-      method: 'DELETE',
+      method: method.delete,
     })
     return response;
   }
 
   async deleteWinner(id: number) {
     const response = await fetch(`http://127.0.0.1:3000/winners/${id}`, {
-      method: 'DELETE',
+      method: method.delete,
     })
     return response;
   }
 
   async enginePatch(id: number, status='started'||'stopped'||'drive') {
     const response = await fetch(`http://127.0.0.1:3000/engine?id=${id}&status=${status}`, {
-      method: 'PATCH',
+      method: method.patch,
     })
     const result = await response.json();
     return result;
@@ -74,7 +81,7 @@ export class Request {
 
   async createWinner(winner: Winner) {
     const response = await fetch('http://127.0.0.1:3000/winners', {
-      method: 'POST',
+      method: method.post,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -104,7 +111,7 @@ export class Request {
 
   async updateWinner(winner: Winner) {
     const response = await fetch(`http://127.0.0.1:3000/winners/${winner.id}`, {
-      method: 'PUT',
+      method: method.put,
       headers: {
         'Content-Type': 'application/json'
       },
