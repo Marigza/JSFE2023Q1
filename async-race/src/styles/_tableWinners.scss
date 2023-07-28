@@ -16,10 +16,12 @@
 .td_button {
   cursor: pointer;
   @extend %transition;
+
   &:hover {
     background-color: $colorBackground-hover;
   }
-  &:active{
+
+  &:active {
     background-color: $colorBackground;
   }
 }
