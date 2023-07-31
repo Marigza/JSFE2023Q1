@@ -1,0 +1,149 @@
+Hello. Let's go speak about SVG.
+
+Scalable Vector Graphics
+
+SVG is a language for describing two-dimensional graphics. 
+As a standalone format or when mixed with other XML, it uses the XML syntax [xml]. 
+SVG code used inside HTML documents uses the HTML syntax [HTML]. 
+SVG allows for three types of graphic objects: vector graphic shapes 
+(e.g., paths consisting of straight lines and curves), images and text. 
+Graphical objects can be grouped, styled, transformed and composited. 
+The feature set includes nested transformations, clipping paths, alpha masks, 
+filter effects and template objects.
+
+Most often, svg icons or images are provided by the designer or 
+you can find them on various stocks:
+
+icomoon.io
+flaticon.com
+iconmonstr.com
+
+SVG cannot be written without a wrapping pair of svg tags. 
+So the browser will understand that this code needs to be read according to 
+special rules and will draw the picture on the page.
+
+There are plenty of reasons to use SVGs today including:
+
+Browser support – Increased native browser support of SVGs means better 
+	consistency and higher fidelity of images.
+Code control – Advancements in CSS and JavaScript functionality to style and animate images.
+File size – The relative “lightness” of SVG code in a world where 
+	bandwidth and performance matter more than ever.
+Accessibility – Markup can be added to the SVGs directly so more 
+	information can be added within the image itself – 
+	which is helpful for people using assistive technology devices such as screen readers.
+
+There are several ways to include an svg image in a web page. 
+Each of them has its own advantages and disadvantages.
+
+<img> 
+The easiest way is to use the <img> tag and specify the path to the svg image 
+in the value of the src attribute.
+With this method, we can easily control the size of the image on the page. 
+But there are also disadvantages - it will not be possible to change the 
+background color or fill of the SVG itself using CSS.
+
+background-image 
+If the svg-picture is not content, then it can be easily connected as a background for the element
+In this case, we also do not have the ability to control the styles of the SVG through CSS.
+
+HTML 
+SVG code can be inserted directly into the page's HTML markup.
+With this connection method, we can control the styles of SVG through styles. 
+This makes it even possible to animate a vector image
+
+Embed/object/iframe
+The content is exposed to external JavaScript. Good browser support
+
+Basic properties of SVG files
+
+The first important thing to notice is the order of rendering elements. 
+The globally valid rule for SVG files is that later elements are rendered atop previous elements. 
+The further down an element is the more it will be visible.
+
+Attributes
+
+fill — responsible for filling the shape. It can be used both for the entire svg container, 
+	and for individual parts.
+stroke — is responsible for shaping the figure. It can be used both for the entire svg container, 
+	and for individual parts.
+viewBox — an attribute responsible for the size of the display window. 
+	The value will be 4 digits: min-x, min-y, width и height. 
+	the following viewBox="0 0 24 24" means that the viewbox will start at 0 on the x-axis 
+	and 0 on the y-axis, and will be 24 pixels wide and high. 
+	It can be specified both for individual elements and for the entire container. 
+	Using this attribute, you can crop the image by specifying the desired values.
+width и height — attributes specifying the dimensions of the svg element. 
+	The value can be a number without specifying units, in which case the browser 
+	will treat it as pixels: width="100" height="100". Can be specified as a percentage: 
+	width="100%" height="100%". Both can be specified at once, or separately. 
+	If you plan to embed SVG in HTML code, then give preference to the viewBox 
+	attribute instead of specifying a width and height. Then, when resizing via CSS, 
+	the image will adjust to the dimensions while maintaining the proportions.
+
+For all elements, SVG uses a coordinate system or grid system similar to the one used by 
+canvas (and by a whole lot of other computer drawing routines). 
+That is, the top left corner of the document is considered to be the point (0,0), or point of origin. 
+Positions are then measured in pixels from the top left corner, 
+with the positive x direction being to the right, and the positive y direction being to the bottom.
+
+There are several basic shapes used for most SVG drawing. 
+The purpose of these shapes is fairly obvious from their names. 
+Some of the parameters that determine their position and size are given, 
+but an element reference would probably contain more accurate and complete descriptions 
+along with other properties that won't be covered in here. 
+
+Rectangle
+The <rect> element draws a rectangle on the screen. 
+There are six basic attributes that control the position and shape of the rectangles on screen. 
+The one on the right has its rx and ry parameters set, giving it rounded corners. 
+If they're not set, they default to 0.
+
+Circle
+The <circle> element draws a circle on the screen. It takes three basic parameters 
+to determine the shape and size of the element.
+r
+The radius of the circle.
+cx
+The x position of the center of the circle.
+cy
+The y position of the center of the circle.
+
+Ellipse
+An <ellipse> is a more general form of the <circle> element, where you can scale the x and y radius
+
+Line
+The <line> element takes the positions of two points as parameters and draws 
+a straight line between them.
+
+Polyline
+A <polyline> is a group of connected straight lines. Since the list of points can get quite long, 
+all the points are included in one attribute
+
+Polygon
+A <polygon> is similar to a <polyline>, in that it is composed of straight line segments 
+connecting a list of points. 
+For polygons though, the path automatically connects the last point with the first, 
+creating a closed shape.
+
+Path
+A <path> is the most general shape that can be used in SVG. 
+Using a path element, you can draw rectangles (with or without rounded corners), 
+circles, ellipses, polylines, and polygons. 
+Basically any of the other types of shapes, bezier curves, quadratic curves, and many more.
+
+useing capabilities in SVG as gradients, patterns, transformations, clipping 
+and masking you can realaise very cool animations. You can see it by following links
+
+http://css.yoksel.ru/svg-gradients/
+http://css.yoksel.ru/animated-svg-mask/
+
+If you want to make some complex edits to SVG, but you don't have a designer at hand, 
+you can use SVG-Edit, SVG-Edit Online, inkscape or Adobe Illustrator.
+Always run it through the SVGO optimizer before using SVG in a project. 
+It will remove everything unnecessary, the code will become nicer and will weigh less.
+SVG can be interacted with using JavaScript 
+
+SVG Documentation and Guide
+
+And that's all I want to show, thank you for your attention and bye-bye!!! 
