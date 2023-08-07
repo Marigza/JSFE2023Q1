@@ -1,4 +1,4 @@
-import { newCar } from "./generateNewCar";
+import { Car } from "./car";
 
 export interface Winner {
   id: number,
@@ -40,7 +40,7 @@ export class Request {
     return choiseCar;
   }
 
-  async createCar(createdCar: newCar) {
+  async createCar(createdCar: Car) {
     const response = await fetch(`${ServerURL}${garageURL}`, {
       method: method.post,
       headers: {
@@ -52,7 +52,7 @@ export class Request {
     return result;
   }
 
-  async updateCar(car: newCar) {
+  async updateCar(car: Car) {
     const response = await fetch(`${ServerURL}${garageURL}/${car.id}`, {
       method: method.put,
       headers: {

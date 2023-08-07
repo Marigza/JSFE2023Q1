@@ -1,5 +1,5 @@
 import { BaseElement } from "./baseElement";
-import { newCar } from "./generateNewCar";
+import { Car } from "./car";
 import { Pagination } from "./pagination";
 import { Request, Winner } from "./serverRequest";
 
@@ -231,7 +231,7 @@ export class Garage {
     return chunkedResult;
   }
 
-  getChunkResult(arr: newCar[], chunkSize: number, cache: newCar[][] = []) {
+  getChunkResult(arr: Car[], chunkSize: number, cache: Car[][] = []) {
     const tmp = [...arr];
 
     if (chunkSize <= 0) return cache;
@@ -241,7 +241,7 @@ export class Garage {
     return cache;
   }
 
-  showCarsOnCurrentPage(array: newCar[]) {
+  showCarsOnCurrentPage(array: Car[]) {
     this.garageBlockContent.innerText = '';
     const currentArray = [];
 
@@ -321,7 +321,7 @@ export class Garage {
   }
 
   async showNewCarOnGarage() {
-    const result = await request.createCar(new newCar);
+    const result = await request.createCar(new Car);
     return result;
   }
 

@@ -1,5 +1,5 @@
 
-export class newCar {
+export class Car {
   name: string;
   color: string;
   id: number;
