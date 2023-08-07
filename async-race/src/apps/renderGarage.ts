@@ -70,7 +70,6 @@ class CarTrackView{
 
   async getVelocity() {
     try {
-
       this.carMoveStart.classList.add('disabled');
       this.carMoveStart.setAttribute('disabled', 'true');
       this.carMoveStop.removeAttribute('disabled');
@@ -95,21 +94,16 @@ class CarTrackView{
       });
 
       return this.activeCar;
-
     } catch {
-
       console.log('Car with such id was not found in the garage')
     }
   }
 
   async getDriveRequest() {
     try {
-
       const isDrive = await request.enginePatch(+this.carView.id, 'drive');
       return isDrive;
-
     } catch {
-
       this.activeCar.style.animationPlayState = 'paused';
       console.log('check engine!!!')
     }
@@ -117,7 +111,6 @@ class CarTrackView{
 
   async stopMoving() {
     try {
-
       const result = await request.enginePatch(+this.carView.id, 'stopped');
 
       if (result.velocity === 0) {
@@ -127,9 +120,7 @@ class CarTrackView{
         this.carMoveStop.classList.add('disabled');
         this.carMoveStop.setAttribute('disabled', 'true');
       }
-
     } catch {
-
       console.log('Car with such id was not found in the garage')
     }
   }
