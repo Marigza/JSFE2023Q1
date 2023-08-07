@@ -9,7 +9,7 @@ const request = new Request();
 
 let isWinner = false;
 
-class carTrackView{
+class CarTrackView{
   name: string;
   color: string;
   carView: HTMLElement; 
@@ -254,7 +254,7 @@ export class Garage {
     return currentArray;
   }
 
-  addListnersForRace(array: carTrackView[]) {
+  addListnersForRace(array: CarTrackView[]) {
     this.startRaceButton.addEventListener('click', () => {
       isWinner = false;
       array.forEach((item)=> item.getVelocity());
@@ -287,7 +287,7 @@ export class Garage {
   }
 
   appendNewCar(name: string, color: string, id: number) {
-    const carTrack = new carTrackView(name, color);
+    const carTrack = new CarTrackView(name, color);
     this.garageBlockContent.append(carTrack.carView);
     carTrack.carView.setAttribute('id', id.toString());
     return carTrack;
