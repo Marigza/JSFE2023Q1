@@ -4,7 +4,7 @@ interface newElem {
   content: string;
 }
 
-export class NewElement {
+export class BaseElement {
   elem: HTMLElement;
   
   constructor(element: newElem) {

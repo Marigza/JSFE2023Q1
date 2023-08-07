@@ -1,9 +1,9 @@
-import { NewElement } from "./createElement";
+import { BaseElement } from "./baseElement";
 import { newCar } from "./generateNewCar";
 import { Pagination } from "./pagination";
 import { Request, Winner } from "./serverRequest";
 
-export const mainBlock = new NewElement({  tag: 'div', classlist: 'main-block', content: '' }).elem;
+export const mainBlock = new BaseElement({  tag: 'div', classlist: 'main-block', content: '' }).elem;
 
 const request = new Request();
 
@@ -25,14 +25,14 @@ class carTrackView{
   constructor(name: string, color: string) {
     this.name = name;
     this.color = color;
-    this.carView = new NewElement({ tag: 'div', classlist: 'car-view', content: '' }).elem;
-    this.carViewCheckView = new NewElement({ tag: 'div', classlist: 'car-view__check-view', content: '' }).elem;
-    this.carViewTrack = new NewElement({ tag: 'div', classlist: 'car-view__track', content: '' }).elem;
-    this.carSelectButton = new NewElement({ tag: 'div', classlist: 'button', content: 'select' }).elem;
-    this.carRemoveButton = new NewElement({ tag: 'div', classlist: 'button', content: 'remove' }).elem;
-    this.carNameBlock = new NewElement({ tag: 'div', classlist: 'car-name__block', content: `${this.name}` }).elem;
-    this.carMoveStart = new NewElement({ tag: 'button', classlist: 'button', content: 'start' }).elem;
-    this.carMoveStop = new NewElement({ tag: 'button', classlist: 'button', content: 'stop' }).elem;
+    this.carView = new BaseElement({ tag: 'div', classlist: 'car-view', content: '' }).elem;
+    this.carViewCheckView = new BaseElement({ tag: 'div', classlist: 'car-view__check-view', content: '' }).elem;
+    this.carViewTrack = new BaseElement({ tag: 'div', classlist: 'car-view__track', content: '' }).elem;
+    this.carSelectButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'select' }).elem;
+    this.carRemoveButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'remove' }).elem;
+    this.carNameBlock = new BaseElement({ tag: 'div', classlist: 'car-name__block', content: `${this.name}` }).elem;
+    this.carMoveStart = new BaseElement({ tag: 'button', classlist: 'button', content: 'start' }).elem;
+    this.carMoveStop = new BaseElement({ tag: 'button', classlist: 'button', content: 'stop' }).elem;
     this.activeCar = this.carViewTrack.firstElementChild as HTMLDivElement;
     this.render();
     this.addListners();
@@ -135,9 +135,9 @@ class carTrackView{
   }
 
   showWinMessage(time: number) {
-    const winMessage = new NewElement({ tag: 'div', classlist: 'win-message__block', content: `${this.name} run first by ${time} seconds` }).elem;
-    const winMessageButton = new NewElement({ tag: 'button', classlist: 'button', content: 'OK' }).elem;
-    const modalWindow = new NewElement({ tag: 'div', classlist: 'modal_window', content: '' }).elem;
+    const winMessage = new BaseElement({ tag: 'div', classlist: 'win-message__block', content: `${this.name} run first by ${time} seconds` }).elem;
+    const winMessageButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'OK' }).elem;
+    const modalWindow = new BaseElement({ tag: 'div', classlist: 'modal_window', content: '' }).elem;
 
     winMessageButton.classList.add('button_car-view');
     mainBlock?.append(modalWindow);
@@ -188,22 +188,22 @@ export class Garage {
   garageBlockHeader!: HTMLElement;
   garageRaceBlock!: HTMLElement;
   garagePaginationBlock!: HTMLElement;
-  createCarBlock = new NewElement({ tag: 'div', classlist: 'create-block', content: '' }).elem;
-  garageBlock = new NewElement({ tag: 'div', classlist: 'garage-block', content: '' }).elem;
-  createCarButton = new NewElement({ tag: 'div', classlist: 'button', content: 'create car!' }).elem;
-  updateCarButton = new NewElement({ tag: 'div', classlist: 'button', content: 'update car!' }).elem;
-  generateCarsButton = new NewElement({ tag: 'div', classlist: 'button', content: 'generate too many cars!' }).elem;
-  garageBlockContent = new NewElement({ tag: 'div', classlist: 'garage-block_content', content: '' }).elem;
-  startRaceButton = new NewElement({ tag: 'button', classlist: 'button', content: 'Start Race!' }).elem;
-  resetRaceButton = new NewElement({ tag: 'button', classlist: 'button', content: 'Reset Race' }).elem;
+  createCarBlock = new BaseElement({ tag: 'div', classlist: 'create-block', content: '' }).elem;
+  garageBlock = new BaseElement({ tag: 'div', classlist: 'garage-block', content: '' }).elem;
+  createCarButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'create car!' }).elem;
+  updateCarButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'update car!' }).elem;
+  generateCarsButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'generate too many cars!' }).elem;
+  garageBlockContent = new BaseElement({ tag: 'div', classlist: 'garage-block_content', content: '' }).elem;
+  startRaceButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'Start Race!' }).elem;
+  resetRaceButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'Reset Race' }).elem;
   carsPerPage = 7;
 
   async getCarsOnGarage() {
     const result = await request.getCars();
     const pagination = new Pagination(result.length, this.carsPerPage);
 
-    this.garageBlockHeader = new NewElement({ tag: 'div', classlist: 'garage-block_header', content: `Garage (${result.length})` }).elem;
-    this.garageRaceBlock = new NewElement({ tag: 'div', classlist: 'garage__race-block', content: '' }).elem;
+    this.garageBlockHeader = new BaseElement({ tag: 'div', classlist: 'garage-block_header', content: `Garage (${result.length})` }).elem;
+    this.garageRaceBlock = new BaseElement({ tag: 'div', classlist: 'garage__race-block', content: '' }).elem;
     this.garagePaginationBlock = pagination.createPaginationView();
     this.garageBlock.prepend(this.garagePaginationBlock);
     this.garageBlock.prepend(this.garageRaceBlock);

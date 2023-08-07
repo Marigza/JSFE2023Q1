@@ -1,14 +1,14 @@
-import { NewElement } from "./createElement";
+import { BaseElement } from "./baseElement";
 import { Garage, mainBlock } from "./renderGarage";
 import { Winners } from "./renderWin";
 
 export const body = document.querySelector('body');
 
-const header = new NewElement({ tag: 'header', classlist: 'header', content: 'Start Race!!!'}).elem;
-const main = new NewElement({ tag: 'main', classlist: 'main', content:''}).elem;
-const mainButtons = new NewElement({ tag: 'div', classlist: 'buttons_wrapper', content: '' }).elem;
-const buttonGarage = new NewElement({ tag: 'div', classlist: 'button', content: 'GARAGE' }).elem;
-const buttonWinners = new NewElement({ tag: 'div', classlist: 'button', content: 'WINNERS' }).elem;
+const header = new BaseElement({ tag: 'header', classlist: 'header', content: 'Start Race!!!'}).elem;
+const main = new BaseElement({ tag: 'main', classlist: 'main', content:''}).elem;
+const mainButtons = new BaseElement({ tag: 'div', classlist: 'buttons_wrapper', content: '' }).elem;
+const buttonGarage = new BaseElement({ tag: 'div', classlist: 'button', content: 'GARAGE' }).elem;
+const buttonWinners = new BaseElement({ tag: 'div', classlist: 'button', content: 'WINNERS' }).elem;
 const garage = new Garage();
 const winners = new Winners();
 
