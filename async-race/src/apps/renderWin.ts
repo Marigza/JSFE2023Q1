@@ -27,7 +27,11 @@ export class Winners {
     const currentPage = 1;
     const pagination = new Pagination(winnersCount, 10);
     const winnerPaginationBlock = pagination.createPaginationView();
-    const winnerCountBlock = new BaseElement({ tag: 'div', classlist: 'winner-count_block', content: `total winners = ${winnersCount}` }).elem;
+    const winnerCountBlock = new BaseElement({
+      tag: 'div',
+      classlist: 'winner-count_block',
+      content: `total winners = ${winnersCount}`
+    }).elem;
 
     this.winnerBlock.innerHTML = '';
     this.winnerBlock.append(this.winnerTable);

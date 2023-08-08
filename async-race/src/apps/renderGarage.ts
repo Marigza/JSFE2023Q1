@@ -126,7 +126,11 @@ class CarTrackView{
   }
 
   showWinMessage(time: number) {
-    const winMessage = new BaseElement({ tag: 'div', classlist: 'win-message__block', content: `${this.name} run first by ${time} seconds` }).elem;
+    const winMessage = new BaseElement({
+      tag: 'div',
+      classlist: 'win-message__block',
+      content: `${this.name} run first by ${time} seconds`
+    }).elem;
     const winMessageButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'OK' }).elem;
     const modalWindow = new BaseElement({ tag: 'div', classlist: 'modal_window', content: '' }).elem;
 
@@ -193,7 +197,11 @@ export class Garage {
     const result = await request.getCars();
     const pagination = new Pagination(result.length, this.carsPerPage);
 
-    this.garageBlockHeader = new BaseElement({ tag: 'div', classlist: 'garage-block_header', content: `Garage (${result.length})` }).elem;
+    this.garageBlockHeader = new BaseElement({
+      tag: 'div',
+      classlist: 'garage-block_header',
+      content: `Garage (${result.length})`
+    }).elem;
     this.garageRaceBlock = new BaseElement({ tag: 'div', classlist: 'garage__race-block', content: '' }).elem;
     this.garagePaginationBlock = pagination.createPaginationView();
     this.garageBlock.prepend(this.garagePaginationBlock);
