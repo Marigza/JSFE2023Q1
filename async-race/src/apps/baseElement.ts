@@ -1,4 +1,4 @@
-interface newElem {
+interface NewElem {
   tag: string;
   classlist: string;
   content: string;
@@ -7,7 +7,7 @@ interface newElem {
 export class BaseElement {
   elem: HTMLElement;
   
-  constructor(element: newElem) {
+  constructor(element: NewElem) {
     this.elem = document.createElement(element.tag);
     this.createElem(element.classlist, element.content)
   }

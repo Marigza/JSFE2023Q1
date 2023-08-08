@@ -6,7 +6,7 @@ export interface Winner {
   time: number
 }
 
-enum method {
+enum Method {
   post = 'POST',
   put = 'PUT',
   delete = 'DELETE',
@@ -42,7 +42,7 @@ export class Request {
 
   async createCar(createdCar: Car) {
     const response = await fetch(`${ServerURL}${garageURL}`, {
-      method: method.post,
+      method: Method.post,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -54,7 +54,7 @@ export class Request {
 
   async updateCar(car: Car) {
     const response = await fetch(`${ServerURL}${garageURL}/${car.id}`, {
-      method: method.put,
+      method: Method.put,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -66,21 +66,21 @@ export class Request {
 
   async deleteCar(id: number) {
     const response = await fetch(`${ServerURL}${garageURL}/${id}`, {
-      method: method.delete,
+      method: Method.delete,
     })
     return response;
   }
 
   async deleteWinner(id: number) {
     const response = await fetch(`${ServerURL}${winnerURL}/${id}`, {
-      method: method.delete,
+      method: Method.delete,
     })
     return response;
   }
 
   async enginePatch(id: number, status: 'started' | 'stopped' | 'drive') {
     const response = await fetch(`${ServerURL}${engineURL}?id=${id}&status=${status}`, {
-      method: method.patch,
+      method: Method.patch,
     })
     const result = await response.json();
     return result;
@@ -88,7 +88,7 @@ export class Request {
 
   async createWinner(winner: Winner) {
     const response = await fetch(`${ServerURL}${winnerURL}`, {
-      method: method.post,
+      method: Method.post,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -118,7 +118,7 @@ export class Request {
 
   async updateWinner(winner: Winner) {
     const response = await fetch(`${ServerURL}${winnerURL}/${winner.id}`, {
-      method: method.put,
+      method: Method.put,
       headers: {
         'Content-Type': 'application/json'
       },
