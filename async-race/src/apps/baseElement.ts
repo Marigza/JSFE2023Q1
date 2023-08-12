@@ -1,6 +1,8 @@
+import { Constants } from "./constants/constants";
+
 interface NewElem {
   tag: string;
-  classlist: string;
+  classlist: Constants;
   content: string;
 }
 

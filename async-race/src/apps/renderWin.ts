@@ -3,34 +3,35 @@ import { Pagination } from "./pagination";
 import { mainBlock } from "./renderGarage";
 import { Request, Winner } from "./serverRequest";
 import { getSvgCar } from "./utils/getSvgCar";
+import { Constants } from "./constants/constants";
 
 const request = new Request();
 
 export class Winners {
-  winnerBlock = new BaseElement({ tag: 'div', classlist: 'winner-block', content: '' }).elem;
-  winnerTable = new BaseElement({ tag: 'table', classlist: 'winner-table', content: '' }).elem;
-  tableHead = new BaseElement({ tag: 'thead', classlist: 'thead', content: '' }).elem;
-  tableBody = new BaseElement({ tag: 'tbody', classlist: 'tbody', content: '' }).elem;
-  tableRow = new BaseElement({ tag: 'tr', classlist: 'tr', content: '' }).elem;
+  winnerBlock = new BaseElement({ tag: 'div', classlist: Constants.winnerBlockClass, content: '' }).elem;
+  winnerTable = new BaseElement({ tag: 'table', classlist: Constants.winnerTableClass, content: '' }).elem;
+  tableHead = new BaseElement({ tag: 'thead', classlist: Constants.tableHeadClass, content: '' }).elem;
+  tableBody = new BaseElement({ tag: 'tbody', classlist: Constants.tableBodyClass, content: '' }).elem;
+  tableRow = new BaseElement({ tag: 'tr', classlist: Constants.tableRowClass, content: '' }).elem;
 
   render() {
     mainBlock.prepend(this.winnerBlock);
   }
   
   async renderTable() {
-    const winsNumber = new BaseElement({ tag: 'td', classlist: 'td', content: '' }).elem;
-    const spanWins = new BaseElement({ tag: 'span', classlist: 'span_text', content: 'Wins number' }).elem;
-    const spanWinsIcon = new BaseElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
-    const bestTime = new BaseElement({ tag: 'td', classlist: 'td', content: '' }).elem;
-    const spanTime = new BaseElement({ tag: 'span', classlist: 'span_text', content: 'Best time in seconds' }).elem;
-    const spanTimeIcon = new BaseElement({ tag: 'span', classlist: 'span-icon', content: '' }).elem;
+    const winsNumber = new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: '' }).elem;
+    const spanWins = new BaseElement({ tag: 'span', classlist: Constants.spanTextClass, content: 'Wins number' }).elem;
+    const spanWinsIcon = new BaseElement({ tag: 'span', classlist: Constants.spanIconClass, content: '' }).elem;
+    const bestTime = new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: '' }).elem;
+    const spanTime = new BaseElement({ tag: 'span', classlist: Constants.spanTextClass, content: 'Best time in seconds' }).elem;
+    const spanTimeIcon = new BaseElement({ tag: 'span', classlist: Constants.spanIconClass, content: '' }).elem;
     const winnersCount = (await this.getWinners()).length;
     const currentPage = 1;
     const pagination = new Pagination(winnersCount, 10);
     const winnerPaginationBlock = pagination.createPaginationView();
     const winnerCountBlock = new BaseElement({
       tag: 'div',
-      classlist: 'winner-count_block',
+      classlist: Constants.countWinBlockClass,
       content: `total winners = ${winnersCount}`
     }).elem;
 
@@ -42,14 +43,14 @@ export class Winners {
     this.tableBody.innerHTML = '';
     this.tableHead.append(this.tableRow);
     this.tableRow.innerHTML = '';
-    this.tableRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: 'N' }).elem);
-    this.tableRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: 'Image of the car' }).elem);
-    this.tableRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: 'Name of the car' }).elem);
-    winsNumber.classList.add('td_button');
+    this.tableRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: 'N' }).elem);
+    this.tableRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: 'Image of the car' }).elem);
+    this.tableRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: 'Name of the car' }).elem);
+    winsNumber.classList.add(Constants.tableCellButtonClass);
     winsNumber.append(spanWins);
     winsNumber.append(spanWinsIcon);
     this.tableRow.append(winsNumber);
-    bestTime.classList.add('td_button');
+    bestTime.classList.add(Constants.tableCellButtonClass);
     bestTime.append(spanTime);
     bestTime.append(spanTimeIcon);
     this.tableRow.append(bestTime);
@@ -100,25 +101,25 @@ export class Winners {
   }
 
   renderRow(car: Winner, number: number, color: string, name: string) {
-    const newRow = new BaseElement({ tag: 'tr', classlist: 'tr', content: '' }).elem;
-    const carImage = new BaseElement({ tag: 'td', classlist: 'td', content: '' }).elem;
+    const newRow = new BaseElement({ tag: 'tr', classlist: Constants.tableRowClass, content: '' }).elem;
+    const carImage = new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: '' }).elem;
 
     this.tableBody.append(newRow);
-    newRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: `${number}` }).elem);
+    newRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: `${number}` }).elem);
     newRow.append(carImage);
-    newRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: `${name}` }).elem);
-    newRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: `${car.wins}` }).elem);
-    newRow.append(new BaseElement({ tag: 'td', classlist: 'td', content: `${car.time}` }).elem);
+    newRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: `${name}` }).elem);
+    newRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: `${car.wins}` }).elem);
+    newRow.append(new BaseElement({ tag: 'td', classlist: Constants.tableCellClass, content: `${car.time}` }).elem);
 
     carImage.innerHTML = getSvgCar(color);
   }
 
   hideBlock() {
-    this.winnerBlock.classList.add('hide');
+    this.winnerBlock.classList.add(Constants.hideClass);
   }
 
   showBlock() {
-    this.winnerBlock.classList.remove('hide');
+    this.winnerBlock.classList.remove(Constants.hideClass);
     this.renderTable();
   }
 }

@@ -3,8 +3,9 @@ import { Car } from "./car";
 import { Pagination } from "./pagination";
 import { Request, Winner } from "./serverRequest";
 import { getSvgCar } from "./utils/getSvgCar";
+import { Constants } from "./constants/constants";
 
-export const mainBlock = new BaseElement({  tag: 'div', classlist: 'main-block', content: '' }).elem;
+export const mainBlock = new BaseElement({  tag: 'div', classlist: Constants.mainBlockClass, content: '' }).elem;
 
 const request = new Request();
 
@@ -26,14 +27,14 @@ class CarTrackView{
   constructor(name: string, color: string) {
     this.name = name;
     this.color = color;
-    this.carView = new BaseElement({ tag: 'div', classlist: 'car-view', content: '' }).elem;
-    this.carViewCheckView = new BaseElement({ tag: 'div', classlist: 'car-view__check-view', content: '' }).elem;
-    this.carViewTrack = new BaseElement({ tag: 'div', classlist: 'car-view__track', content: '' }).elem;
-    this.carSelectButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'select' }).elem;
-    this.carRemoveButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'remove' }).elem;
-    this.carNameBlock = new BaseElement({ tag: 'div', classlist: 'car-name__block', content: `${this.name}` }).elem;
-    this.carMoveStart = new BaseElement({ tag: 'button', classlist: 'button', content: 'start' }).elem;
-    this.carMoveStop = new BaseElement({ tag: 'button', classlist: 'button', content: 'stop' }).elem;
+    this.carView = new BaseElement({ tag: 'div', classlist: Constants.carViewClass, content: '' }).elem;
+    this.carViewCheckView = new BaseElement({ tag: 'div', classlist: Constants.carCheckViewClass, content: '' }).elem;
+    this.carViewTrack = new BaseElement({ tag: 'div', classlist: Constants.carTrackClass, content: '' }).elem;
+    this.carSelectButton = new BaseElement({ tag: 'div', classlist: Constants.buttonClass, content: 'select' }).elem;
+    this.carRemoveButton = new BaseElement({ tag: 'div', classlist: Constants.buttonClass, content: 'remove' }).elem;
+    this.carNameBlock = new BaseElement({ tag: 'div', classlist: Constants.carNameClass, content: `${this.name}` }).elem;
+    this.carMoveStart = new BaseElement({ tag: 'button', classlist: Constants.buttonClass, content: 'start' }).elem;
+    this.carMoveStop = new BaseElement({ tag: 'button', classlist: Constants.buttonClass, content: 'stop' }).elem;
     this.activeCar = this.carViewTrack.firstElementChild as HTMLDivElement;
     this.render();
     this.addListners();
@@ -45,16 +46,16 @@ class CarTrackView{
     this.carView.append(this.carViewCheckView);
     this.carView.append(this.carViewTrack);
     this.carViewCheckView.append(this.carSelectButton);
-    this.carSelectButton.classList.add('button_car-view');
+    this.carSelectButton.classList.add(Constants.buttonCarViewClass);
     this.carViewCheckView.append(this.carRemoveButton);
-    this.carRemoveButton.classList.add('button_car-view');
+    this.carRemoveButton.classList.add(Constants.buttonCarViewClass);
     this.carViewCheckView.append(this.carNameBlock);
     this.carViewCheckView.append(this.carMoveStart);
-    this.carMoveStart.classList.add('button_car-view');
+    this.carMoveStart.classList.add(Constants.buttonCarViewClass);
     this.carViewCheckView.append(this.carMoveStop);
-    this.carMoveStop.classList.add('button_car-view');
-    this.carMoveStop.classList.add('disabled');
-    this.carMoveStop.setAttribute('disabled', 'true')
+    this.carMoveStop.classList.add(Constants.buttonCarViewClass);
+    this.carMoveStop.classList.add(Constants.disabled);
+    this.carMoveStop.setAttribute(Constants.disabled, 'true')
     this.carViewTrack.innerHTML = `<div>${carSVG}</div>`;
     this.activeCar = this.carViewTrack.firstElementChild as HTMLDivElement;
   }
@@ -71,14 +72,14 @@ class CarTrackView{
 
   async getVelocity() {
     try {
-      this.carMoveStart.classList.add('disabled');
-      this.carMoveStart.setAttribute('disabled', 'true');
-      this.carMoveStop.removeAttribute('disabled');
-      this.carMoveStop.classList.remove('disabled');
+      this.carMoveStart.classList.add(Constants.disabled);
+      this.carMoveStart.setAttribute(Constants.disabled, 'true');
+      this.carMoveStop.removeAttribute(Constants.disabled);
+      this.carMoveStop.classList.remove(Constants.disabled);
       const result = await request.enginePatch(+this.carView.id, 'started');
       const multiplier = 1000;
       const time = (result.distance / result.velocity) / multiplier;
-      this.activeCar.classList.add('car__animation');
+      this.activeCar.classList.add(Constants.carAnimationClass);
       this.activeCar.style.animationPlayState = 'running';
       this.activeCar.style.animationDuration = `${time.toString()}s`;
       this.getDriveRequest();
@@ -115,11 +116,11 @@ class CarTrackView{
       const result = await request.enginePatch(+this.carView.id, 'stopped');
 
       if (result.velocity === 0) {
-        this.activeCar.classList.remove('car__animation');
-        this.carMoveStart.removeAttribute('disabled');
-        this.carMoveStart.classList.remove('disabled');
-        this.carMoveStop.classList.add('disabled');
-        this.carMoveStop.setAttribute('disabled', 'true');
+        this.activeCar.classList.remove(Constants.carAnimationClass);
+        this.carMoveStart.removeAttribute(Constants.disabled);
+        this.carMoveStart.classList.remove(Constants.disabled);
+        this.carMoveStop.classList.add(Constants.disabled);
+        this.carMoveStop.setAttribute(Constants.disabled, 'true');
       }
     } catch {
       console.log('Car with such id was not found in the garage')
@@ -129,13 +130,13 @@ class CarTrackView{
   showWinMessage(time: number) {
     const winMessage = new BaseElement({
       tag: 'div',
-      classlist: 'win-message__block',
+      classlist: Constants.winMessageClass,
       content: `${this.name} run first by ${time} seconds`
     }).elem;
-    const winMessageButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'OK' }).elem;
-    const modalWindow = new BaseElement({ tag: 'div', classlist: 'modal_window', content: '' }).elem;
+    const winMessageButton = new BaseElement({ tag: 'button', classlist: Constants.buttonClass, content: 'OK' }).elem;
+    const modalWindow = new BaseElement({ tag: 'div', classlist: Constants.modalWindowClass, content: '' }).elem;
 
-    winMessageButton.classList.add('button_car-view');
+    winMessageButton.classList.add(Constants.buttonCarViewClass);
     mainBlock?.append(modalWindow);
     mainBlock?.append(winMessage);
     winMessage.append(winMessageButton);
@@ -184,14 +185,14 @@ export class Garage {
   garageBlockHeader!: HTMLElement;
   garageRaceBlock!: HTMLElement;
   garagePaginationBlock!: HTMLElement;
-  createCarBlock = new BaseElement({ tag: 'div', classlist: 'create-block', content: '' }).elem;
-  garageBlock = new BaseElement({ tag: 'div', classlist: 'garage-block', content: '' }).elem;
-  createCarButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'create car!' }).elem;
-  updateCarButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'update car!' }).elem;
-  generateCarsButton = new BaseElement({ tag: 'div', classlist: 'button', content: 'generate too many cars!' }).elem;
-  garageBlockContent = new BaseElement({ tag: 'div', classlist: 'garage-block_content', content: '' }).elem;
-  startRaceButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'Start Race!' }).elem;
-  resetRaceButton = new BaseElement({ tag: 'button', classlist: 'button', content: 'Reset Race' }).elem;
+  createCarBlock = new BaseElement({ tag: 'div', classlist: Constants.createblockClass, content: '' }).elem;
+  garageBlock = new BaseElement({ tag: 'div', classlist: Constants.garageBlockClass, content: '' }).elem;
+  createCarButton = new BaseElement({ tag: 'div', classlist: Constants.buttonClass, content: 'create car!' }).elem;
+  updateCarButton = new BaseElement({ tag: 'div', classlist: Constants.buttonClass, content: 'update car!' }).elem;
+  generateCarsButton = new BaseElement({ tag: 'div', classlist: Constants.buttonClass, content: 'generate too many cars!' }).elem;
+  garageBlockContent = new BaseElement({ tag: 'div', classlist: Constants.garageContentClass, content: '' }).elem;
+  startRaceButton = new BaseElement({ tag: 'button', classlist: Constants.buttonClass, content: 'Start Race!' }).elem;
+  resetRaceButton = new BaseElement({ tag: 'button', classlist: Constants.buttonClass, content: 'Reset Race' }).elem;
   carsPerPage = 7;
 
   async getCarsOnGarage() {
@@ -200,18 +201,18 @@ export class Garage {
 
     this.garageBlockHeader = new BaseElement({
       tag: 'div',
-      classlist: 'garage-block_header',
+      classlist: Constants.garageHeaderClass,
       content: `Garage (${result.length})`
     }).elem;
-    this.garageRaceBlock = new BaseElement({ tag: 'div', classlist: 'garage__race-block', content: '' }).elem;
+    this.garageRaceBlock = new BaseElement({ tag: 'div', classlist: Constants.garageRaceClass, content: '' }).elem;
     this.garagePaginationBlock = pagination.createPaginationView();
     this.garageBlock.prepend(this.garagePaginationBlock);
     this.garageBlock.prepend(this.garageRaceBlock);
     this.garageBlock.prepend(this.garageBlockHeader);
     this.garageRaceBlock.append(this.startRaceButton);
     this.garageRaceBlock.append(this.resetRaceButton);
-    this.resetRaceButton.setAttribute('disabled', 'true');
-    this.resetRaceButton.classList.add('disabled');
+    this.resetRaceButton.setAttribute(Constants.disabled, 'true');
+    this.resetRaceButton.classList.add(Constants.disabled);
     let chunkedResult = await this.getCurrentPage(pagination.currentPage);
     this.showCarsOnCurrentPage(chunkedResult);
 
@@ -258,18 +259,18 @@ export class Garage {
     this.startRaceButton.addEventListener('click', () => {
       isWinner = false;
       array.forEach((item)=> item.getVelocity());
-      this.startRaceButton.setAttribute('disabled', 'true');
-      this.startRaceButton.classList.add('disabled');
-      this.resetRaceButton.removeAttribute('disabled');
-      this.resetRaceButton.classList.remove('disabled');
+      this.startRaceButton.setAttribute(Constants.disabled, 'true');
+      this.startRaceButton.classList.add(Constants.disabled);
+      this.resetRaceButton.removeAttribute(Constants.disabled);
+      this.resetRaceButton.classList.remove(Constants.disabled);
     });
 
     this.resetRaceButton.addEventListener('click', () => {
       array.forEach((elem)=>elem.stopMoving());
-      this.startRaceButton.removeAttribute('disabled');
-      this.startRaceButton.classList.remove('disabled');
-      this.resetRaceButton.setAttribute('disabled', 'true');
-      this.resetRaceButton.classList.add('disabled');
+      this.startRaceButton.removeAttribute(Constants.disabled);
+      this.startRaceButton.classList.remove(Constants.disabled);
+      this.resetRaceButton.setAttribute(Constants.disabled, 'true');
+      this.resetRaceButton.classList.add(Constants.disabled);
       isWinner = false;
     });
   }
@@ -282,8 +283,8 @@ export class Garage {
     this.createCarBlock.append(this.generateCarsButton);
     this.getCarsOnGarage();
     this.garageBlock.append(this.garageBlockContent);
-    this.createCarBlock.classList.remove('hide');
-    this.garageBlock.classList.remove('hide');
+    this.createCarBlock.classList.remove(Constants.hideClass);
+    this.garageBlock.classList.remove(Constants.hideClass);
   }
 
   appendNewCar(name: string, color: string, id: number) {
@@ -294,13 +295,13 @@ export class Garage {
   }
 
   hideBlock() {
-    this.createCarBlock.classList.add('hide');
-    this.garageBlock.classList.add('hide');
+    this.createCarBlock.classList.add(Constants.hideClass);
+    this.garageBlock.classList.add(Constants.hideClass);
   }
 
   showBlock() {
-    this.createCarBlock.classList.remove('hide');
-    this.garageBlock.classList.remove('hide');
+    this.createCarBlock.classList.remove(Constants.hideClass);
+    this.garageBlock.classList.remove(Constants.hideClass);
   }
 
   addListners() {
